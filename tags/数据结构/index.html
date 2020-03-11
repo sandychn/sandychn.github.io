@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>Sandy&#39;s Blog</title>
+<title>标签: 数据结构 - Sandy&#39;s Blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Sandy&#39;s Blog">
-<meta property="og:url" content="https://sandychn.github.io/index.html">
+<meta property="og:url" content="https://sandychn.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
@@ -84,7 +84,7 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/">主页</a>
                 
                 <a class="navbar-item"
@@ -114,137 +114,16 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-07T10:40:01.000Z">2020-03-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 752 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">C++引用的实现</a>
-            
-        </h1>
-        <div class="content">
-            <p>当我学习C++引用时，听到的第一句话是“引用是变量的别名，不像指针一样需要占用内存空间”。然而学到深处，发现此话并不完全正确。</p>
-<p>本文主要介绍我如何通过实验来了解到C++引用的实现，其实<strong>引用的内部就是指针</strong>。当然这也于编译器有关，所以这里需要提及一下测试所用的编译器及环境。</p>
-<p>测试环境是MinGW的g++ 8.1.0，64位编译器，64位的机子。所以指针的大小是8个字节，即64个bit。（注：因为目的是测试，所以测试时并没有处理对new操作符所产生对象的回收）</p>
-<p>首先我写出了如下代码，试图通过指针偏移来获取有关引用的信息：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int64_t</span> x;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="keyword">int64_t</span> y;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">"123"</span>; <span class="comment">// 对引用做一次操作，避免编译器把变量优化掉</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;x &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;y &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然而，这个程序的输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x61fe00</span><br><span class="line">0x61fdf8</span><br></pre></td></tr></table></figure>
-
-<p>难道引用真的不占内存？编译器真的很聪明，可能优化掉了吧；经过一系列尝试，我写出了另外一段代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int64_t</span> q, <span class="built_in">string</span>&amp; s, <span class="keyword">int64_t</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"&amp;q: "</span> &lt;&lt; &amp;q &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"&amp;r: "</span> &lt;&lt; &amp;r &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"*(string**)(&amp;q + 1): "</span> &lt;&lt; *(<span class="built_in">string</span>**)(&amp;q + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"main(): "</span> &lt;&lt; &amp;str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    foo(<span class="number">0</span>, str, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段代码的输出是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main(): 0x1e1bd0</span><br><span class="line">&amp;q: 0x61fde0</span><br><span class="line">&amp;r: 0x61fdf0</span><br><span class="line">*(string**)(&amp;q + 1): 0x1e1bd0</span><br></pre></td></tr></table></figure>
-
-<p>我们首先来看，q的地址是<code>0x61fde0</code>，r的地址是<code>0x61fdf0</code>。两个地址间相差16个字节！这里引用占用的内存出来了。显然引用对应的指针存储在q的8个字节之后。我们可以将q的地址加1，也就是加上8个字节，这里存储的就是引用的信息。我们假设它就是指针，那么我们来考虑：<code>(&amp;q + 1)</code>本身是一个指向<code>string*</code>的指针，也就是<code>string**</code>。所以我们要获取指针的值，要对这个值解一次引用，输出出来。（当然如果你想简单一点，可以直接把它转成<code>int64_t</code>然后用16进制输出）</p>
-<p>至此真相大白，程序输出的最后一行<code>0x1e1bd0</code>与主函数中new出来的对象的地址（见输出第一行）一致。所以得出结论：<strong>引用是用指针实现的。用户对引用的访问操作都内含一次解引用，而这对用户来说是透明的</strong>。</p>
-<p>不过需要提及的是，回想本文的第一个测试，发现引用的指针空间被优化掉了。所以引用有时也不一定会在栈上真正以指针体现出来。</p>
-
-        </div>
-        
-        
-        
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">数据结构</a></li>
+        </ul>
+        </nav>
     </div>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-05T11:05:09.000Z">2020-03-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Go/">Go</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 567 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/05/Golang%E4%B8%AD%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81defer%E3%80%81panic%E3%80%81recover/">Golang中的匿名函数、闭包、defer、panic、recover</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"test"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    f()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>下面代码中，输出的三个x的地址一定是一样的，它们引用同一个变量。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f := closure(<span class="number">10</span>)</span><br><span class="line">    fmt.Println(f(<span class="number">1</span>))</span><br><span class="line">    fmt.Println(f(<span class="number">2</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">closure</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    fmt.Println(&amp;x)</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">        fmt.Println(&amp;x)</span><br><span class="line">        <span class="keyword">return</span> x + y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* possible output:</span></span><br><span class="line"><span class="comment">0xc000060068</span></span><br><span class="line"><span class="comment">0xc000060068</span></span><br><span class="line"><span class="comment">11</span></span><br><span class="line"><span class="comment">0xc000060068</span></span><br><span class="line"><span class="comment">12</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h2><ul>
-<li>执行方式类似其它语言中的析构函数，在函数体执行结束后按照调用顺序的<strong>相反顺序</strong>逐个执行</li>
-<li>即使函数<strong>发生严重错误也会执行</strong></li>
-<li>支持匿名函数的调用</li>
-<li>常用于资源清理、文件关闭、解锁以及记录时间等操作</li>
-<li>通过与匿名函数配合可在return之后<strong>修改</strong>函数计算结果</li>
-<li>如果函数体内某个变量作为defer时匿名函数的参数，则在定义defer时即已经获得了拷贝，否则则是引用某个变量的地址</li>
-</ul>
-<p>下面这个代码中，defer时<code>i</code>就传值进去了。所以输出<code>210</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> fmt.Print(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下面这个代码中，由于闭包中的<code>i</code>是对<code>main</code>函数中局部变量<code>i</code>的引用。<code>defer</code>在<code>main</code>函数结束后执行，而<code>main</code>函数结束时<code>i</code>的值已经为3。所以输出3次<code>3</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下面这个代码中，闭包里每一次传递的<code>string</code>事实上都不是同一个。所以输出的是<code>ans2 ans1 ans0</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">var</span> t <span class="keyword">string</span> = <span class="string">"ans"</span> + strconv.Itoa(i)</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Print(t + <span class="string">" "</span>)</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="defer配合panic与recover"><a href="#defer配合panic与recover" class="headerlink" title="defer配合panic与recover"></a>defer配合panic与recover</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f1()</span><br><span class="line">    f2()</span><br><span class="line">    f3()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f1</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"func f1"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f2</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// defer 一定要在 panic 之前, 因为 panic 触发时</span></span><br><span class="line">    <span class="comment">// panic 所在函数就会立刻终止并倒序调用所有已经存在的defer</span></span><br><span class="line">    <span class="comment">// 若 defer 在 panic 之后, 程序根本不会知道后面有 defer</span></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"err ="</span>, err)</span><br><span class="line">            fmt.Println(<span class="string">"recover in f2 (first)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"err ="</span>, err)</span><br><span class="line">            fmt.Println(<span class="string">"recover in f2 (second)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">"panic in f2"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f3</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"func f3"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* output:</span></span><br><span class="line"><span class="comment">func f1</span></span><br><span class="line"><span class="comment">err = panic in f2</span></span><br><span class="line"><span class="comment">recover in f2 (second)</span></span><br><span class="line"><span class="comment">func f3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
 
     
 <div class="card">
@@ -287,84 +166,6 @@
 
         </div>
         
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-02-10T08:11:22.000Z">2020-02-10</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    15 分钟 读完 (大约 2313 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/">C++中的虚函数、重写与多态</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="在C-中顺利使用虚函数需知道的细节"><a href="#在C-中顺利使用虚函数需知道的细节" class="headerlink" title="在C++中顺利使用虚函数需知道的细节"></a>在C++中顺利使用虚函数需知道的细节</h2><ul>
-<li>如函数在派生类中的定义有别于基类中的定义，而且你希望它成为虚函数，就要为基类的函数声明添加保留字<code>virtual</code>。在派生类的函数声明中，则可以不添加<code>virtual</code>。函数在基类中<code>virtual</code>，在派生类中自动<code>virtual</code>（但为了澄清，最好派生类中也将函数声明标记为<code>virtual</code>，尽管这非必须）。</li>
-<li>保留字<code>virtual</code>在函数声明中添加，不要再函数定义中添加。</li>
-<li>除非使用保留字<code>virtual</code>，否则不能获得虚函数，也不能获得虚函数的任何好处。</li>
-<li>既然虚函数如此好用，为何不将所有成员函数都设为<code>virtual</code>？这似乎只有一个理由——效率。编译器和“运行时”环境要为虚函数做多得多的工作。所以，无谓地将成员函数为<code>virtual</code>会影响程序执行效率。</li>
-</ul>
-<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><p>虚函数定义在派生类中发生改变时我们说函数定义被重写。一些C++书籍区分了重定义（redefine）和重写（override）。两者都是在派生类更改函数定义。函数是虚函数，就称为重写。如果不是，就称为重定义。对于我们程序员而言，这种区分似乎有点无聊，因为程序员在两种情况下做的事情是一样的。不过，编译器对于这两种情况确定是区别对待的。</p>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态性是指借助晚期绑定技术，为一个函数名关联多种含义的能力。因此，多态性、晚期绑定和虚函数其实是同一个主题。</p>
-<h2 id="虚函数和扩展类型兼容性、切割问题"><a href="#虚函数和扩展类型兼容性、切割问题" class="headerlink" title="虚函数和扩展类型兼容性、切割问题"></a>虚函数和扩展类型兼容性、切割问题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pet</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> :</span> <span class="keyword">public</span> Pet</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">string</span> breed; <span class="comment">// 品种</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pet::print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Pet name: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dog::print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dog name: "</span> &lt;&lt; name &lt;&lt; <span class="string">", breed: "</span> &lt;&lt; breed &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Pet vPet;</span><br><span class="line">    Dog vDog;</span><br><span class="line">    vDog.name = <span class="string">"Tiny"</span>;</span><br><span class="line">    vDog.breed = <span class="string">"Great Dane"</span>;</span><br><span class="line">    vPet = vDog;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; vPet.breed;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上述代码<code>vPet = vDog;</code>的赋值是允许的，但赋给变量<code>vPet</code>的值会丢失其<code>breed</code>字段。这称为<strong>切割问题（slicing problem）</strong>。例如，<code>cout &lt;&lt; vPet.breed</code>会报错。</p>
-<p><strong>切割问题</strong>：在将派生类对象赋给基类变量时，派生类对象有、基类没有的数据成员会在赋值过程中丢失，基类没有的成员函数也会丢失。在最终的基类对象中，将无法使用这些丢失的成员。</p>
-<p>切割测试：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s): str(s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo constructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Demo()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo deconstructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Demo(<span class="keyword">const</span> Demo&amp; other)</span><br><span class="line">    &#123;</span><br><span class="line">        str = other.str;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo copy constructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Demo&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Demo&amp; other)</span><br><span class="line">    &#123;</span><br><span class="line">        str = other.str;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo operator= called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo member1 = Demo(<span class="string">"member1"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span> <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo member2 = Demo(<span class="string">"member2"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Derived derived;</span><br><span class="line">    Base base;</span><br><span class="line">    base = derived;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output</span></span><br><span class="line"><span class="comment">Demo constructor called (member1).</span></span><br><span class="line"><span class="comment">Demo constructor called (member2).</span></span><br><span class="line"><span class="comment">Demo constructor called (member1).</span></span><br><span class="line"><span class="comment">Demo operator= called (member1).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member1).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member2).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member1).</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>幸好，C++提供了一种方式，允许在将一个<code>Dog</code>视为<code>Pet</code>的同时不丢失品种名称：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Pet *pPet;</span><br><span class="line">Dog *pDog;</span><br><span class="line">pDog = <span class="keyword">new</span> Dog;</span><br><span class="line">pDog-&gt;name = <span class="string">"Tiny"</span>;</span><br><span class="line">pDog-&gt;breed = <span class="string">"Great Dane"</span>;</span><br><span class="line">pPet = pDog;</span><br><span class="line">pPet-&gt;print(); <span class="comment">// prints "Dog name: Tiny, breed: Great Dane"</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>基类<code>Pet</code>把<code>print()</code>声明为<code>virtual</code>。所以一旦编译器看到<code>pPet-&gt;print();</code>就会检查<code>Pet</code>和<code>Dog</code>的<code>virtual</code>表，判断<code>pPet</code>指向的是<code>Dog</code>类型的对象。</strong>因此，它会使用<code>Dog::print()</code>，而不是<code>Pet::print()</code>。</p>
-<p>配合动态变量进行OOP是一种全然不同的编程方式。只要记住以下两条简单的规则，理解起来就容易得多。</p>
-<ol>
-<li><strong>如果指针<code>pAncestor</code>的域类型是指针<code>pDescendant</code>的域类型的基类，则以下指针赋值操作允许：<code>pAncestor = pDescendant;</code>。此外，<code>pDescendant</code>指向的动态变量的任何数据成员或成员函数都不会丢失。</strong></li>
-<li><strong>虽然动态变量所有附加字段（成员）都没有丢，但要用<code>virtual</code>成员函数访问。</strong></li>
-</ol>
-<h2 id="视图对虚成员函数定义不齐全的类进行编译"><a href="#视图对虚成员函数定义不齐全的类进行编译" class="headerlink" title="视图对虚成员函数定义不齐全的类进行编译"></a>视图对虚成员函数定义不齐全的类进行编译</h2><p>编译前，如果还有任何尚未实现的<code>virtual</code>成员函数，编译就会失败，并产生形如<code>undefined reference to Class_Name virtual table</code>的错误信息。即使没有派生类，只有一个<code>virtual</code>成员，并且没有调用该虚函数，只要函数没有定义，就会产生这种形式的消息。此外，可能还会产生进一步的错误消息，声称程序对默认构造函数进行了未定义的引用，即使确实已定义了这些构造函数。</p>
-<h2 id="始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"><a href="#始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）" class="headerlink" title="始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"></a>始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）</h2><p><span style="color: red"><strong>这里主要阐述让析构函数称为虚函数的好处，但实际上也有坏处。在《Effective C++》条款07中有提到具体内容，见本文后记。</strong></span></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -445,53 +246,6 @@
                 </div>
             </div>
         </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-07T12:58:43.000Z">2019-08-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 208 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/07/%E9%AB%98%E6%95%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90-random%E4%B8%8Echrono/">高效随机数据生成-random与chrono</a>
-            
-        </h1>
-        <div class="content">
-            <p>请注意random库与chrono库均是C++11。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 INT_MIN &lt;= a &lt;= b &lt;= INT_MAX</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;<span class="keyword">int</span>&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 0 &lt;= a &lt;= b &lt;= UNSIGNED_INT_MAX</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">rand</span><span class="params">(<span class="keyword">unsigned</span> a, <span class="keyword">unsigned</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;<span class="keyword">unsigned</span>&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 LONG_LONG_MIN &lt;= a &lt;= b &lt;= LONG_LONG_MAX</span></span><br><span class="line"><span class="function">LL <span class="title">rand</span><span class="params">(LL a, LL b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937_64 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;LL&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 0 &lt;= a &lt;= b &lt;= UNSIGNED_LONG_LONG_MAX</span></span><br><span class="line"><span class="function">ULL <span class="title">rand</span><span class="params">(ULL a, ULL b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937_64 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;ULL&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> LL MAX = <span class="number">1e10</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; rand(-MAX, MAX);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
         
         
     </div>
@@ -776,25 +530,75 @@
 
 
 
-
     
-<div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/0/">上一页</a>
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-16T15:16:09.000Z">2019-03-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 821 个字)
+                </span>
+                
+                
+            </div>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">下一页</a>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/">FJUTOJ-3682-LRU算法的实现2</a>
+            
+        </h1>
+        <div class="content">
+            <p><a href="http://www.fjutacm.com/Problem.jsp?pid=3682">传送门</a></p>
+<p>此题让我们实现一个LRU的模板类。本题较简便且高效的写法是维护一个<code>std::list</code>和一个<code>std::unordered_map</code>。</p>
+<h2 id="std-list-与-std-unordered-map-中存放的内容"><a href="#std-list-与-std-unordered-map-中存放的内容" class="headerlink" title="std::list 与 std::unordered_map 中存放的内容"></a>std::list 与 std::unordered_map 中存放的内容</h2><p><code>std::list</code>中存放各key，类型为K。链表中<strong>各键码存放的顺序是按照访问顺序存放的</strong>。</p>
+<p><code>std::unordered_map</code>中以key为第一维，第二维为一个<code>pair</code>，其<code>first</code>和<code>second</code>分别为：</p>
+<p><code>first</code>: 该key对应的value。</p>
+<p><code>second</code>:该key在<code>std::list</code>中的迭代器方便访问。</p>
+<p>为方便，下面用“链表”来指代<code>std::list</code>，用“哈希表”来指代<code>std::unordered_map</code>。</p>
+<h2 id="各操作实现"><a href="#各操作实现" class="headerlink" title="各操作实现"></a>各操作实现</h2><p><code>insert</code>操作：用哈希表判断该键是否已经存在。若存在，先在链表中删除该key，然后再新加一个该key到链表尾部，并更新在哈希表中的value和链表的迭代器。若不存在，则直接加至链表尾部，并在哈希表中插入该key，伴随着对应的value和链表迭代器。</p>
+<p><code>get</code>操作：直接从哈希表中获得其value即可。代码实现未检测该key是否存在，严谨来说应该加上异常处理。</p>
+<p><code>contains</code>操作：直接在哈希表中查询是否存在该key即可。</p>
+<p><code>vis</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，然后再将其加至链表尾部，并更新哈希表中对应链表迭代器。</p>
+<p><code>pop</code>操作：判断是否整个容器已经为空。若为空，则本操作无效。否则，将链表头部元素从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>remove</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>empty</code>操作：哈希表或链表判空即可。</p>
+<p><code>size</code>操作：取哈希表或链表大小即可。</p>
+<p><code>clear</code>操作：清空哈希表和链表即可。</p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>各操作基于对链表和哈希表的修改。期望复杂度均为$O(1)$。</p>
         </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link is-current" href="/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
 </div>
+
+
+
+
+
+
+
+
 </div>
                 
 
