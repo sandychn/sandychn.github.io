@@ -185,74 +185,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-05T11:05:09.000Z">2020-03-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Go/">Go</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 567 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/05/Golang%E4%B8%AD%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81defer%E3%80%81panic%E3%80%81recover/">Golang中的匿名函数、闭包、defer、panic、recover</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">"test"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    f()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>下面代码中，输出的三个x的地址一定是一样的，它们引用同一个变量。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f := closure(<span class="number">10</span>)</span><br><span class="line">    fmt.Println(f(<span class="number">1</span>))</span><br><span class="line">    fmt.Println(f(<span class="number">2</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">closure</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    fmt.Println(&amp;x)</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(y <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">        fmt.Println(&amp;x)</span><br><span class="line">        <span class="keyword">return</span> x + y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* possible output:</span></span><br><span class="line"><span class="comment">0xc000060068</span></span><br><span class="line"><span class="comment">0xc000060068</span></span><br><span class="line"><span class="comment">11</span></span><br><span class="line"><span class="comment">0xc000060068</span></span><br><span class="line"><span class="comment">12</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h2><ul>
-<li>执行方式类似其它语言中的析构函数，在函数体执行结束后按照调用顺序的<strong>相反顺序</strong>逐个执行</li>
-<li>即使函数<strong>发生严重错误也会执行</strong></li>
-<li>支持匿名函数的调用</li>
-<li>常用于资源清理、文件关闭、解锁以及记录时间等操作</li>
-<li>通过与匿名函数配合可在return之后<strong>修改</strong>函数计算结果</li>
-<li>如果函数体内某个变量作为defer时匿名函数的参数，则在定义defer时即已经获得了拷贝，否则则是引用某个变量的地址</li>
-</ul>
-<p>下面这个代码中，defer时<code>i</code>就传值进去了。所以输出<code>210</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> fmt.Print(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下面这个代码中，由于闭包中的<code>i</code>是对<code>main</code>函数中局部变量<code>i</code>的引用。<code>defer</code>在<code>main</code>函数结束后执行，而<code>main</code>函数结束时<code>i</code>的值已经为3。所以输出3次<code>3</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下面这个代码中，闭包里每一次传递的<code>string</code>事实上都不是同一个。所以输出的是<code>ans2 ans1 ans0</code>。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">var</span> t <span class="keyword">string</span> = <span class="string">"ans"</span> + strconv.Itoa(i)</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Print(t + <span class="string">" "</span>)</span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="defer配合panic与recover"><a href="#defer配合panic与recover" class="headerlink" title="defer配合panic与recover"></a>defer配合panic与recover</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f1()</span><br><span class="line">    f2()</span><br><span class="line">    f3()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f1</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"func f1"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f2</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// defer 一定要在 panic 之前, 因为 panic 触发时</span></span><br><span class="line">    <span class="comment">// panic 所在函数就会立刻终止并倒序调用所有已经存在的defer</span></span><br><span class="line">    <span class="comment">// 若 defer 在 panic 之后, 程序根本不会知道后面有 defer</span></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"err ="</span>, err)</span><br><span class="line">            fmt.Println(<span class="string">"recover in f2 (first)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"err ="</span>, err)</span><br><span class="line">            fmt.Println(<span class="string">"recover in f2 (second)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">"panic in f2"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f3</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"func f3"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* output:</span></span><br><span class="line"><span class="comment">func f1</span></span><br><span class="line"><span class="comment">err = panic in f2</span></span><br><span class="line"><span class="comment">recover in f2 (second)</span></span><br><span class="line"><span class="comment">func f3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-19T19:10:09.000Z">2020-02-20</time>
                 
                 <div class="level-item">
@@ -776,25 +708,75 @@
 
 
 
-
     
-<div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/0/">上一页</a>
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-16T15:16:09.000Z">2019-03-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 821 个字)
+                </span>
+                
+                
+            </div>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">下一页</a>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/">FJUTOJ-3682-LRU算法的实现2</a>
+            
+        </h1>
+        <div class="content">
+            <p><a href="http://www.fjutacm.com/Problem.jsp?pid=3682">传送门</a></p>
+<p>此题让我们实现一个LRU的模板类。本题较简便且高效的写法是维护一个<code>std::list</code>和一个<code>std::unordered_map</code>。</p>
+<h2 id="std-list-与-std-unordered-map-中存放的内容"><a href="#std-list-与-std-unordered-map-中存放的内容" class="headerlink" title="std::list 与 std::unordered_map 中存放的内容"></a>std::list 与 std::unordered_map 中存放的内容</h2><p><code>std::list</code>中存放各key，类型为K。链表中<strong>各键码存放的顺序是按照访问顺序存放的</strong>。</p>
+<p><code>std::unordered_map</code>中以key为第一维，第二维为一个<code>pair</code>，其<code>first</code>和<code>second</code>分别为：</p>
+<p><code>first</code>: 该key对应的value。</p>
+<p><code>second</code>:该key在<code>std::list</code>中的迭代器方便访问。</p>
+<p>为方便，下面用“链表”来指代<code>std::list</code>，用“哈希表”来指代<code>std::unordered_map</code>。</p>
+<h2 id="各操作实现"><a href="#各操作实现" class="headerlink" title="各操作实现"></a>各操作实现</h2><p><code>insert</code>操作：用哈希表判断该键是否已经存在。若存在，先在链表中删除该key，然后再新加一个该key到链表尾部，并更新在哈希表中的value和链表的迭代器。若不存在，则直接加至链表尾部，并在哈希表中插入该key，伴随着对应的value和链表迭代器。</p>
+<p><code>get</code>操作：直接从哈希表中获得其value即可。代码实现未检测该key是否存在，严谨来说应该加上异常处理。</p>
+<p><code>contains</code>操作：直接在哈希表中查询是否存在该key即可。</p>
+<p><code>vis</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，然后再将其加至链表尾部，并更新哈希表中对应链表迭代器。</p>
+<p><code>pop</code>操作：判断是否整个容器已经为空。若为空，则本操作无效。否则，将链表头部元素从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>remove</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>empty</code>操作：哈希表或链表判空即可。</p>
+<p><code>size</code>操作：取哈希表或链表大小即可。</p>
+<p><code>clear</code>操作：清空哈希表和链表即可。</p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>各操作基于对链表和哈希表的修改。期望复杂度均为$O(1)$。</p>
         </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link is-current" href="/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
 </div>
+
+
+
+
+
+
+
+
 </div>
                 
 
@@ -831,7 +813,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            11
+                            10
                         </p>
                     </a>
                 </div>
@@ -843,7 +825,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            2
+                            1
                         </p>
                     </a>
                 </div>
@@ -910,14 +892,6 @@
             <span class="level-end">
                 <span class="level-item tag">10</span>
             </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Go/">
-            <span class="level-start">
-                <span class="level-item">Go</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
         </a></li>
             </ul>
         </div>
@@ -950,19 +924,6 @@
                     <a href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++引用的实现</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T11:05:09.000Z">2020-03-05</time></div>
-                    <a href="/2020/03/05/Golang%E4%B8%AD%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81defer%E3%80%81panic%E3%80%81recover/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Golang中的匿名函数、闭包、defer、panic、recover</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Go/">Go</a>
                     </p>
                 </div>
             </div>
@@ -1007,6 +968,19 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-07T12:58:43.000Z">2019-08-07</time></div>
+                    <a href="/2019/08/07/%E9%AB%98%E6%95%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90-random%E4%B8%8Echrono/" class="title has-link-black-ter is-size-6 has-text-weight-normal">高效随机数据生成-random与chrono</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
         
@@ -1024,7 +998,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1146,19 +1120,6 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T11:05:09.000Z">2020-03-05</time></div>
-                    <a href="/2020/03/05/Golang%E4%B8%AD%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81defer%E3%80%81panic%E3%80%81recover/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Golang中的匿名函数、闭包、defer、panic、recover</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Go/">Go</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-19T19:10:09.000Z">2020-02-20</time></div>
                     <a href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">STL中_Rb_tree的探索</a>
                     <p class="is-size-7 is-uppercase">
@@ -1194,6 +1155,19 @@
             </div>
         </article>
         
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-07T12:58:43.000Z">2019-08-07</time></div>
+                    <a href="/2019/08/07/%E9%AB%98%E6%95%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90-random%E4%B8%8Echrono/" class="title has-link-black-ter is-size-6 has-text-weight-normal">高效随机数据生成-random与chrono</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
     
@@ -1211,7 +1185,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
