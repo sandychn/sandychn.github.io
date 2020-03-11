@@ -1,501 +1,239 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html  lang="zh">
 <head>
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <meta charset="utf-8" />
 
-<link rel="stylesheet" href="/css/main.css">
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>分类: C++ - Sandy&#39;s Blog</title>
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"sandychn.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 <meta property="og:title" content="Sandy&#39;s Blog">
 <meta property="og:url" content="https://sandychn.github.io/categories/C/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
 <meta property="article:author" content="SandyChen">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="https://sandychn.github.io/categories/C/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : false
-  };
-</script>
-
-  <title>分类: C++ | Sandy's Blog</title>
-  
+<meta name="twitter:image" content="https://sandychn.github.io/images/og_image.png">
 
 
 
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Sandy's Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
+<link rel="icon" href="/images/favicon.svg">
 
 
-<nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
             
+                <img src="/avatar.jpg" alt="Sandy&#39;s Blog" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">文章</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/categories">分类</a></li>
+            
+            <li class="is-active"><a href="#" aria-current="page">C++</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
 
-  
-  
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">C++
-          <small>分类</small>
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-07T10:40:01.000Z">2020-03-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 752 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">C++引用的实现</a>
+            
         </h1>
-      </div>
+        <div class="content">
+            <p>当我学习C++引用时，听到的第一句话是“引用是变量的别名，不像指针一样需要占用内存空间”。然而学到深处，发现此话并不完全正确。</p>
+<p>本文主要介绍我如何通过实验来了解到C++引用的实现，其实<strong>引用的内部就是指针</strong>。当然这也于编译器有关，所以这里需要提及一下测试所用的编译器及环境。</p>
+<p>测试环境是MinGW的g++ 8.1.0，64位编译器，64位的机子。所以指针的大小是8个字节，即64个bit。（注：因为目的是测试，所以测试时并没有处理对new操作符所产生对象的回收）</p>
+<p>首先我写出了如下代码，试图通过指针偏移来获取有关引用的信息：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int64_t</span> x;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="keyword">int64_t</span> y;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">"123"</span>; <span class="comment">// 对引用做一次操作，避免编译器把变量优化掉</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;x &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;y &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
+<p>然而，这个程序的输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x61fe00</span><br><span class="line">0x61fdf8</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>难道引用真的不占内存？编译器真的很聪明，可能优化掉了吧；经过一系列尝试，我写出了另外一段代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int64_t</span> q, <span class="built_in">string</span>&amp; s, <span class="keyword">int64_t</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"&amp;q: "</span> &lt;&lt; &amp;q &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"&amp;r: "</span> &lt;&lt; &amp;r &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"*(string**)(&amp;q + 1): "</span> &lt;&lt; *(<span class="built_in">string</span>**)(&amp;q + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"main(): "</span> &lt;&lt; &amp;str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    foo(<span class="number">0</span>, str, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-07T18:40:01+08:00"
-              content="2020-03-07">
-          03-07
-        </time>
-      </div>
+<p>这段代码的输出是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main(): 0x1e1bd0</span><br><span class="line">&amp;q: 0x61fde0</span><br><span class="line">&amp;r: 0x61fdf0</span><br><span class="line">*(string**)(&amp;q + 1): 0x1e1bd0</span><br></pre></td></tr></table></figure>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" itemprop="url">
-            <span itemprop="name">C++引用的实现</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-20T03:10:09+08:00"
-              content="2020-02-20">
-          02-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" itemprop="url">
-            <span itemprop="name">STL中_Rb_tree的探索</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-10T16:11:22+08:00"
-              content="2020-02-10">
-          02-10
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/" itemprop="url">
-            <span itemprop="name">C++中的虚函数、重写与多态</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-13T16:14:15+08:00"
-              content="2019-08-13">
-          08-13
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/13/C++11%20%E6%96%B0%E7%94%A8%E6%B3%95/" itemprop="url">
-            <span itemprop="name">C++11 新用法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-07T20:58:43+08:00"
-              content="2019-08-07">
-          08-07
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/07/%E9%AB%98%E6%95%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90-random%E4%B8%8Echrono/" itemprop="url">
-            <span itemprop="name">高效随机数据生成-random与chrono</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-06T15:57:34+08:00"
-              content="2019-08-06">
-          08-06
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/06/bitset/" itemprop="url">
-            <span itemprop="name">bitset</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-06T15:56:08+08:00"
-              content="2019-08-06">
-          08-06
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/06/multimap%E4%B8%8Emultiset/" itemprop="url">
-            <span itemprop="name">multimap与multiset</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-08-03T03:10:47+08:00"
-              content="2019-08-03">
-          08-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/03/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/" itemprop="url">
-            <span itemprop="name">后缀数组</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-07-23T15:51:16+08:00"
-              content="2019-07-23">
-          07-23
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/07/23/%E4%BA%8C%E5%8F%89%E5%A0%86%E5%9F%BA%E7%A1%80%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" itemprop="url">
-            <span itemprop="name">二叉堆基础与优先队列</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-16T23:16:09+08:00"
-              content="2019-03-16">
-          03-16
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/" itemprop="url">
-            <span itemprop="name">FJUTOJ-3682-LRU算法的实现2</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
-
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
+<p>我们首先来看，q的地址是<code>0x61fde0</code>，r的地址是<code>0x61fdf0</code>。两个地址间相差16个字节！这里引用占用的内存出来了。显然引用对应的指针存储在q的8个字节之后。我们可以将q的地址加1，也就是加上8个字节，这里存储的就是引用的信息。我们假设它就是指针，那么我们来考虑：<code>(&amp;q + 1)</code>本身是一个指向<code>string*</code>的指针，也就是<code>string**</code>。所以我们要获取指针的值，要对这个值解一次引用，输出出来。（当然如果你想简单一点，可以直接把它转成<code>int64_t</code>然后用16进制输出）</p>
+<p>至此真相大白，程序输出的最后一行<code>0x1e1bd0</code>与主函数中new出来的对象的地址（见输出第一行）一致。所以得出结论：<strong>引用是用指针实现的。用户对引用的访问操作都内含一次解引用，而这对用户来说是透明的</strong>。</p>
+<p>不过需要提及的是，回想本文的第一个测试，发现引用的指针空间被优化掉了。所以引用有时也不一定会在栈上真正以指针体现出来。</p>
 
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">SandyChen</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
+        
+        
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">SandyChen</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    <span title="站点总字数">26k</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
-  </div>
 
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
         
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-19T19:10:09.000Z">2020-02-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 595 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/">STL中_Rb_tree的探索</a>
+            
+        </h1>
+        <div class="content">
+            <p>我们知道STL中我们常用的<code>set</code>与<code>multiset</code>和<code>map</code>与<code>multimap</code>都是基于红黑树。本文介绍了它们的在STL中的底层数据结构<code>_Rb_tree</code>的直接用法与部分函数。难点主要是<code>_Rb_tree</code>的各个参数的确定。</p>
+<p>特别注意在如下代码的<code>Selector</code>类用于从<code>Node</code>中选出用于排序的key值，这个仿函数必须返回<code>const int&amp;</code>而不能是<code>int</code>，否则<code>less&lt;int&gt;::operator(const int&amp;, const int&amp;)</code>会抛出<code>segmentation fault</code>。由于源码中逻辑比较复杂，但是可以观察到内部涉及这方面的地方经常使用到指针。所以可以推测是因为引用了已经释放的局部变量所以才抛出的<code>segmentation fault</code>。一开始写成<code>int</code>，看了很多源码才发现是这个原因，一定要注意。</p>
+<p>接下来是样例代码，里面都有注释了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 原则上不要直接引用这个头文件，这里只是为了测试</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stl_tree.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> first, second;</span><br><span class="line">    Node(<span class="keyword">int</span> _first, <span class="keyword">int</span> _second) : first(_first), second(_second)&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; outs, <span class="keyword">const</span> Node&amp; node) &#123;</span><br><span class="line">        outs &lt;&lt; <span class="string">'&#123;'</span> &lt;&lt; node.first &lt;&lt; <span class="string">','</span> &lt;&lt; node.second &lt;&lt; <span class="string">'&#125;'</span>;</span><br><span class="line">        <span class="keyword">return</span> outs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">Selector</span> &#123;</span></span><br><span class="line">    <span class="comment">// MUST return const int&amp;, not int.</span></span><br><span class="line">    <span class="comment">// if return int, segmentation fault will occur.</span></span><br><span class="line">    <span class="comment">// I have spent much time because of this.</span></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">int</span>&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T&amp; obj)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obj.first;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// _Rb_tree: red-black tree in STL.</span></span><br><span class="line">    <span class="keyword">using</span> tree_type = _Rb_tree&lt;<span class="keyword">int</span>, Node, Selector&lt;Node&gt;, less&lt;<span class="keyword">int</span>&gt;&gt;;</span><br><span class="line">    <span class="keyword">using</span> iterator_type = tree_type::iterator;</span><br><span class="line">    <span class="keyword">using</span> result_pair_type = pair&lt;tree_type::iterator, <span class="keyword">bool</span>&gt;;</span><br><span class="line">    tree_type tree;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素Node(1, 2)</span></span><br><span class="line">    result_pair_type res = tree._M_insert_unique(Node(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert address = "</span> &lt;&lt; res.first._M_node &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert result = "</span> &lt;&lt; boolalpha &lt;&lt; res.second &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">    iterator_type it = tree.begin();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"begin address = "</span> &lt;&lt; it._M_node &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    it = tree.find(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"address = "</span> &lt;&lt; it._M_node &lt;&lt; <span class="string">", value = "</span> &lt;&lt; *it &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 再插入元素Node(1, 2)但是因为调用的是insert_unique</span></span><br><span class="line">    <span class="comment">// 它不会添加重复值，所以插入会被拒绝</span></span><br><span class="line">    res = tree._M_insert_unique(Node(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert result = "</span> &lt;&lt; boolalpha &lt;&lt; res.second &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 再插入元素Node(1, 2)但这次调用insert_equal</span></span><br><span class="line">    <span class="comment">// multiset和multimap就是利用这个函数来插入重复值</span></span><br><span class="line">    <span class="comment">// 也就是这个函数允许重复值，所以插入成功</span></span><br><span class="line">    tree._M_insert_equal(Node(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"size = "</span> &lt;&lt; tree.size() &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 大小就变为2</span></span><br><span class="line"></span><br><span class="line">    pair&lt;iterator_type, iterator_type&gt; result = tree.equal_range(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (iterator_type ite = result.first; ite != result.second; ++ite) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"address = "</span> &lt;&lt; ite._M_node &lt;&lt; <span class="string">", value = "</span> &lt;&lt; *ite &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序的输出为（内存地址不定）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">insert address &#x3D; 0xf91be0</span><br><span class="line">insert result &#x3D; true</span><br><span class="line">begin address &#x3D; 0xf91be0</span><br><span class="line">address &#x3D; 0xf91be0, value &#x3D; &#123;1,2&#125;</span><br><span class="line">insert result &#x3D; false</span><br><span class="line">size &#x3D; 2</span><br><span class="line">address &#x3D; 0xf91be0, value &#x3D; &#123;1,2&#125;</span><br><span class="line">address &#x3D; 0xf91c10, value &#x3D; &#123;1,3&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
 
 
 
@@ -504,31 +242,1162 @@
 
 
 
-      </div>
-    </footer>
-  </div>
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-10T08:11:22.000Z">2020-02-10</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2313 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/">C++中的虚函数、重写与多态</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="在C-中顺利使用虚函数需知道的细节"><a href="#在C-中顺利使用虚函数需知道的细节" class="headerlink" title="在C++中顺利使用虚函数需知道的细节"></a>在C++中顺利使用虚函数需知道的细节</h2><ul>
+<li>如函数在派生类中的定义有别于基类中的定义，而且你希望它成为虚函数，就要为基类的函数声明添加保留字<code>virtual</code>。在派生类的函数声明中，则可以不添加<code>virtual</code>。函数在基类中<code>virtual</code>，在派生类中自动<code>virtual</code>（但为了澄清，最好派生类中也将函数声明标记为<code>virtual</code>，尽管这非必须）。</li>
+<li>保留字<code>virtual</code>在函数声明中添加，不要再函数定义中添加。</li>
+<li>除非使用保留字<code>virtual</code>，否则不能获得虚函数，也不能获得虚函数的任何好处。</li>
+<li>既然虚函数如此好用，为何不将所有成员函数都设为<code>virtual</code>？这似乎只有一个理由——效率。编译器和“运行时”环境要为虚函数做多得多的工作。所以，无谓地将成员函数为<code>virtual</code>会影响程序执行效率。</li>
+</ul>
+<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><p>虚函数定义在派生类中发生改变时我们说函数定义被重写。一些C++书籍区分了重定义（redefine）和重写（override）。两者都是在派生类更改函数定义。函数是虚函数，就称为重写。如果不是，就称为重定义。对于我们程序员而言，这种区分似乎有点无聊，因为程序员在两种情况下做的事情是一样的。不过，编译器对于这两种情况确定是区别对待的。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态性是指借助晚期绑定技术，为一个函数名关联多种含义的能力。因此，多态性、晚期绑定和虚函数其实是同一个主题。</p>
+<h2 id="虚函数和扩展类型兼容性、切割问题"><a href="#虚函数和扩展类型兼容性、切割问题" class="headerlink" title="虚函数和扩展类型兼容性、切割问题"></a>虚函数和扩展类型兼容性、切割问题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pet</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> :</span> <span class="keyword">public</span> Pet</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">string</span> breed; <span class="comment">// 品种</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pet::print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Pet name: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dog::print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dog name: "</span> &lt;&lt; name &lt;&lt; <span class="string">", breed: "</span> &lt;&lt; breed &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Pet vPet;</span><br><span class="line">    Dog vDog;</span><br><span class="line">    vDog.name = <span class="string">"Tiny"</span>;</span><br><span class="line">    vDog.breed = <span class="string">"Great Dane"</span>;</span><br><span class="line">    vPet = vDog;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; vPet.breed;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  
-  <script src="/lib/anime.min.js"></script>
+<p>上述代码<code>vPet = vDog;</code>的赋值是允许的，但赋给变量<code>vPet</code>的值会丢失其<code>breed</code>字段。这称为<strong>切割问题（slicing problem）</strong>。例如，<code>cout &lt;&lt; vPet.breed</code>会报错。</p>
+<p><strong>切割问题</strong>：在将派生类对象赋给基类变量时，派生类对象有、基类没有的数据成员会在赋值过程中丢失，基类没有的成员函数也会丢失。在最终的基类对象中，将无法使用这些丢失的成员。</p>
+<p>切割测试：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s): str(s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo constructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Demo()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo deconstructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Demo(<span class="keyword">const</span> Demo&amp; other)</span><br><span class="line">    &#123;</span><br><span class="line">        str = other.str;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo copy constructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Demo&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Demo&amp; other)</span><br><span class="line">    &#123;</span><br><span class="line">        str = other.str;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo operator= called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo member1 = Demo(<span class="string">"member1"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span> <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo member2 = Demo(<span class="string">"member2"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Derived derived;</span><br><span class="line">    Base base;</span><br><span class="line">    base = derived;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output</span></span><br><span class="line"><span class="comment">Demo constructor called (member1).</span></span><br><span class="line"><span class="comment">Demo constructor called (member2).</span></span><br><span class="line"><span class="comment">Demo constructor called (member1).</span></span><br><span class="line"><span class="comment">Demo operator= called (member1).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member1).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member2).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member1).</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
-<script src="/js/utils.js"></script>
+<p>幸好，C++提供了一种方式，允许在将一个<code>Dog</code>视为<code>Pet</code>的同时不丢失品种名称：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Pet *pPet;</span><br><span class="line">Dog *pDog;</span><br><span class="line">pDog = <span class="keyword">new</span> Dog;</span><br><span class="line">pDog-&gt;name = <span class="string">"Tiny"</span>;</span><br><span class="line">pDog-&gt;breed = <span class="string">"Great Dane"</span>;</span><br><span class="line">pPet = pDog;</span><br><span class="line">pPet-&gt;print(); <span class="comment">// prints "Dog name: Tiny, breed: Great Dane"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>基类<code>Pet</code>把<code>print()</code>声明为<code>virtual</code>。所以一旦编译器看到<code>pPet-&gt;print();</code>就会检查<code>Pet</code>和<code>Dog</code>的<code>virtual</code>表，判断<code>pPet</code>指向的是<code>Dog</code>类型的对象。</strong>因此，它会使用<code>Dog::print()</code>，而不是<code>Pet::print()</code>。</p>
+<p>配合动态变量进行OOP是一种全然不同的编程方式。只要记住以下两条简单的规则，理解起来就容易得多。</p>
+<ol>
+<li><strong>如果指针<code>pAncestor</code>的域类型是指针<code>pDescendant</code>的域类型的基类，则以下指针赋值操作允许：<code>pAncestor = pDescendant;</code>。此外，<code>pDescendant</code>指向的动态变量的任何数据成员或成员函数都不会丢失。</strong></li>
+<li><strong>虽然动态变量所有附加字段（成员）都没有丢，但要用<code>virtual</code>成员函数访问。</strong></li>
+</ol>
+<h2 id="视图对虚成员函数定义不齐全的类进行编译"><a href="#视图对虚成员函数定义不齐全的类进行编译" class="headerlink" title="视图对虚成员函数定义不齐全的类进行编译"></a>视图对虚成员函数定义不齐全的类进行编译</h2><p>编译前，如果还有任何尚未实现的<code>virtual</code>成员函数，编译就会失败，并产生形如<code>undefined reference to Class_Name virtual table</code>的错误信息。即使没有派生类，只有一个<code>virtual</code>成员，并且没有调用该虚函数，只要函数没有定义，就会产生这种形式的消息。此外，可能还会产生进一步的错误消息，声称程序对默认构造函数进行了未定义的引用，即使确实已定义了这些构造函数。</p>
+<h2 id="始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"><a href="#始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）" class="headerlink" title="始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"></a>始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）</h2><p><span style="color: red"><strong>这里主要阐述让析构函数称为虚函数的好处，但实际上也有坏处。在《Effective C++》条款07中有提到具体内容，见本文后记。</strong></span></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
 
 
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
 
 
 
 
 
 
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-13T08:14:15.000Z">2019-08-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 829 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/13/C++11%20%E6%96%B0%E7%94%A8%E6%B3%95/">C++11 新用法</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="基于哈希的-map-和-set"><a href="#基于哈希的-map-和-set" class="headerlink" title="基于哈希的 map 和 set"></a>基于哈希的 map 和 set</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>基于哈希的 <code>map</code> 和 <code>set</code> ，它们分别叫做 <code>unordered_map</code>, <code>unordered_set</code> 。数据分布越平均，性能相较 <code>map</code> 和 <code>set</code> 来说提升就更大。但由于它们基于哈希，所以并不像 <code>map</code> 和 <code>set</code> 一样能自动排序；它们都是无序的。</p>
+<p>我做了一个测试：随机生成 $10^7$ 个 <code>int</code> 范围内的整数（平均分布），然后将其分别插入 <code>map</code> 和 <code>unordered_map</code>，再完整的做一次查询，查看时间和内存上的消耗。</p>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><table>
+<thead>
+<tr>
+<th align="center">结构</th>
+<th align="center">总耗时</th>
+<th align="center">插入耗时</th>
+<th align="center">查询耗时</th>
+<th align="center">内存</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">map</td>
+<td align="center">18,041 MS</td>
+<td align="center">10,299 MS</td>
+<td align="center">7,742 MS</td>
+<td align="center">230.7 MB</td>
+</tr>
+<tr>
+<td align="center">unordered_map</td>
+<td align="center">7,138 MS</td>
+<td align="center">5,426 MS</td>
+<td align="center">1,712 MS</td>
+<td align="center">212.0 MB</td>
+</tr>
+</tbody></table>
+<p>当数据分布平均时，从时间上看，两者的性能差距约为 $7138 / 18041 \approx 40\%$</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/13/C++11%20%E6%96%B0%E7%94%A8%E6%B3%95/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-07T12:58:43.000Z">2019-08-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 208 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/07/%E9%AB%98%E6%95%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90-random%E4%B8%8Echrono/">高效随机数据生成-random与chrono</a>
+            
+        </h1>
+        <div class="content">
+            <p>请注意random库与chrono库均是C++11。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 INT_MIN &lt;= a &lt;= b &lt;= INT_MAX</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;<span class="keyword">int</span>&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 0 &lt;= a &lt;= b &lt;= UNSIGNED_INT_MAX</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">rand</span><span class="params">(<span class="keyword">unsigned</span> a, <span class="keyword">unsigned</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;<span class="keyword">unsigned</span>&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 LONG_LONG_MIN &lt;= a &lt;= b &lt;= LONG_LONG_MAX</span></span><br><span class="line"><span class="function">LL <span class="title">rand</span><span class="params">(LL a, LL b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937_64 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;LL&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 0 &lt;= a &lt;= b &lt;= UNSIGNED_LONG_LONG_MAX</span></span><br><span class="line"><span class="function">ULL <span class="title">rand</span><span class="params">(ULL a, ULL b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937_64 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;ULL&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> LL MAX = <span class="number">1e10</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; rand(-MAX, MAX);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-06T07:57:34.000Z">2019-08-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 424 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/06/bitset/">bitset</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h2><p>一含有特定二进制位数 <code>N</code> 的容器，相当于 <code>bool</code> 数组，但压缩内存至每一个二进制位。</p>
+<h2 id="申明"><a href="#申明" class="headerlink" title="申明"></a>申明</h2><p><code>bitset&lt;N&gt; bset</code>，其中 <code>N</code> 为字面常量，表示 <code>bitset</code> 中的二进制位个数。如 <code>bitset&lt;10&gt; bset;</code></p>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p><code>bitset(unsigned long val)</code> 用 <code>val</code> 构造一个对应的 <code>bitset</code> (至 C++11 前)</p>
+<p><code>bitset(unsigned long long val)</code> 用 <code>val</code> 构造一个对应的 <code>bitset</code> (自 C++11 始)</p>
+<p><code>bitset(string val)</code> 用 <code>val</code> 构造一个对应的 <code>bitset</code></p>
+<p><code>bool operator[]</code> 获取特定二进制位的值</p>
+<p><code>bool test(pos)</code> 获取特定二进制位的值，但有越界检查：如果越界，抛出 <code>std::out_of_range</code> 异常。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/06/bitset/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-06T07:56:08.000Z">2019-08-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 357 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/06/multimap%E4%B8%8Emultiset/">multimap与multiset</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>基本与 <code>map</code> 相同，但除去了 <code>operator[]</code>， 因为其特点是<strong>相同 <code>key</code> 的值在 <code>multimap</code> 中可以多个存在</strong>。需要强调的，与 <code>map</code> 有明显不同的常用方法：</p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><code>iterator insert(value)</code> 插入键值对，返回插入后该元素的迭代器</p>
+<p><code>size_type erase(key)</code> 删除所有关键字与 <code>key</code> 相等的键值对，返回删除的元素个数</p>
+<p><code>void erase(iterator pos)</code> 删除对应位置元素</p>
+<p><code>size_type count(key)</code> 统计关键字为 <code>key</code> 的元素个数</p>
+<p><code>iterator find(key)</code> 查找关键字与 <code>key</code> 相等的键值对，返回对应位置的迭代器。如果不存在则返回 <code>end()</code> 。<span style="color: red;">如果有多个关键字与 <code>key</code> 相等的键值对，返回的迭代器指向哪一个不定。</span></p>
+<p><code>pair&lt;iterator, iterator&gt; equal_range(key)</code> 查找关键字与 <code>key</code> 相等的键值对，返回迭代器对，描述与 <code>key</code> 相等的键值对的区间 <code>[first, last)</code> 。</p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;::iterator iterType;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; mp;</span><br><span class="line">    mp.insert(make_pair(<span class="number">1</span>, <span class="string">'A'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'B'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'C'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'D'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">4</span>, <span class="string">'E'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">3</span>, <span class="string">'F'</span>));</span><br><span class="line">    pair&lt;iterType, iterType&gt; range = mp.equal_range(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span> (iterType it = range.first; it != range.second; ++it) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">' '</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">output</span><br><span class="line"></span><br><span class="line">2 B</span><br><span class="line">2 C</span><br><span class="line">2 D</span><br></pre></td></tr></table></figure>
+
+<h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>与上述 <code>multimap</code> 的用法基本相同，只是每个元素只有一个值 <code>key</code>，而没有对应的 <code>value</code>。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-02T19:10:47.000Z">2019-08-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1227 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/03/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">后缀数组</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="相关定义及其证明"><a href="#相关定义及其证明" class="headerlink" title="相关定义及其证明"></a>相关定义及其证明</h2><h3 id="sa-后缀数组-suffix-array"><a href="#sa-后缀数组-suffix-array" class="headerlink" title="sa 后缀数组 suffix array"></a>sa 后缀数组 suffix array</h3><p>保存 $0 \sim n-1$ 的全排列，含义是把所有后缀按字典序排序后，后缀在原串中的位置。$suffix(sa[i]) &lt; suffix(sa[i + 1])$</p>
+<p>$sa[,]$ 记录位置，即“排第i的后缀是谁”。</p>
+<h3 id="rk-名次数组-rank-array"><a href="#rk-名次数组-rank-array" class="headerlink" title="rk 名次数组 rank array"></a>rk 名次数组 rank array</h3><p>保存 $0 \sim n-1$ 的全排列，$rk[i]$ 的含义是 $suffix(i)$ 在所有后缀中按字典序排序的名次。</p>
+<p>$rk[,]$ 记录排名，即“第以第i个字符起始的后缀子串在所有后缀子串中排第几”。</p>
+<h3 id="sa-与-rk-的关系"><a href="#sa-与-rk-的关系" class="headerlink" title="sa 与 rk 的关系"></a>sa 与 rk 的关系</h3><p>$sa[,]$ 与 $rk[,]$ 是一一对应的关系，且互为逆运算。于是</p>
+<p>可用 $rk[,]$ 推导 $sa[,]$： <code>for (int i = 0; i &lt; n; ++i) sa[rk[i]] = i;</code></p>
+<p>可用 $sa[,]$ 推导 $rk[,]$： <code>for (int i = 0; i &lt; n; ++i) rk[sa[i]] = i;</code></p>
+<h3 id="LCP-最长公共前缀"><a href="#LCP-最长公共前缀" class="headerlink" title="LCP 最长公共前缀"></a>LCP 最长公共前缀</h3><p>LCP 即 Longest Common Prefix，最长公共前缀。</p>
+<p>记 $LCP(i, j)$ 为 $suffix(sa[i])$ 与 $suffix(sa[j])$ 的最长公共前缀长度，即排序后第 $i$ 个后缀与第 $j$ 个后缀的最长公共前缀长度</p>
+<h4 id="LCP-Lemma-LCP引理"><a href="#LCP-Lemma-LCP引理" class="headerlink" title="LCP Lemma (LCP引理)"></a>LCP Lemma (LCP引理)</h4><p>若 $0 \lt i \lt j \lt k \le n-1$，则 $LCP(i, k) = min{LCP(i, j),,LCP(j, k)}$。</p>
+<p><strong>证明</strong>：</p>
+<p>设 $p=min{LCP(i, j), LCP(j, k)}$ ，则 $LCP(i, j) \ge p ,;LCP(j, k) \ge p$。</p>
+<p>又设 <span style="color: blue">$suffix(sa[i])=u,;suffix(sa[j])=v,;suffix(sa[k])=w$ <strong>①</strong></span>。</p>
+<p>我们记 $a=_{len}b$表示字符串 $a$ 长度为 $len$ 的前缀与字符串 $b$ 的长度为 $len$ 的前缀相等。</p>
+<p>则由 $u=<em>{LCP(i,j)}v$ 可得 $u=</em>{p}v, ; v=_{p}w$ 。</p>
+<p>于是可得 $u=_{p}w$。即 $LCP(i, k) \ge p = min{LCP(i, j),,LCP(j, k)}$。</p>
+<p>现在我们再证 $LCP(i,k) \gt p$ 是不可能的。</p>
+<p>又设存在一个 $q \gt p$，$LCP(i, k) = q$。</p>
+<p>则可得 $u[i] = w[i]$ 对任意 $i \in [1, q]$ 均成立。由于 $q \gt p$，所以上式中的一个是 $u[p+1] = w[p+1]$。</p>
+<p>由 <strong><span style="color: blue">①</span></strong> 得 $u[p+1] \leq v[p+1] \leq w[p+1]$。结合上一行得 $u[p+1]=v[p+1]=w[p+1]$。</p>
+<p>而 $p=min{LCP(i, j), LCP(j, k)}$，即 $u[p+1] \neq v[p+1]$ 或 $v[p+1] \ne w[p+1]$。</p>
+<p>出现矛盾，故不存在 $q$ ，使得假设 $LCP(i, k) = q \gt p$ 成立。即得 $LCP(i, k) \le p$。</p>
+<p>故得 $LCP(i, k) \ge p$ 且 $LCP(i, k) \le p$。</p>
+<p>最后 $LCP(i, k) = min{LCP(i, j), LCP(j, k)}$。</p>
+<h4 id="LCP-Theorem-LCP定理"><a href="#LCP-Theorem-LCP定理" class="headerlink" title="LCP Theorem(LCP定理)"></a>LCP Theorem(LCP定理)</h4><p>若 $i \lt j$ 则 $LCP(i, j) = min{LCP(k - 1, k)},;i \lt k \le j$</p>
+<p><strong>证明</strong>：由 LCP Lemma 与数学归纳法可得。</p>
+<h3 id="height-高度数组"><a href="#height-高度数组" class="headerlink" title="height 高度数组"></a>height 高度数组</h3><p>$height[,]$ 是一个辅助数组，和最长公共前缀 (LCP) 相关。</p>
+<p>令 $height[i]=LCP(i-1,i),;1 \lt i \le n$ ，即 $suffix(sa[i-1])$ 与 $suffix(sa[i])$ 的最长公共前缀长度。</p>
+<p>为了描述方便，记 $h[i]$ 为 $height[rank[i]]$ ，即后缀 $suffix(i)$ 与 $suffix(sa[rank[i]-1])$ 的LCP长度。</p>
+<p>有一个很重要的性质可以让我们在 $O(N)$ 的时间内求得 $height[]$ 数组：$h[i] \ge h[i-1] - 1$ 。</p>
+<p><strong>证明</strong>：</p>
+<p>设 $suffix(k)$ 是排在 $suffix(i-1)$ 前一名的后缀，则它们的LCP长度为 $h[i-1]$。两者都去掉第一个字符，得到 $suffix(k+1)$ 与 $suffix(i)$ 。</p>
+<p>① 若 $h[i-1] \le 1$ ，即 $h[i-1]-1 \le 0$ ，则 $h[i] \ge h[i-1] - 1$ 显然成立。</p>
+<p>② 若 $h[i-1] \gt 1$ ，则在上面去掉第一个字符的过程中是去掉的两者LCP中的第一个字符，那么 $suffix(k+1)$ 与 $suffix(i)$ 的LCP长度就至少为 $h[i] \ge [h-1]-1$ 。</p>
+<p>故 $h[i] \ge h[i-1]-1$ 得证。</p>
+<h2 id="倍增-基数排序-求-sa-rk-height-三数组"><a href="#倍增-基数排序-求-sa-rk-height-三数组" class="headerlink" title="倍增+基数排序 求 sa, rk, height 三数组"></a>倍增+基数排序 求 sa, rk, height 三数组</h2><p>个人模板，供参考。设字符串长度为 $N$，则下面代码求三数组的复杂度为 $O(N;logN)$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="keyword">int</span> sa[N], rk[N], cnt[N], height[N], t1[N], t2[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calcSA</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = <span class="number">256</span>;</span><br><span class="line">    <span class="keyword">int</span> i, *x = t1, *y = t2;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; ++i) cnt[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) ++cnt[x[i] = s[i]];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= m; ++i) cnt[i] += cnt[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (i = n; i &gt;= <span class="number">1</span>; --i) sa[cnt[x[i]]--] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = n - k + <span class="number">1</span>; i &lt;= n; ++i) y[++p] = i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span> (sa[i] &gt; k) y[++p] = sa[i] - k;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; ++i) cnt[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) ++cnt[x[i]];</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= m; ++i) cnt[i] += cnt[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (i = n; i &gt;= <span class="number">1</span>; --i) sa[cnt[x[y[i]]]--] = y[i];</span><br><span class="line">        swap(x, y);</span><br><span class="line">        x[sa[<span class="number">1</span>]] = <span class="number">1</span>;</span><br><span class="line">        p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">            x[sa[i]] = (y[sa[i - <span class="number">1</span>]] == y[sa[i]] &amp;&amp; y[sa[i - <span class="number">1</span>] + k] == y[sa[i] + k]) ? p : ++p;</span><br><span class="line">        <span class="keyword">if</span> (p &gt;= n) <span class="keyword">break</span>;</span><br><span class="line">        m = p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) rk[sa[i]] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, k = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (rk[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            height[rk[i]] = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (k) --k;</span><br><span class="line">            <span class="keyword">int</span> j = sa[rk[i] - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">while</span> (i + k &lt;= n &amp;&amp; j + k &lt;= n &amp;&amp; s[i + k] == s[j + k]) ++k;</span><br><span class="line">            height[rk[i]] = k;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span><br><span class="line">    calcSA(s, len);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; ++i) <span class="built_in">printf</span>(<span class="string">"%d "</span>, sa[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p><a href="https://www.cnblogs.com/ECJTUACM-873284962/p/6618870.html">https://www.cnblogs.com/ECJTUACM-873284962/p/6618870.html</a></p>
+<p><a href="https://blog.csdn.net/qq_37774171/article/details/81776029">https://blog.csdn.net/qq_37774171/article/details/81776029</a></p>
+<p>从上两文中做了一些参考，但部分证明感觉并不浅显易懂，在加以个人理解后最后形成此文。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-23T07:51:16.000Z">2019-07-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 608 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/23/%E4%BA%8C%E5%8F%89%E5%A0%86%E5%9F%BA%E7%A1%80%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">二叉堆基础与优先队列</a>
+            
+        </h1>
+        <div class="content">
+            <p><strong>堆是一种数据结构，而<code>priority_queue</code> (优先队列)是一个基于二叉堆的STL容器。</strong></p>
+<p>堆有很多种类，但以下提及的堆均为二叉堆。</p>
+<p>以下是一个例子。将新元素20插入二叉堆：</p>
+<img style="width:60%;" src="https://i.loli.net/2020/03/11/Lrqd4hK87asyzXW.png" alt="" align="center" />
+
+<img style="width:60%;" src="https://i.loli.net/2020/03/11/yj9IUE7xpk4BL6R.png" alt="" align="center" />
+
+<img style="width:60%;" src="https://i.loli.net/2020/03/11/fBLNdSreUCJc2yG.png" alt="" align="center" />
+
+<p>所以对一个二叉堆，有3种基本操作：</p>
+<ol>
+<li><p>插入：将 <code>val</code> 插入堆。</p>
+</li>
+<li><p>取堆顶：查看堆顶元素值。（即整个堆中最大或最小值）</p>
+</li>
+<li><p>出堆：将堆顶元素出堆。</p>
+</li>
+</ol>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/23/%E4%BA%8C%E5%8F%89%E5%A0%86%E5%9F%BA%E7%A1%80%E4%B8%8E%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-16T15:16:09.000Z">2019-03-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 820 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/">FJUTOJ-3682-LRU算法的实现2</a>
+            
+        </h1>
+        <div class="content">
+            <p><a href="http://www.fjutacm.com/Problem.jsp?pid=3682">传送门</a></p>
+<p>此题让我们实现一个LRU的模板类。本题较简便且高效的写法是维护一个<code>std::list</code>和一个<code>std::unordered_map</code>。</p>
+<h2 id="std-list-与-std-unordered-map-中存放的内容"><a href="#std-list-与-std-unordered-map-中存放的内容" class="headerlink" title="std::list 与 std::unordered_map 中存放的内容"></a>std::list 与 std::unordered_map 中存放的内容</h2><p><code>std::list</code>中存放各key，类型为K。链表中<strong>各键码存放的顺序是按照访问顺序存放的</strong>。</p>
+<p><code>std::unordered_map</code>中以key为第一维，第二维为一个<code>pair</code>，其<code>first</code>和<code>second</code>分别为：</p>
+<p><code>first</code>: 该key对应的value。</p>
+<p><code>second</code>:该key在<code>std::list</code>中的迭代器方便访问。</p>
+<p>为方便，下面用“链表”来指代<code>std::list</code>，用“哈希表”来指代<code>std::unordered_map</code>。</p>
+<h2 id="各操作实现"><a href="#各操作实现" class="headerlink" title="各操作实现"></a>各操作实现</h2><p><code>insert</code>操作：用哈希表判断该键是否已经存在。若存在，先在链表中删除该key，然后再新加一个该key到链表尾部，并更新在哈希表中的value和链表的迭代器。若不存在，则直接加至链表尾部，并在哈希表中插入该key，伴随着对应的value和链表迭代器。</p>
+<p><code>get</code>操作：直接从哈希表中获得其value即可。代码实现未检测该key是否存在，严谨来说应该加上异常处理。</p>
+<p><code>contains</code>操作：直接在哈希表中查询是否存在该key即可。</p>
+<p><code>vis</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，然后再将其加至链表尾部，并更新哈希表中对应链表迭代器。</p>
+<p><code>pop</code>操作：判断是否整个容器已经为空。若为空，则本操作无效。否则，将链表头部元素从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>remove</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>empty</code>操作：哈希表或链表判空即可。</p>
+<p><code>size</code>操作：取哈希表或链表大小即可。</p>
+<p><code>clear</code>操作：清空哈希表和链表即可。</p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>各操作基于对链表和哈希表的修改。期望复杂度均为$O(1)$。</p>
+<h2 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRU</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;K&gt;::iterator listIter;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;K, <span class="built_in">std</span>::pair&lt;V, listIter&gt;&gt;::iterator unorderedMapIter;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;K&gt; lst;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;K, <span class="built_in">std</span>::pair&lt;V, listIter&gt;&gt; mp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">const</span> K &amp;key, <span class="keyword">const</span> V &amp;value)</span> </span>&#123;</span><br><span class="line">        unorderedMapIter it = mp.find(key);</span><br><span class="line">        <span class="keyword">if</span> (it == mp.end()) &#123;</span><br><span class="line">            lst.emplace_back(key);</span><br><span class="line">            mp.insert(<span class="built_in">std</span>::make_pair(key, <span class="built_in">std</span>::make_pair(value, --lst.end())));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            lst.erase(it-&gt;second.second);</span><br><span class="line">            lst.emplace_back(key);</span><br><span class="line">            it-&gt;second = <span class="built_in">std</span>::make_pair(value, --lst.end());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If Key doesn't exist, this will create one &lt;Key, zero&gt;</span></span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mp[key].first;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">contains</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mp.count(key) == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">vis</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        unorderedMapIter it = mp.find(key);</span><br><span class="line">        <span class="keyword">if</span> (it != mp.end()) &#123;</span><br><span class="line">            lst.erase(it-&gt;second.second);</span><br><span class="line">            lst.emplace_back(key);</span><br><span class="line">            it-&gt;second.second = --lst.end();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!lst.empty()) &#123;</span><br><span class="line">            mp.erase(lst.front());</span><br><span class="line">            lst.pop_front();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        unorderedMapIter it = mp.find(key);</span><br><span class="line">        <span class="keyword">if</span> (it != mp.end()) &#123;</span><br><span class="line">            lst.erase(it-&gt;second.second);</span><br><span class="line">            mp.erase(it);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">emtpy</span><span class="params">()</span> </span>&#123; <span class="comment">// 本题要求此函数名为emtpy</span></span><br><span class="line">        <span class="keyword">return</span> lst.empty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lst.size();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        lst.clear();</span><br><span class="line">        mp.clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/avatar.jpg" alt="Sandy Chen">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Sandy Chen
+                    </p>
+                    
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            11
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            2
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/sandychn" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/C/">
+            <span class="level-start">
+                <span class="level-item">C++</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Go/">
+            <span class="level-start">
+                <span class="level-item">Go</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/C-11/" style="font-size: 15px;">C++11</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-07T10:40:01.000Z">2020-03-07</time></div>
+                    <a href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++引用的实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T11:05:09.000Z">2020-03-05</time></div>
+                    <a href="/2020/03/05/Golang%E4%B8%AD%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81defer%E3%80%81panic%E3%80%81recover/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Golang中的匿名函数、闭包、defer、panic、recover</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Go/">Go</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-19T19:10:09.000Z">2020-02-20</time></div>
+                    <a href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">STL中_Rb_tree的探索</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-10T08:11:22.000Z">2020-02-10</time></div>
+                    <a href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++中的虚函数、重写与多态</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T08:14:15.000Z">2019-08-13</time></div>
+                    <a href="/2019/08/13/C++11%20%E6%96%B0%E7%94%A8%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++11 新用法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ACM/">
+                        <span class="tag">ACM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-07T10:40:01.000Z">2020-03-07</time></div>
+                    <a href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++引用的实现</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-05T11:05:09.000Z">2020-03-05</time></div>
+                    <a href="/2020/03/05/Golang%E4%B8%AD%E7%9A%84%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81defer%E3%80%81panic%E3%80%81recover/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Golang中的匿名函数、闭包、defer、panic、recover</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Go/">Go</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-19T19:10:09.000Z">2020-02-20</time></div>
+                    <a href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">STL中_Rb_tree的探索</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-10T08:11:22.000Z">2020-02-10</time></div>
+                    <a href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++中的虚函数、重写与多态</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-13T08:14:15.000Z">2019-08-13</time></div>
+                    <a href="/2019/08/13/C++11%20%E6%96%B0%E7%94%A8%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++11 新用法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ACM/">
+                        <span class="tag">ACM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/avatar.jpg" alt="Sandy&#39;s Blog" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 SandyChen&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://sandychn.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
 
@@ -538,11 +1407,43 @@
 
 
 
-  
 
-  
 
-  
 
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>
