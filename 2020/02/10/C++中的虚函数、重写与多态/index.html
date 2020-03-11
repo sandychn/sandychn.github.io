@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在C++中顺利使用虚函数需知道的细节 如函数在派生类中的定义有别于基类中的定义，而且你希望它成为虚函数，就要为基类的函数声明添加保留字virtual。在派生类的函数声明中，则可以不添加virtual。函数在基类中virtual，在派生类中自动virtual（但为了澄清，最好派生类中也将函数声明标记为virtual，尽管这非必须）。 保留字virtual在函数声明中添加，不要再函数定义中添加。 除非">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++中的虚函数、重写与多态">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/index.html">
+<meta property="og:site_name" content="Sandy&#39;s Blog">
+<meta property="og:description" content="在C++中顺利使用虚函数需知道的细节 如函数在派生类中的定义有别于基类中的定义，而且你希望它成为虚函数，就要为基类的函数声明添加保留字virtual。在派生类的函数声明中，则可以不添加virtual。函数在基类中virtual，在派生类中自动virtual（但为了澄清，最好派生类中也将函数声明标记为virtual，尽管这非必须）。 保留字virtual在函数声明中添加，不要再函数定义中添加。 除非">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-10T08:11:22.000Z">
+<meta property="article:modified_time" content="2020-03-11T05:54:24.633Z">
+<meta property="article:author" content="SandyChen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>C++中的虚函数、重写与多态 | Sandy's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sandy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="SandyChen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sandy's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++中的虚函数、重写与多态
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-10 16:11:22" itemprop="dateCreated datePublished" datetime="2020-02-10T16:11:22+08:00">2020-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-11 13:54:24" itemprop="dateModified" datetime="2020-03-11T13:54:24+08:00">2020-03-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="在C-中顺利使用虚函数需知道的细节"><a href="#在C-中顺利使用虚函数需知道的细节" class="headerlink" title="在C++中顺利使用虚函数需知道的细节"></a>在C++中顺利使用虚函数需知道的细节</h2><ul>
+<li>如函数在派生类中的定义有别于基类中的定义，而且你希望它成为虚函数，就要为基类的函数声明添加保留字<code>virtual</code>。在派生类的函数声明中，则可以不添加<code>virtual</code>。函数在基类中<code>virtual</code>，在派生类中自动<code>virtual</code>（但为了澄清，最好派生类中也将函数声明标记为<code>virtual</code>，尽管这非必须）。</li>
+<li>保留字<code>virtual</code>在函数声明中添加，不要再函数定义中添加。</li>
+<li>除非使用保留字<code>virtual</code>，否则不能获得虚函数，也不能获得虚函数的任何好处。</li>
+<li>既然虚函数如此好用，为何不将所有成员函数都设为<code>virtual</code>？这似乎只有一个理由——效率。编译器和“运行时”环境要为虚函数做多得多的工作。所以，无谓地将成员函数为<code>virtual</code>会影响程序执行效率。</li>
+</ul>
+<h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><p>虚函数定义在派生类中发生改变时我们说函数定义被重写。一些C++书籍区分了重定义（redefine）和重写（override）。两者都是在派生类更改函数定义。函数是虚函数，就称为重写。如果不是，就称为重定义。对于我们程序员而言，这种区分似乎有点无聊，因为程序员在两种情况下做的事情是一样的。不过，编译器对于这两种情况确定是区别对待的。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态性是指借助晚期绑定技术，为一个函数名关联多种含义的能力。因此，多态性、晚期绑定和虚函数其实是同一个主题。</p>
+<h2 id="虚函数和扩展类型兼容性、切割问题"><a href="#虚函数和扩展类型兼容性、切割问题" class="headerlink" title="虚函数和扩展类型兼容性、切割问题"></a>虚函数和扩展类型兼容性、切割问题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pet</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> :</span> <span class="keyword">public</span> Pet</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">string</span> breed; <span class="comment">// 品种</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pet::print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Pet name: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dog::print</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dog name: "</span> &lt;&lt; name &lt;&lt; <span class="string">", breed: "</span> &lt;&lt; breed &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Pet vPet;</span><br><span class="line">    Dog vDog;</span><br><span class="line">    vDog.name = <span class="string">"Tiny"</span>;</span><br><span class="line">    vDog.breed = <span class="string">"Great Dane"</span>;</span><br><span class="line">    vPet = vDog;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; vPet.breed;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码<code>vPet = vDog;</code>的赋值是允许的，但赋给变量<code>vPet</code>的值会丢失其<code>breed</code>字段。这称为<strong>切割问题（slicing problem）</strong>。例如，<code>cout &lt;&lt; vPet.breed</code>会报错。</p>
+<p><strong>切割问题</strong>：在将派生类对象赋给基类变量时，派生类对象有、基类没有的数据成员会在赋值过程中丢失，基类没有的成员函数也会丢失。在最终的基类对象中，将无法使用这些丢失的成员。</p>
+<p>切割测试：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo(<span class="keyword">const</span> <span class="built_in">string</span>&amp; s): str(s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo constructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Demo()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo deconstructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Demo(<span class="keyword">const</span> Demo&amp; other)</span><br><span class="line">    &#123;</span><br><span class="line">        str = other.str;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo copy constructor called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Demo&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Demo&amp; other)</span><br><span class="line">    &#123;</span><br><span class="line">        str = other.str;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Demo operator= called ("</span> + str + <span class="string">").\n"</span>;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo member1 = Demo(<span class="string">"member1"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span> <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Demo member2 = Demo(<span class="string">"member2"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Derived derived;</span><br><span class="line">    Base base;</span><br><span class="line">    base = derived;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output</span></span><br><span class="line"><span class="comment">Demo constructor called (member1).</span></span><br><span class="line"><span class="comment">Demo constructor called (member2).</span></span><br><span class="line"><span class="comment">Demo constructor called (member1).</span></span><br><span class="line"><span class="comment">Demo operator= called (member1).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member1).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member2).</span></span><br><span class="line"><span class="comment">Demo deconstructor called (member1).</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>幸好，C++提供了一种方式，允许在将一个<code>Dog</code>视为<code>Pet</code>的同时不丢失品种名称：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Pet *pPet;</span><br><span class="line">Dog *pDog;</span><br><span class="line">pDog = <span class="keyword">new</span> Dog;</span><br><span class="line">pDog-&gt;name = <span class="string">"Tiny"</span>;</span><br><span class="line">pDog-&gt;breed = <span class="string">"Great Dane"</span>;</span><br><span class="line">pPet = pDog;</span><br><span class="line">pPet-&gt;print(); <span class="comment">// prints "Dog name: Tiny, breed: Great Dane"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>基类<code>Pet</code>把<code>print()</code>声明为<code>virtual</code>。所以一旦编译器看到<code>pPet-&gt;print();</code>就会检查<code>Pet</code>和<code>Dog</code>的<code>virtual</code>表，判断<code>pPet</code>指向的是<code>Dog</code>类型的对象。</strong>因此，它会使用<code>Dog::print()</code>，而不是<code>Pet::print()</code>。</p>
+<p>配合动态变量进行OOP是一种全然不同的编程方式。只要记住以下两条简单的规则，理解起来就容易得多。</p>
+<ol>
+<li><strong>如果指针<code>pAncestor</code>的域类型是指针<code>pDescendant</code>的域类型的基类，则以下指针赋值操作允许：<code>pAncestor = pDescendant;</code>。此外，<code>pDescendant</code>指向的动态变量的任何数据成员或成员函数都不会丢失。</strong></li>
+<li><strong>虽然动态变量所有附加字段（成员）都没有丢，但要用<code>virtual</code>成员函数访问。</strong></li>
+</ol>
+<h2 id="视图对虚成员函数定义不齐全的类进行编译"><a href="#视图对虚成员函数定义不齐全的类进行编译" class="headerlink" title="视图对虚成员函数定义不齐全的类进行编译"></a>视图对虚成员函数定义不齐全的类进行编译</h2><p>编译前，如果还有任何尚未实现的<code>virtual</code>成员函数，编译就会失败，并产生形如<code>undefined reference to Class_Name virtual table</code>的错误信息。即使没有派生类，只有一个<code>virtual</code>成员，并且没有调用该虚函数，只要函数没有定义，就会产生这种形式的消息。此外，可能还会产生进一步的错误消息，声称程序对默认构造函数进行了未定义的引用，即使确实已定义了这些构造函数。</p>
+<h2 id="始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"><a href="#始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）" class="headerlink" title="始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"></a>始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）</h2><p><span style="color: red"><strong>这里主要阐述让析构函数称为虚函数的好处，但实际上也有坏处。在《Effective C++》条款07中有提到具体内容，见<a href="#后记">本文后记</a>。</strong></span></p>
+<p>析构函数最好都是虚函数。但在解释它为什么好之前，首先解释一下析构函数和指针如何交互，以及虚析构函数的具体含义。如以下代码，其中<code>SomeClass</code>是含有<strong>非虚析构函数</strong>的类：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SomeClass *p = <span class="keyword">new</span> SomeClass;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">delete</span> p;</span><br></pre></td></tr></table></figure>
+
+<p>为<code>p</code>调用<code>delete</code>，会自动调用<code>SomeClass</code>类的析构函数，现在看看将析构函数标记为<code>virtual</code>之后会发生什么。<strong>为了描述析构函数与虚函数机制的交互，最简单的方式是将所有析构函数都视为同名（即使它们并非真的同名）</strong>。如假定<code>Derived</code>类是<code>Base</code>类的派生类，并假定<code>Base</code>类的析构函数标记为<code>virtual</code>，现在分析以下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Base *pBase = <span class="keyword">new</span> Derived;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">delete</span> pBase;</span><br></pre></td></tr></table></figure>
+
+<p>为<code>pBase</code>调用<code>delete</code>时，会调用一个析构函数。由于<code>Base</code>类中的析构函数标记为<code>virtual</code>，且指向的对象是<code>Derived</code>类型，故会调用<code>Derived</code>的析构函数（它进而调用Base类的析构函数）。若<code>Base</code>类的析构函数没有标记为<code>virtual</code>，则只调用<code>Base</code>类的析构函数。</p>
+<p>还要注意一点，<strong>将析构函数标记为<code>virtual</code>后，派生类的所有析构函数都自动成为<code>virtual</code>的（不管是否用<code>virtual</code>标记）。同样，这种行为就好比所有析构函数具有相同的名称（即使事实上不同名）</strong>。</p>
+<p>现在，已准备好解释为什么所有析构函数都应该是虚函数。假定<code>Base</code>类有一个指针类型的成员变量<code>pB</code>，<code>Base</code>类的构造函数会创建由<code>pB</code>指向的一个动态变量，而<code>Base</code>类的析构函数会删除之；另外，<strong>假定<code>Base</code>类的析构函数没有标记为<code>virtual</code></strong>，并假定<code>Derived</code>类（从<code>Base</code>派生）有一个指针类型的成员变量<code>pD</code>，<code>Derived</code>类的构造函数会创建由<code>pD</code>指向的一个动态变量，而<code>Derived</code>类的析构函数会删除之。则以下代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Base *pBase = <span class="keyword">new</span> Derived;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">delete</span> pBase;</span><br></pre></td></tr></table></figure>
+
+<p>由于基类析构函数未标记为<code>virtual</code>，所以只会调用<code>Base</code>类的析构函数。这会将<code>pB</code>指向的动态变量的内存返还给自由存储；但<code>pD</code>指向的动态变量占用的内存永远不会返还给自由存储直到程序终止。</p>
+<p>另一方面，将基类<code>Base</code>析构函数标记为<code>virtual</code>，<code>delete pBase;</code>时会调用<code>Derived</code>类的析构函数（因为指向的对象是<code>Derived</code>类型）。<code>Derived</code>类的析构函数会删除<code>pD</code>指向的动态变量，再自动调用基类<code>Base</code>的析构函数删除<code>pB</code>指向的动态变量。</p>
+<p>测试代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Base()</span><br><span class="line">    &#123;</span><br><span class="line">        baseData = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"baseData allocated.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Base()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> baseData;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"baseData deleted.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> *baseData;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span> <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Derived()</span><br><span class="line">    &#123;</span><br><span class="line">        derivedData = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"derivedData allocated.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Derived()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> derivedData;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"derivedData deleted.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> *derivedData;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Base *base = <span class="keyword">new</span> Derived;</span><br><span class="line">    <span class="keyword">delete</span> base;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output</span></span><br><span class="line"><span class="comment">baseData allocated.</span></span><br><span class="line"><span class="comment">derivedData allocated.</span></span><br><span class="line"><span class="comment">baseData deleted.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>将第11行的<code>~Base()</code>改为<code>virtual ~Base()</code>，程序输出为</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Output</span></span><br><span class="line"><span class="comment">baseData allocated.</span></span><br><span class="line"><span class="comment">derivedData allocated.</span></span><br><span class="line"><span class="comment">derivedData deleted.</span></span><br><span class="line"><span class="comment">baseData deleted.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>参考：Walter Savitch《Problem Solving with C++, Tenth Edition》《Effective C++》。</p>
+<p>《Effective C++》条款07：“为多态基类声明virtual析构函数”中提到：</p>
+<blockquote>
+<ul>
+<li>带多态性质的基类应该声明一个virtual析构函数；如果类带有任何virtual函数，则它就应该拥有一个virtual析构函数。</li>
+<li>类的设计目的如果不是作为基类使用，或不是为了具备多态性，就不该声明virtual析构函数。（如标准库<code>input_iterator_tag</code>等）</li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/13/C++11%20%E6%96%B0%E7%94%A8%E6%B3%95/" rel="prev" title="C++11 新用法">
+      <i class="fa fa-chevron-left"></i> C++11 新用法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" rel="next" title="STL中_Rb_tree的探索">
+      STL中_Rb_tree的探索 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在C-中顺利使用虚函数需知道的细节"><span class="nav-number">1.</span> <span class="nav-text">在C++中顺利使用虚函数需知道的细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重写"><span class="nav-number">2.</span> <span class="nav-text">重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态"><span class="nav-number">3.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚函数和扩展类型兼容性、切割问题"><span class="nav-number">4.</span> <span class="nav-text">虚函数和扩展类型兼容性、切割问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图对虚成员函数定义不齐全的类进行编译"><span class="nav-number">5.</span> <span class="nav-text">视图对虚成员函数定义不齐全的类进行编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"><span class="nav-number">6.</span> <span class="nav-text">始终&#x2F;尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">7.</span> <span class="nav-text">后记</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">SandyChen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SandyChen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">21k</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
