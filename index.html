@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta property="og:type" content="website">
@@ -139,7 +139,6 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
-  <div class="reading-progress-bar"></div>
 
 
     <main class="main">
@@ -186,7 +185,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:50:05" itemprop="dateModified" datetime="2020-03-11T13:50:05+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:45:39" itemprop="dateModified" datetime="2020-03-11T14:45:39+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,7 +273,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:54:24" itemprop="dateModified" datetime="2020-03-11T13:54:24+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:43:15" itemprop="dateModified" datetime="2020-03-11T14:43:15+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -329,35 +328,15 @@
 <li><strong>虽然动态变量所有附加字段（成员）都没有丢，但要用<code>virtual</code>成员函数访问。</strong></li>
 </ol>
 <h2 id="视图对虚成员函数定义不齐全的类进行编译"><a href="#视图对虚成员函数定义不齐全的类进行编译" class="headerlink" title="视图对虚成员函数定义不齐全的类进行编译"></a>视图对虚成员函数定义不齐全的类进行编译</h2><p>编译前，如果还有任何尚未实现的<code>virtual</code>成员函数，编译就会失败，并产生形如<code>undefined reference to Class_Name virtual table</code>的错误信息。即使没有派生类，只有一个<code>virtual</code>成员，并且没有调用该虚函数，只要函数没有定义，就会产生这种形式的消息。此外，可能还会产生进一步的错误消息，声称程序对默认构造函数进行了未定义的引用，即使确实已定义了这些构造函数。</p>
-<h2 id="始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"><a href="#始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）" class="headerlink" title="始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"></a>始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）</h2><p><span style="color: red"><strong>这里主要阐述让析构函数称为虚函数的好处，但实际上也有坏处。在《Effective C++》条款07中有提到具体内容，见<a href="#后记">本文后记</a>。</strong></span></p>
-<p>析构函数最好都是虚函数。但在解释它为什么好之前，首先解释一下析构函数和指针如何交互，以及虚析构函数的具体含义。如以下代码，其中<code>SomeClass</code>是含有<strong>非虚析构函数</strong>的类：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SomeClass *p = <span class="keyword">new</span> SomeClass;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">delete</span> p;</span><br></pre></td></tr></table></figure>
-
-<p>为<code>p</code>调用<code>delete</code>，会自动调用<code>SomeClass</code>类的析构函数，现在看看将析构函数标记为<code>virtual</code>之后会发生什么。<strong>为了描述析构函数与虚函数机制的交互，最简单的方式是将所有析构函数都视为同名（即使它们并非真的同名）</strong>。如假定<code>Derived</code>类是<code>Base</code>类的派生类，并假定<code>Base</code>类的析构函数标记为<code>virtual</code>，现在分析以下代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Base *pBase = <span class="keyword">new</span> Derived;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">delete</span> pBase;</span><br></pre></td></tr></table></figure>
-
-<p>为<code>pBase</code>调用<code>delete</code>时，会调用一个析构函数。由于<code>Base</code>类中的析构函数标记为<code>virtual</code>，且指向的对象是<code>Derived</code>类型，故会调用<code>Derived</code>的析构函数（它进而调用Base类的析构函数）。若<code>Base</code>类的析构函数没有标记为<code>virtual</code>，则只调用<code>Base</code>类的析构函数。</p>
-<p>还要注意一点，<strong>将析构函数标记为<code>virtual</code>后，派生类的所有析构函数都自动成为<code>virtual</code>的（不管是否用<code>virtual</code>标记）。同样，这种行为就好比所有析构函数具有相同的名称（即使事实上不同名）</strong>。</p>
-<p>现在，已准备好解释为什么所有析构函数都应该是虚函数。假定<code>Base</code>类有一个指针类型的成员变量<code>pB</code>，<code>Base</code>类的构造函数会创建由<code>pB</code>指向的一个动态变量，而<code>Base</code>类的析构函数会删除之；另外，<strong>假定<code>Base</code>类的析构函数没有标记为<code>virtual</code></strong>，并假定<code>Derived</code>类（从<code>Base</code>派生）有一个指针类型的成员变量<code>pD</code>，<code>Derived</code>类的构造函数会创建由<code>pD</code>指向的一个动态变量，而<code>Derived</code>类的析构函数会删除之。则以下代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Base *pBase = <span class="keyword">new</span> Derived;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">delete</span> pBase;</span><br></pre></td></tr></table></figure>
-
-<p>由于基类析构函数未标记为<code>virtual</code>，所以只会调用<code>Base</code>类的析构函数。这会将<code>pB</code>指向的动态变量的内存返还给自由存储；但<code>pD</code>指向的动态变量占用的内存永远不会返还给自由存储直到程序终止。</p>
-<p>另一方面，将基类<code>Base</code>析构函数标记为<code>virtual</code>，<code>delete pBase;</code>时会调用<code>Derived</code>类的析构函数（因为指向的对象是<code>Derived</code>类型）。<code>Derived</code>类的析构函数会删除<code>pD</code>指向的动态变量，再自动调用基类<code>Base</code>的析构函数删除<code>pB</code>指向的动态变量。</p>
-<p>测试代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Base()</span><br><span class="line">    &#123;</span><br><span class="line">        baseData = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"baseData allocated.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Base()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> baseData;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"baseData deleted.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> *baseData;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span> <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Derived()</span><br><span class="line">    &#123;</span><br><span class="line">        derivedData = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"derivedData allocated.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Derived()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> derivedData;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"derivedData deleted.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> *derivedData;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Base *base = <span class="keyword">new</span> Derived;</span><br><span class="line">    <span class="keyword">delete</span> base;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output</span></span><br><span class="line"><span class="comment">baseData allocated.</span></span><br><span class="line"><span class="comment">derivedData allocated.</span></span><br><span class="line"><span class="comment">baseData deleted.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>将第11行的<code>~Base()</code>改为<code>virtual ~Base()</code>，程序输出为</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Output</span></span><br><span class="line"><span class="comment">baseData allocated.</span></span><br><span class="line"><span class="comment">derivedData allocated.</span></span><br><span class="line"><span class="comment">derivedData deleted.</span></span><br><span class="line"><span class="comment">baseData deleted.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>参考：Walter Savitch《Problem Solving with C++, Tenth Edition》《Effective C++》。</p>
-<p>《Effective C++》条款07：“为多态基类声明virtual析构函数”中提到：</p>
-<blockquote>
-<ul>
-<li>带多态性质的基类应该声明一个virtual析构函数；如果类带有任何virtual函数，则它就应该拥有一个virtual析构函数。</li>
-<li>类的设计目的如果不是作为基类使用，或不是为了具备多态性，就不该声明virtual析构函数。（如标准库<code>input_iterator_tag</code>等）</li>
-</ul>
-</blockquote>
-
+<h2 id="始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"><a href="#始终-尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）" class="headerlink" title="始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）"></a>始终/尽量使析构函数成为虚函数（主要讲述把析构函数声明为虚函数的优点）</h2><p><span style="color: red"><strong>这里主要阐述让析构函数称为虚函数的好处，但实际上也有坏处。在《Effective C++》条款07中有提到具体内容，见本文后记。</strong></span></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/10/C++%E4%B8%AD%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E3%80%81%E9%87%8D%E5%86%99%E4%B8%8E%E5%A4%9A%E6%80%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -407,7 +386,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:49:30" itemprop="dateModified" datetime="2020-03-11T13:49:30+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:24:53" itemprop="dateModified" datetime="2020-03-11T14:24:53+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -439,8 +418,6 @@
       
           <h2 id="基于哈希的-map-和-set"><a href="#基于哈希的-map-和-set" class="headerlink" title="基于哈希的 map 和 set"></a>基于哈希的 map 和 set</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>基于哈希的 <code>map</code> 和 <code>set</code> ，它们分别叫做 <code>unordered_map</code>, <code>unordered_set</code> 。数据分布越平均，性能相较 <code>map</code> 和 <code>set</code> 来说提升就更大。但由于它们基于哈希，所以并不像 <code>map</code> 和 <code>set</code> 一样能自动排序；它们都是无序的。</p>
 <p>我做了一个测试：随机生成 $10^7$ 个 <code>int</code> 范围内的整数（平均分布），然后将其分别插入 <code>map</code> 和 <code>unordered_map</code>，再完整的做一次查询，查看时间和内存上的消耗。</p>
-<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; data;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    freopen(<span class="string">"map.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    data.resize(<span class="number">5000000</span>);</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line">    <span class="keyword">double</span> st, ed;</span><br><span class="line">    st = clock();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5000000</span>; ++i) <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;data[i].first, &amp;data[i].second);</span><br><span class="line">    ed = clock();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Read: %dms\n"</span>, <span class="keyword">int</span>(<span class="number">1000.0</span> * (ed - st) / CLOCKS_PER_SEC));</span><br><span class="line">    st = clock();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5000000</span>; ++i) mp[data[i].first] = data[i].second;</span><br><span class="line">    ed = clock();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Insert: %dms\n"</span>, <span class="keyword">int</span>(<span class="number">1000.0</span> * (ed - st) / CLOCKS_PER_SEC));</span><br><span class="line">    st = clock();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5000000</span>; ++i) data[i].second = mp[data[i].first];</span><br><span class="line">    ed = clock();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Query: %dms\n"</span>, <span class="keyword">int</span>(<span class="number">1000.0</span> * (ed - st) / CLOCKS_PER_SEC));</span><br><span class="line">    data = <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><table>
 <thead>
 <tr>
@@ -466,28 +443,15 @@
 <td align="center">212.0 MB</td>
 </tr>
 </tbody></table>
-<p>当数据分布平均时，从时间上看，两者的性能差距约为 $7138 / 18041 \approx 40%$</p>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><p>即使在平均意义下 <code>unordered_map</code> 有着比 <code>map</code> 更高的效率，但是由于两者的实现（前者哈希，后者平衡树）， <code>unordered_map</code> 单次插入的最差复杂度是 $O(N)$， <code>map</code> 单次插入的最差复杂度是 $O(log N)$ 。所以在出题人故意造数据卡 <code>unordered_map</code> 使其内部哈希表发生严重冲突时，<code>unordered_map</code> 就会变得很慢。</p>
-<h2 id="语法上的变化"><a href="#语法上的变化" class="headerlink" title="语法上的变化"></a>语法上的变化</h2><h3 id="auto-关键字的新含义"><a href="#auto-关键字的新含义" class="headerlink" title="auto 关键字的新含义"></a>auto 关键字的新含义</h3><p>在 C++11 中，<code>auto</code> 关键字被赋予了新的含义。其功能是自动类型推导。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> x = <span class="number">3</span>; <span class="comment">// y的类型自动推导为 int</span></span><br><span class="line"><span class="keyword">auto</span> y = make_pair(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// y的类型自动推导为 pair&lt;int, int&gt;</span></span><br><span class="line"><span class="keyword">auto</span> z; <span class="comment">// 编译错误, z的类型需要一个初始值才能推导</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line"><span class="comment">// iter的类型推导为map&lt;int, int&gt;::iterator</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> iter = mp.begin(); iter != mp.end(); ++iter)</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; iter-&gt;first &lt;&lt; <span class="string">' '</span> &lt;&lt; iter-&gt;second &lt;&lt; <span class="string">'\n'</span>;</span><br></pre></td></tr></table></figure>
-
-<p>与其相关的是一个新的关键字 <code>decltype</code>，取得某一个值的类型。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a + b) c; <span class="comment">// c为int</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="增强的-for（基于范围的for循环）"><a href="#增强的-for（基于范围的for循环）" class="headerlink" title="增强的 for（基于范围的for循环）"></a>增强的 for（基于范围的for循环）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">map&lt;int, int&gt; mp;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; C++11 之前遍历</span><br><span class="line">for (map&lt;int, int&gt;::iterator it &#x3D; mp,begin(); it !&#x3D; mp,end(); ++it)</span><br><span class="line">	cout &lt;&lt; it-&gt;first &lt;&lt; &#39; &#39; &lt;&lt; it-&gt;second &lt;&lt; &#39;\n&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; C++11 之后</span><br><span class="line">for (auto val : mp)</span><br><span class="line">	cout &lt;&lt; val.first &lt;&lt; &#39; &#39; &lt;&lt; val.second &lt;&lt; &#39;\n&#39;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="模板嵌套时一个小改善"><a href="#模板嵌套时一个小改善" class="headerlink" title="模板嵌套时一个小改善"></a>模板嵌套时一个小改善</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;pair&lt;int, int&gt; &gt; heap; &#x2F;&#x2F; C++11之前需加一个空格避免歧义</span><br><span class="line">priority_queue&lt;pair&lt;int, int&gt;&gt; heap; &#x2F;&#x2F; C++11之后不用</span><br></pre></td></tr></table></figure>
-
-<h3 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h3><p>更简单的初始化方式。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; v&#123; &#123;<span class="number">1</span>, <span class="number">2</span>&#125;, &#123;<span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>&#125; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于下面代码</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; v;</span><br><span class="line">v.push_back(make_pair(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">v.push_back(make_pair(<span class="number">2</span>, <span class="number">3</span>));</span><br><span class="line">v.push_back(make_pair(<span class="number">3</span>, <span class="number">4</span>));</span><br></pre></td></tr></table></figure>
-
-<h3 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h3><p>下面用一个例子讲述一下lambda表达式的大致用法。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; v&#123; &#123;<span class="number">1</span>, <span class="number">2</span>&#125;, &#123;<span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>&#125; &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; val : v) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; val.first &lt;&lt; <span class="string">' '</span> &lt;&lt; val.second &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(v.begin(), v.end(), [](<span class="keyword">const</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &amp;a, <span class="keyword">const</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &amp;b) &#123; <span class="keyword">return</span> a.first &gt; b.first; &#125;);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"After sort:\n"</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; val : v) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; val.first &lt;&lt; <span class="string">' '</span> &lt;&lt; val.second &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码里的 <code>sort</code>，在C++11之前比较常见的等价写法是：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &amp;a, <span class="keyword">const</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &amp;b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.first &gt; b.first;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    sort(v.begin(), v.end(), cmp);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<p>当数据分布平均时，从时间上看，两者的性能差距约为 $7138 / 18041 \approx 40\%$</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/13/C++11%20%E6%96%B0%E7%94%A8%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -537,7 +501,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:51:00" itemprop="dateModified" datetime="2020-03-11T13:51:00+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:30:30" itemprop="dateModified" datetime="2020-03-11T14:30:30+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -619,7 +583,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:49:33" itemprop="dateModified" datetime="2020-03-11T13:49:33+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:30:53" itemprop="dateModified" datetime="2020-03-11T14:30:53+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -656,30 +620,14 @@
 <p><code>bitset(string val)</code> 用 <code>val</code> 构造一个对应的 <code>bitset</code></p>
 <p><code>bool operator[]</code> 获取特定二进制位的值</p>
 <p><code>bool test(pos)</code> 获取特定二进制位的值，但有越界检查：如果越界，抛出 <code>std::out_of_range</code> 异常。</p>
-<p><code>bool all()</code> 是否所有二进制位都是1  (自 C++11)</p>
-<p><code>bool any()</code> 是否有二进制位是1</p>
-<p><code>bool none()</code> 是否所有二进制位都是0</p>
-<p><code>size_t count()</code> 返回二进制位是1的二进制位个数</p>
-<p><code>size_t size()</code> 返回 <code>N</code></p>
-<p><code>bitset&lt;N&gt;&amp; operator&amp;=(const bitset&lt;N&gt;&amp; other)</code> 与操作</p>
-<p><code>bitset&lt;N&gt;&amp; operator|=(const bitset&lt;N&gt;&amp; other)</code> 或操作</p>
-<p><code>bitset&lt;N&gt;&amp; operator^=(const bitset&lt;N&gt;&amp; other)</code> 异或操作</p>
-<p><code>bitset&lt;N&gt; operator~()</code> 非操作</p>
-<p><code>bitset&lt;N&gt; operator&lt;&lt;(size_t pos)</code> 左移</p>
-<p><code>bitset&lt;N&gt;&amp; operator&lt;&lt;=(size_t pos)</code> 自左移</p>
-<p><code>bitset&lt;N&gt; operator&gt;&gt;(size_t pos)</code> 右移</p>
-<p><code>bitset&lt;N&gt;&amp; operator&gt;&gt;=(size_t pos)</code> 自右移</p>
-<p><code>bitset&lt;N&gt;&amp; set()</code> 将全部位设为1</p>
-<p><code>bitset&lt;N&gt;&amp; set(pos, value)</code> 将pos位设为 <code>value</code></p>
-<p><code>bitset&lt;N&gt;&amp; reset()</code> 将全部位设为0</p>
-<p><code>bitset&lt;N&gt;&amp; reset(pos)</code> 将pos位设为0</p>
-<p><code>bitset&lt;N&gt;&amp; flip()</code> 翻转所有位（与 <code>operator~</code> 类似，但是是直接在原数上进行）</p>
-<p><code>bitset&lt;N&gt; &amp;flip(pos)</code> 翻转第pos位</p>
-<p><code>string to_string(char zero = &#39;0&#39;, char one = &#39;1&#39;)</code> 转为字符串</p>
-<p><code>unsigned long to_ulong()</code> 转为 <code>unsigned long</code> ，若溢出则抛出 <code>std::overflow_error</code></p>
-<p><code>unsigned long long to_ullong()</code> 转为 <code>unsigned long long</code> ，若溢出则抛出 <code>std::overflow_error</code> (自C++11)</p>
-<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">bitset</span>&lt;10&gt; <span class="title">bset</span><span class="params">(<span class="number">15</span>)</span></span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; bset &lt;&lt; <span class="string">'\n'</span>; <span class="comment">// output: 0000001111</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/06/bitset/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -729,7 +677,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:50:08" itemprop="dateModified" datetime="2020-03-11T13:50:08+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:41:08" itemprop="dateModified" datetime="2020-03-11T14:41:08+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -821,7 +769,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:48:49" itemprop="dateModified" datetime="2020-03-11T13:48:49+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:41:32" itemprop="dateModified" datetime="2020-03-11T14:41:32+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -942,7 +890,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-11 13:50:51" itemprop="dateModified" datetime="2020-03-11T13:50:51+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-11 14:42:04" itemprop="dateModified" datetime="2020-03-11T14:42:04+08:00">2020-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1125,7 +1073,7 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
         
