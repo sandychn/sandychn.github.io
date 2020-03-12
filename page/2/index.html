@@ -130,6 +130,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-19T19:10:09.000Z">2020-02-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 595 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/">STL中_Rb_tree的探索</a>
+            
+        </h1>
+        <div class="content">
+            <p>我们知道STL中我们常用的<code>set</code>与<code>multiset</code>和<code>map</code>与<code>multimap</code>都是基于红黑树。本文介绍了它们的在STL中的底层数据结构<code>_Rb_tree</code>的直接用法与部分函数。难点主要是<code>_Rb_tree</code>的各个参数的确定。</p>
+<p>特别注意在如下代码的<code>Selector</code>类用于从<code>Node</code>中选出用于排序的key值，这个仿函数必须返回<code>const int&amp;</code>而不能是<code>int</code>，否则<code>less&lt;int&gt;::operator(const int&amp;, const int&amp;)</code>会抛出<code>segmentation fault</code>。由于源码中逻辑比较复杂，但是可以观察到内部涉及这方面的地方经常使用到指针。所以可以推测是因为引用了已经释放的局部变量所以才抛出的<code>segmentation fault</code>。一开始写成<code>int</code>，看了很多源码才发现是这个原因，一定要注意。</p>
+<p>接下来是样例代码，里面都有注释了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 原则上不要直接引用这个头文件，这里只是为了测试</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stl_tree.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> first, second;</span><br><span class="line">    Node(<span class="keyword">int</span> _first, <span class="keyword">int</span> _second) : first(_first), second(_second)&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; outs, <span class="keyword">const</span> Node&amp; node) &#123;</span><br><span class="line">        outs &lt;&lt; <span class="string">'&#123;'</span> &lt;&lt; node.first &lt;&lt; <span class="string">','</span> &lt;&lt; node.second &lt;&lt; <span class="string">'&#125;'</span>;</span><br><span class="line">        <span class="keyword">return</span> outs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">Selector</span> &#123;</span></span><br><span class="line">    <span class="comment">// MUST return const int&amp;, not int.</span></span><br><span class="line">    <span class="comment">// if return int, segmentation fault will occur.</span></span><br><span class="line">    <span class="comment">// I have spent much time because of this.</span></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">int</span>&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T&amp; obj)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obj.first;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// _Rb_tree: red-black tree in STL.</span></span><br><span class="line">    <span class="keyword">using</span> tree_type = _Rb_tree&lt;<span class="keyword">int</span>, Node, Selector&lt;Node&gt;, less&lt;<span class="keyword">int</span>&gt;&gt;;</span><br><span class="line">    <span class="keyword">using</span> iterator_type = tree_type::iterator;</span><br><span class="line">    <span class="keyword">using</span> result_pair_type = pair&lt;tree_type::iterator, <span class="keyword">bool</span>&gt;;</span><br><span class="line">    tree_type tree;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素Node(1, 2)</span></span><br><span class="line">    result_pair_type res = tree._M_insert_unique(Node(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert address = "</span> &lt;&lt; res.first._M_node &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert result = "</span> &lt;&lt; boolalpha &lt;&lt; res.second &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">    iterator_type it = tree.begin();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"begin address = "</span> &lt;&lt; it._M_node &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    it = tree.find(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"address = "</span> &lt;&lt; it._M_node &lt;&lt; <span class="string">", value = "</span> &lt;&lt; *it &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 再插入元素Node(1, 2)但是因为调用的是insert_unique</span></span><br><span class="line">    <span class="comment">// 它不会添加重复值，所以插入会被拒绝</span></span><br><span class="line">    res = tree._M_insert_unique(Node(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert result = "</span> &lt;&lt; boolalpha &lt;&lt; res.second &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 再插入元素Node(1, 2)但这次调用insert_equal</span></span><br><span class="line">    <span class="comment">// multiset和multimap就是利用这个函数来插入重复值</span></span><br><span class="line">    <span class="comment">// 也就是这个函数允许重复值，所以插入成功</span></span><br><span class="line">    tree._M_insert_equal(Node(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"size = "</span> &lt;&lt; tree.size() &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 大小就变为2</span></span><br><span class="line"></span><br><span class="line">    pair&lt;iterator_type, iterator_type&gt; result = tree.equal_range(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (iterator_type ite = result.first; ite != result.second; ++ite) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"address = "</span> &lt;&lt; ite._M_node &lt;&lt; <span class="string">", value = "</span> &lt;&lt; *ite &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序的输出为（内存地址不定）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">insert address &#x3D; 0xf91be0</span><br><span class="line">insert result &#x3D; true</span><br><span class="line">begin address &#x3D; 0xf91be0</span><br><span class="line">address &#x3D; 0xf91be0, value &#x3D; &#123;1,2&#125;</span><br><span class="line">insert result &#x3D; false</span><br><span class="line">size &#x3D; 2</span><br><span class="line">address &#x3D; 0xf91be0, value &#x3D; &#123;1,2&#125;</span><br><span class="line">address &#x3D; 0xf91c10, value &#x3D; &#123;1,3&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-02-10T08:11:22.000Z">2020-02-10</time>
                 
                 <div class="level-item">
@@ -387,63 +440,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-06T07:56:08.000Z">2019-08-06</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 357 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/06/multimap%E4%B8%8Emultiset/">multimap与multiset</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>基本与 <code>map</code> 相同，但除去了 <code>operator[]</code>， 因为其特点是<strong>相同 <code>key</code> 的值在 <code>multimap</code> 中可以多个存在</strong>。需要强调的，与 <code>map</code> 有明显不同的常用方法：</p>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><code>iterator insert(value)</code> 插入键值对，返回插入后该元素的迭代器</p>
-<p><code>size_type erase(key)</code> 删除所有关键字与 <code>key</code> 相等的键值对，返回删除的元素个数</p>
-<p><code>void erase(iterator pos)</code> 删除对应位置元素</p>
-<p><code>size_type count(key)</code> 统计关键字为 <code>key</code> 的元素个数</p>
-<p><code>iterator find(key)</code> 查找关键字与 <code>key</code> 相等的键值对，返回对应位置的迭代器。如果不存在则返回 <code>end()</code> 。<span style="color: red;">如果有多个关键字与 <code>key</code> 相等的键值对，返回的迭代器指向哪一个不定。</span></p>
-<p><code>pair&lt;iterator, iterator&gt; equal_range(key)</code> 查找关键字与 <code>key</code> 相等的键值对，返回迭代器对，描述与 <code>key</code> 相等的键值对的区间 <code>[first, last)</code> 。</p>
-<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;::iterator iterType;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; mp;</span><br><span class="line">    mp.insert(make_pair(<span class="number">1</span>, <span class="string">'A'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'B'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'C'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'D'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">4</span>, <span class="string">'E'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">3</span>, <span class="string">'F'</span>));</span><br><span class="line">    pair&lt;iterType, iterType&gt; range = mp.equal_range(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span> (iterType it = range.first; it != range.second; ++it) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">' '</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">output</span><br><span class="line"></span><br><span class="line">2 B</span><br><span class="line">2 C</span><br><span class="line">2 D</span><br></pre></td></tr></table></figure>
-
-<h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>与上述 <code>multimap</code> 的用法基本相同，只是每个元素只有一个值 <code>key</code>，而没有对应的 <code>value</code>。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -502,7 +498,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            13
+                            14
                         </p>
                     </a>
                 </div>
@@ -570,7 +566,7 @@
                 <span class="level-item">操作系统</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -592,6 +588,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-12T18:56:05.000Z">2020-03-13</time></div>
+                    <a href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%AD%BB%E9%94%81%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">操作系统——死锁与内存管理</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -645,19 +654,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-19T19:10:09.000Z">2020-02-20</time></div>
-                    <a href="/2020/02/20/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">STL中_Rb_tree的探索</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -675,7 +671,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
