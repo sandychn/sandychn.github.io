@@ -64,7 +64,7 @@
     <link rel="stylesheet" href="/css/progressbar.css">
 <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
     
-    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
 
@@ -202,7 +202,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 752 个字)
+                    5 分钟 读完 (大约 757 个字)
                 </span>
                 
                 
@@ -219,9 +219,9 @@
 <p>本文主要介绍我如何通过实验来了解到C++引用的实现，其实<strong>引用的内部就是指针</strong>。当然这也于编译器有关，所以这里需要提及一下测试所用的编译器及环境。</p>
 <p>测试环境是MinGW的g++ 8.1.0，64位编译器，64位的机子。所以指针的大小是8个字节，即64个bit。（注：因为目的是测试，所以测试时并没有处理对new操作符所产生对象的回收）</p>
 <p>首先我写出了如下代码，试图通过指针偏移来获取有关引用的信息：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int64_t</span> x;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="keyword">int64_t</span> y;</span><br><span class="line"></span><br><span class="line">    str = <span class="string">"123"</span>; <span class="comment">// 对引用做一次操作，避免编译器把变量优化掉</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;x &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;y &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int64_t</span> x;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="keyword">int64_t</span> y;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; str; <span class="comment">// 对引用做一次操作，避免编译器把变量优化掉</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;x &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;y &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>然而，这个程序的输出如下：</p>
+<p>然而，这个程序的输出如下（str的输出忽略）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x61fe00</span><br><span class="line">0x61fdf8</span><br></pre></td></tr></table></figure>
 
 <p>难道引用真的不占内存？编译器真的很聪明，可能优化掉了吧；经过一系列尝试，我写出了另外一段代码：</p>
@@ -230,7 +230,7 @@
 <p>这段代码的输出是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main(): 0x1e1bd0</span><br><span class="line">&amp;q: 0x61fde0</span><br><span class="line">&amp;r: 0x61fdf0</span><br><span class="line">*(string**)(&amp;q + 1): 0x1e1bd0</span><br></pre></td></tr></table></figure>
 
-<p>我们首先来看，q的地址是<code>0x61fde0</code>，r的地址是<code>0x61fdf0</code>。两个地址间相差16个字节！这里引用占用的内存出来了。显然引用对应的指针存储在q的8个字节之后。我们可以将q的地址加1，也就是加上8个字节，这里存储的就是引用的信息。我们假设它就是指针，那么我们来考虑：<code>(&amp;q + 1)</code>本身是一个指向<code>string*</code>的指针，也就是<code>string**</code>。所以我们要获取指针的值，要对这个值解一次引用，输出出来。（当然如果你想简单一点，可以直接把它转成<code>int64_t</code>然后用16进制输出）</p>
+<p>可见，q的地址是<code>0x61fde0</code>，r的地址是<code>0x61fdf0</code>。两个地址间相差16个字节！这里引用占用的内存出来了。显然引用对应的指针存储在q的8个字节之后。我们可以将q的地址加1，也就是加上8个字节，这里存储的就是引用的信息。假设它就是指针，那么考虑：<code>(&amp;q + 1)</code>本身是一个指向<code>string*</code>的指针，也就是<code>string**</code>。所以若要获取指针的值，需要对这个值解一次引用，输出出来。（当然如果你想简单一点，可以直接把它转成<code>int64_t</code>然后用16进制输出亦可）</p>
 <p>至此真相大白，程序输出的最后一行<code>0x1e1bd0</code>与主函数中new出来的对象的地址（见输出第一行）一致。所以得出结论：<strong>引用是用指针实现的。用户对引用的访问操作都内含一次解引用，而这对用户来说是透明的</strong>。</p>
 <p>不过需要提及的是，回想本文的第一个测试，发现引用的指针空间被优化掉了。所以引用有时也不一定会在栈上真正以指针体现出来。</p>
 
@@ -1121,6 +1121,11 @@
                 &copy; 2020 SandyChen&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
                 
                 </p>
             </div>
