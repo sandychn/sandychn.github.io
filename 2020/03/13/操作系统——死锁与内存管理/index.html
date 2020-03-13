@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
 <meta property="article:published_time" content="2020-03-12T18:56:05.000Z">
-<meta property="article:modified_time" content="2020-03-13T08:09:45.245Z">
+<meta property="article:modified_time" content="2020-03-13T08:35:29.179Z">
 <meta property="article:author" content="SandyChen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sandychn.github.io/images/og_image.png">
@@ -147,7 +147,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    26 分钟 读完 (大约 3916 个字)
+                    26 分钟 读完 (大约 3917 个字)
                 </span>
                 
                 
@@ -188,6 +188,8 @@
 <p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。</p>
 <p>图 a 可以抽取出环，如图 b，它满足了环路等待条件，因此会发生死锁。</p>
 <p><strong>每种类型一个资源</strong>的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。</p>
+<a id="more"></a>
+
 <h5 id="2-每种类型多个资源的死锁检测"><a href="#2-每种类型多个资源的死锁检测" class="headerlink" title="2. 每种类型多个资源的死锁检测"></a>2. 每种类型多个资源的死锁检测</h5><div align="center"> <img src="/pics/操作系统——死锁与内存管理/deadlock2.png"/> </div><br>
 
 <p>上图中，有三个进程四个资源，每个数据代表的含义如下：</p>
