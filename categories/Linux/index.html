@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: 操作系统 - Sandy&#39;s Blog</title>
+<title>分类: Linux - Sandy&#39;s Blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Sandy&#39;s Blog">
-<meta property="og:url" content="https://sandychn.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:url" content="https://sandychn.github.io/categories/Linux/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
@@ -128,7 +128,7 @@
         <ul>
             <li><a href="/categories">分类</a></li>
             
-            <li class="is-active"><a href="#" aria-current="page">操作系统</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Linux</a></li>
         </ul>
         </nav>
     </div>
@@ -141,17 +141,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-13T08:13:33.000Z">2020-03-13</time>
+                <time class="level-item has-text-grey" datetime="2020-03-22T18:10:09.000Z">2020-03-23</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1401 个字)
+                    2 分钟 读完 (大约 358 个字)
                 </span>
                 
                 
@@ -160,166 +160,27 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E4%B8%8E%E9%93%BE%E6%8E%A5/">操作系统——设备管理与链接</a>
+                <a class="has-link-black-ter" href="/2020/03/23/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Valgrind安装与memcheck简单使用</a>
             
         </h1>
         <div class="content">
-            <h2 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h2><h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><ul>
-<li>盘面（Platter）：一个磁盘有多个盘面；</li>
-<li>磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道；</li>
-<li>扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小；</li>
-<li>磁头（Head）：与盘面非常接近，能够将盘面上的磁场转换为电信号（读），或者将电信号转换为盘面的磁场（写）；</li>
-<li>制动手臂（Actuator arm）：用于在磁道之间移动磁头；</li>
-<li>主轴（Spindle）：使整个盘面转动。</li>
-</ul>
+            <h2 id="安装-valgrind"><a href="#安装-valgrind" class="headerlink" title="安装 valgrind"></a>安装 valgrind</h2><p><code>sudo apt install valgrind</code></p>
+<p>安装后，查看一下版本以确认安装成功</p>
+<p><code>valgrind --version</code></p>
+<h2 id="使用-memcheck-检查内存泄漏"><a href="#使用-memcheck-检查内存泄漏" class="headerlink" title="使用 memcheck 检查内存泄漏"></a>使用 memcheck 检查内存泄漏</h2><p>memleak.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A() &#123;</span><br><span class="line">        a_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] a_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* a_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B() &#123;</span><br><span class="line">        b_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~B() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] b_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* b_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A* pa = <span class="keyword">new</span> B();</span><br><span class="line">    <span class="keyword">delete</span> pa;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -g memleak.cpp -o memleak</span><br><span class="line">valgrind --tool=memcheck ./memleak</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>--tool=memcheck</code> 可以省略，因为 <code>valgrind</code> 的默认工具就是 <code>memcheck</code> 。<br>可以检查出类B对象中的12个字节（3个int）内存泄漏（见下方 <code>definitely lost</code> ）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Memcheck, a memory error detector</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Copyright (C) 2002-2015, and GNU GPL&#39;d, by Julian Seward et al.</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Command: .&#x2F;memleak</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; HEAP SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;     in use at exit: 72,716 bytes in 2 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;   total heap usage: 4 allocs, 2 frees, 72,752 bytes allocated</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; LEAK SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    definitely lost: 12 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    indirectly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;      possibly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    still reachable: 72,704 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;         suppressed: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Rerun with --leak-check&#x3D;full to see details of leaked memory</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; For counts of detected and suppressed errors, rerun with: -v</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</span><br></pre></td></tr></table></figure>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E4%B8%8E%E9%93%BE%E6%8E%A5/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T18:56:05.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    26 分钟 读完 (大约 3917 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%AD%BB%E9%94%81%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">操作系统——死锁与内存管理</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h3><ul>
-<li>互斥：每个资源要么已经分配给了一个进程，要么就是可用的。</li>
-<li>占有和等待：已经得到了某个资源的进程可以再请求新的资源。</li>
-<li>不可抢占：已经分配给一个进程的资源不能强制性地被抢占，它只能被占有它的进程显式地释放。</li>
-<li>环路等待：有两个或者两个以上的进程组成一条环路，该环路中的每个进程都在等待下一个进程所占有的资源。</li>
-</ul>
-<h3 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h3><p>主要有以下四种方法：</p>
-<ul>
-<li>鸵鸟策略</li>
-<li>死锁检测与死锁恢复</li>
-<li>死锁预防</li>
-<li>死锁避免</li>
-</ul>
-<h4 id="鸵鸟策略"><a href="#鸵鸟策略" class="headerlink" title="鸵鸟策略"></a>鸵鸟策略</h4><p><strong>把头埋在沙子里，假装根本没发生问题</strong>。</p>
-<p>因为解决死锁问题的代价很高，因此鸵鸟策略这种不采取任务措施的方案会获得更高的性能。</p>
-<p>当发生死锁时不会对用户造成多大影响，或发生死锁的概率很低，可以采用鸵鸟策略。</p>
-<p>大多数操作系统，包括 Unix，Linux 和 Windows，处理死锁问题的办法仅仅是忽略它。</p>
-<h4 id="死锁检测与死锁恢复"><a href="#死锁检测与死锁恢复" class="headerlink" title="死锁检测与死锁恢复"></a>死锁检测与死锁恢复</h4><p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复。</p>
-<h5 id="1-每种类型一个资源的死锁检测"><a href="#1-每种类型一个资源的死锁检测" class="headerlink" title="1. 每种类型一个资源的死锁检测"></a>1. 每种类型一个资源的死锁检测</h5><div align="center"> <img src="/pics/操作系统——死锁与内存管理/deadlock1.png"/> </div><br>
-
-<p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。</p>
-<p>图 a 可以抽取出环，如图 b，它满足了环路等待条件，因此会发生死锁。</p>
-<p><strong>每种类型一个资源</strong>的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%AD%BB%E9%94%81%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T13:35:43.000Z">2020-03-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    30 分钟 读完 (大约 4498 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">操作系统——进程管理</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>进程是资源分配的基本单位；线程是独立调度的基本单位。</p>
-<p>一个进程中可以有多个线程，它们共享进程资源。</p>
-<p>QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 HTTP 请求线程、事件响应线程、渲染线程等等，线程的并发执行使得在浏览器中点击一个新链接从而发起 HTTP 请求时，浏览器还可以响应用户的其它事件。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>Ⅰ 拥有资源</p>
-<p>进程是资源分配的基本单位，但是线程不拥有资源，线程可以访问隶属进程的资源。</p>
-<p>Ⅱ 调度</p>
-<p>线程是独立调度的基本单位，在同一进程中，线程的切换不会引起进程切换，从一个进程中的线程切换到另一个进程中的线程时，会引起进程切换。</p>
-<p>Ⅲ 系统开销</p>
-<p>由于创建或撤销进程时，系统都要为之分配或回收资源，如内存空间、I/O 设备等，所付出的开销远大于创建或撤销线程时的开销。类似地，在进行进程切换时，涉及当前执行进程 CPU 环境的保存及新调度进程 CPU 环境的设置，而线程切换时只需保存和设置少量寄存器内容，开销很小。</p>
-<p>Ⅳ 通信方面</p>
-<p>线程间可以通过直接读写同一进程中的数据进行通信，但是进程通信需要借助 IPC（Inter-Process Communication，进程间通信，提供了各种进程间通信的方法）。</p>
-<h2 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h2><p>不同环境的调度算法目标不同，因此需要针对不同环境来讨论调度算法。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/03/23/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#more">阅读更多</a>
                 </div>
             </div>
         </div>

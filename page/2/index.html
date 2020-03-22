@@ -130,6 +130,70 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-07T10:40:01.000Z">2020-03-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 757 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">C++引用的实现</a>
+            
+        </h1>
+        <div class="content">
+            <p>当我学习C++引用时，听到的第一句话是“引用是变量的别名，不像指针一样需要占用内存空间”。然而学到深处，发现此话并不完全正确。</p>
+<p>本文主要介绍我如何通过实验来了解到C++引用的实现，其实<strong>引用的内部就是指针</strong>。当然这也于编译器有关，所以这里需要提及一下测试所用的编译器及环境。</p>
+<p>测试环境是MinGW的g++ 8.1.0，64位编译器，64位的机子。所以指针的大小是8个字节，即64个bit。（注：因为目的是测试，所以测试时并没有处理对new操作符所产生对象的回收）</p>
+<p>首先我写出了如下代码，试图通过指针偏移来获取有关引用的信息：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int64_t</span> x;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="keyword">int64_t</span> y;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; str; <span class="comment">// 对引用做一次操作，避免编译器把变量优化掉</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;x &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;y &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，这个程序的输出如下（str的输出忽略）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x61fe00</span><br><span class="line">0x61fdf8</span><br></pre></td></tr></table></figure>
+
+<p>难道引用真的不占内存？编译器真的很聪明，可能优化掉了吧；经过一系列尝试，我写出了另外一段代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">int64_t</span> q, <span class="built_in">string</span>&amp; s, <span class="keyword">int64_t</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"&amp;q: "</span> &lt;&lt; &amp;q &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"&amp;r: "</span> &lt;&lt; &amp;r &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"*(string**)(&amp;q + 1): "</span> &lt;&lt; *(<span class="built_in">string</span>**)(&amp;q + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span>&amp; str = *<span class="keyword">new</span> <span class="built_in">string</span>();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"main(): "</span> &lt;&lt; &amp;str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    foo(<span class="number">0</span>, str, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码的输出是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main(): 0x1e1bd0</span><br><span class="line">&amp;q: 0x61fde0</span><br><span class="line">&amp;r: 0x61fdf0</span><br><span class="line">*(string**)(&amp;q + 1): 0x1e1bd0</span><br></pre></td></tr></table></figure>
+
+<p>可见，q的地址是<code>0x61fde0</code>，r的地址是<code>0x61fdf0</code>。两个地址间相差16个字节！这里引用占用的内存出来了。显然引用对应的指针存储在q的8个字节之后。我们可以将q的地址加1，也就是加上8个字节，这里存储的就是引用的信息。假设它就是指针，那么考虑：<code>(&amp;q + 1)</code>本身是一个指向<code>string*</code>的指针，也就是<code>string**</code>。所以若要获取指针的值，需要对这个值解一次引用，输出出来。（当然如果你想简单一点，可以直接把它转成<code>int64_t</code>然后用16进制输出亦可）</p>
+<p>至此真相大白，程序输出的最后一行<code>0x1e1bd0</code>与主函数中new出来的对象的地址（见输出第一行）一致。所以得出结论：<strong>引用是用指针实现的。用户对引用的访问操作都内含一次解引用，而这对用户来说是透明的</strong>。</p>
+<p>不过需要提及的是，回想本文的第一个测试，发现引用的指针空间被优化掉了。所以引用有时也不一定会在栈上真正以指针体现出来。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-05T11:05:09.000Z">2020-03-05</time>
                 
                 <div class="level-item">
@@ -406,54 +470,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-07T12:58:43.000Z">2019-08-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 208 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/08/07/%E9%AB%98%E6%95%88%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90-random%E4%B8%8Echrono/">高效随机数据生成-random与chrono</a>
-            
-        </h1>
-        <div class="content">
-            <p>请注意random库与chrono库均是C++11。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 INT_MIN &lt;= a &lt;= b &lt;= INT_MAX</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;<span class="keyword">int</span>&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 0 &lt;= a &lt;= b &lt;= UNSIGNED_INT_MAX</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">rand</span><span class="params">(<span class="keyword">unsigned</span> a, <span class="keyword">unsigned</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;<span class="keyword">unsigned</span>&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 LONG_LONG_MIN &lt;= a &lt;= b &lt;= LONG_LONG_MAX</span></span><br><span class="line"><span class="function">LL <span class="title">rand</span><span class="params">(LL a, LL b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937_64 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;LL&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 [a, b] 范围内的整数</span></span><br><span class="line"><span class="comment">// 其中 0 &lt;= a &lt;= b &lt;= UNSIGNED_LONG_LONG_MAX</span></span><br><span class="line"><span class="function">ULL <span class="title">rand</span><span class="params">(ULL a, ULL b)</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> mt19937_64 <span class="title">rng</span><span class="params">(chrono::steady_clock::now().time_since_epoch().count())</span></span>;</span><br><span class="line">    <span class="keyword">return</span> uniform_int_distribution&lt;ULL&gt;(a, b)(rng);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> LL MAX = <span class="number">1e10</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; rand(-MAX, MAX);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -471,6 +487,8 @@
             <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
             
         </ul>
     </nav>
@@ -512,7 +530,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            15
+                            16
                         </p>
                     </a>
                 </div>
@@ -524,7 +542,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            3
+                            4
                         </p>
                     </a>
                 </div>
@@ -536,7 +554,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            4
+                            7
                         </p>
                     </a>
                 </div>
@@ -575,6 +593,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
             <span class="level-start">
                 <span class="level-item">操作系统</span>
@@ -593,7 +619,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 10px;">ACM</a> <a href="/tags/C-11/" style="font-size: 15px;">C++11</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -602,6 +628,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T18:10:09.000Z">2020-03-23</time></div>
+                    <a href="/2020/03/23/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Valgrind安装与memcheck简单使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -655,19 +694,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-07T10:40:01.000Z">2020-03-07</time></div>
-                    <a href="/2020/03/07/C++%E5%BC%95%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++引用的实现</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -685,7 +711,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -762,9 +788,30 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/STL/">
                         <span class="tag">STL</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Valgrind/">
+                        <span class="tag">Valgrind</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/memcheck/">
+                        <span class="tag">memcheck</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: 操作系统 - Sandy&#39;s Blog</title>
+<title>Sandy&#39;s Blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Sandy&#39;s Blog">
-<meta property="og:url" content="https://sandychn.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:url" content="https://sandychn.github.io/page/4/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
@@ -122,220 +122,100 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-16T15:16:09.000Z">2019-03-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 821 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-            <li class="is-active"><a href="#" aria-current="page">操作系统</a></li>
+                <a class="has-link-black-ter" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/">FJUTOJ-3682-LRU算法的实现2</a>
+            
+        </h1>
+        <div class="content">
+            <p><a href="http://www.fjutacm.com/Problem.jsp?pid=3682">传送门</a></p>
+<p>此题让我们实现一个LRU的模板类。本题较简便且高效的写法是维护一个<code>std::list</code>和一个<code>std::unordered_map</code>。</p>
+<h2 id="std-list-与-std-unordered-map-中存放的内容"><a href="#std-list-与-std-unordered-map-中存放的内容" class="headerlink" title="std::list 与 std::unordered_map 中存放的内容"></a>std::list 与 std::unordered_map 中存放的内容</h2><p><code>std::list</code>中存放各key，类型为K。链表中<strong>各键码存放的顺序是按照访问顺序存放的</strong>。</p>
+<p><code>std::unordered_map</code>中以key为第一维，第二维为一个<code>pair</code>，其<code>first</code>和<code>second</code>分别为：</p>
+<p><code>first</code>: 该key对应的value。</p>
+<p><code>second</code>:该key在<code>std::list</code>中的迭代器方便访问。</p>
+<p>为方便，下面用“链表”来指代<code>std::list</code>，用“哈希表”来指代<code>std::unordered_map</code>。</p>
+<h2 id="各操作实现"><a href="#各操作实现" class="headerlink" title="各操作实现"></a>各操作实现</h2><p><code>insert</code>操作：用哈希表判断该键是否已经存在。若存在，先在链表中删除该key，然后再新加一个该key到链表尾部，并更新在哈希表中的value和链表的迭代器。若不存在，则直接加至链表尾部，并在哈希表中插入该key，伴随着对应的value和链表迭代器。</p>
+<p><code>get</code>操作：直接从哈希表中获得其value即可。代码实现未检测该key是否存在，严谨来说应该加上异常处理。</p>
+<p><code>contains</code>操作：直接在哈希表中查询是否存在该key即可。</p>
+<p><code>vis</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，然后再将其加至链表尾部，并更新哈希表中对应链表迭代器。</p>
+<p><code>pop</code>操作：判断是否整个容器已经为空。若为空，则本操作无效。否则，将链表头部元素从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>remove</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，并在哈希表中删除对应键值信息。</p>
+<p><code>empty</code>操作：哈希表或链表判空即可。</p>
+<p><code>size</code>操作：取哈希表或链表大小即可。</p>
+<p><code>clear</code>操作：清空哈希表和链表即可。</p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>各操作基于对链表和哈希表的修改。期望复杂度均为$O(1)$。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/03/16/FJUTOJ-3682-LRU%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B02/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous">
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">上一页</a>
+        </div>
+        <div class="pagination-next is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/page/5/">下一页</a>
+        </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link has-text-black-ter" href="/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/3/">3</a></li>
+            
+            <li><a class="pagination-link is-current" href="/page/4/">4</a></li>
+            
         </ul>
-        </nav>
-    </div>
+    </nav>
 </div>
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-13T08:13:33.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1401 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E4%B8%8E%E9%93%BE%E6%8E%A5/">操作系统——设备管理与链接</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h2><h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><ul>
-<li>盘面（Platter）：一个磁盘有多个盘面；</li>
-<li>磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道；</li>
-<li>扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小；</li>
-<li>磁头（Head）：与盘面非常接近，能够将盘面上的磁场转换为电信号（读），或者将电信号转换为盘面的磁场（写）；</li>
-<li>制动手臂（Actuator arm）：用于在磁道之间移动磁头；</li>
-<li>主轴（Spindle）：使整个盘面转动。</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E4%B8%8E%E9%93%BE%E6%8E%A5/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T18:56:05.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    26 分钟 读完 (大约 3917 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%AD%BB%E9%94%81%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">操作系统——死锁与内存管理</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h3><ul>
-<li>互斥：每个资源要么已经分配给了一个进程，要么就是可用的。</li>
-<li>占有和等待：已经得到了某个资源的进程可以再请求新的资源。</li>
-<li>不可抢占：已经分配给一个进程的资源不能强制性地被抢占，它只能被占有它的进程显式地释放。</li>
-<li>环路等待：有两个或者两个以上的进程组成一条环路，该环路中的每个进程都在等待下一个进程所占有的资源。</li>
-</ul>
-<h3 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h3><p>主要有以下四种方法：</p>
-<ul>
-<li>鸵鸟策略</li>
-<li>死锁检测与死锁恢复</li>
-<li>死锁预防</li>
-<li>死锁避免</li>
-</ul>
-<h4 id="鸵鸟策略"><a href="#鸵鸟策略" class="headerlink" title="鸵鸟策略"></a>鸵鸟策略</h4><p><strong>把头埋在沙子里，假装根本没发生问题</strong>。</p>
-<p>因为解决死锁问题的代价很高，因此鸵鸟策略这种不采取任务措施的方案会获得更高的性能。</p>
-<p>当发生死锁时不会对用户造成多大影响，或发生死锁的概率很低，可以采用鸵鸟策略。</p>
-<p>大多数操作系统，包括 Unix，Linux 和 Windows，处理死锁问题的办法仅仅是忽略它。</p>
-<h4 id="死锁检测与死锁恢复"><a href="#死锁检测与死锁恢复" class="headerlink" title="死锁检测与死锁恢复"></a>死锁检测与死锁恢复</h4><p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复。</p>
-<h5 id="1-每种类型一个资源的死锁检测"><a href="#1-每种类型一个资源的死锁检测" class="headerlink" title="1. 每种类型一个资源的死锁检测"></a>1. 每种类型一个资源的死锁检测</h5><div align="center"> <img src="/pics/操作系统——死锁与内存管理/deadlock1.png"/> </div><br>
-
-<p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。</p>
-<p>图 a 可以抽取出环，如图 b，它满足了环路等待条件，因此会发生死锁。</p>
-<p><strong>每种类型一个资源</strong>的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%AD%BB%E9%94%81%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T13:35:43.000Z">2020-03-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    30 分钟 读完 (大约 4498 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">操作系统——进程管理</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>进程是资源分配的基本单位；线程是独立调度的基本单位。</p>
-<p>一个进程中可以有多个线程，它们共享进程资源。</p>
-<p>QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 HTTP 请求线程、事件响应线程、渲染线程等等，线程的并发执行使得在浏览器中点击一个新链接从而发起 HTTP 请求时，浏览器还可以响应用户的其它事件。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>Ⅰ 拥有资源</p>
-<p>进程是资源分配的基本单位，但是线程不拥有资源，线程可以访问隶属进程的资源。</p>
-<p>Ⅱ 调度</p>
-<p>线程是独立调度的基本单位，在同一进程中，线程的切换不会引起进程切换，从一个进程中的线程切换到另一个进程中的线程时，会引起进程切换。</p>
-<p>Ⅲ 系统开销</p>
-<p>由于创建或撤销进程时，系统都要为之分配或回收资源，如内存空间、I/O 设备等，所付出的开销远大于创建或撤销线程时的开销。类似地，在进行进程切换时，涉及当前执行进程 CPU 环境的保存及新调度进程 CPU 环境的设置，而线程切换时只需保存和设置少量寄存器内容，开销很小。</p>
-<p>Ⅳ 通信方面</p>
-<p>线程间可以通过直接读写同一进程中的数据进行通信，但是进程通信需要借助 IPC（Inter-Process Communication，进程间通信，提供了各种进程间通信的方法）。</p>
-<h2 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h2><p>不同环境的调度算法目标不同，因此需要针对不同环境来讨论调度算法。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 </div>
                 
                 
