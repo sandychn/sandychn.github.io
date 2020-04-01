@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: Linux - Sandy&#39;s Blog</title>
+<title>分类: LeetCode - Sandy&#39;s Blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Sandy&#39;s Blog">
-<meta property="og:url" content="https://sandychn.github.io/categories/Linux/index.html">
+<meta property="og:url" content="https://sandychn.github.io/categories/LeetCode/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
@@ -128,7 +128,7 @@
         <ul>
             <li><a href="/categories">分类</a></li>
             
-            <li class="is-active"><a href="#" aria-current="page">Linux</a></li>
+            <li class="is-active"><a href="#" aria-current="page">LeetCode</a></li>
         </ul>
         </nav>
     </div>
@@ -141,17 +141,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-22T18:10:09.000Z">2020-03-23</time>
+                <time class="level-item has-text-grey" datetime="2020-04-01T07:34:43.675Z">2020-04-01</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 378 个字)
+                    1 分钟 读完 (大约 121 个字)
                 </span>
                 
                 
@@ -160,33 +160,16 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/23/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Valgrind安装与memcheck简单使用</a>
+                <a class="has-link-black-ter" href="/2020/04/01/LeetCode/4%E6%9C%88%E4%BB%BD%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E9%A2%98%E8%A7%A3/">LeetCode 4月份每日一题题解</a>
             
         </h1>
         <div class="content">
-            <h2 id="安装-valgrind"><a href="#安装-valgrind" class="headerlink" title="安装 valgrind"></a>安装 valgrind</h2><p><code>sudo apt install valgrind</code></p>
-<p>安装后，查看一下版本以确认安装成功</p>
-<p><code>valgrind --version</code></p>
-<p>输出形如以下版本号信息就表示安装成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valgrind-3.11.0</span><br></pre></td></tr></table></figure>
+            <h2 id="Apr-1-有效括号的嵌套深度"><a href="#Apr-1-有效括号的嵌套深度" class="headerlink" title="Apr.1 有效括号的嵌套深度"></a>Apr.1 有效括号的嵌套深度</h2><p>由于所给的字符串保证是<strong>有效括号字符串</strong>，所以将每个括号尽量平均分配即可。<br>官方题解中考虑的<strong>奇偶性</strong>更巧妙，但不容易想到。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0 ms, 7.3 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">maxDepthAfterSplit</span><span class="params">(<span class="built_in">string</span> seq)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">int</span> n = seq.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">        res.reserve(n);</span><br><span class="line">        <span class="keyword">int</span> depth[<span class="number">2</span>] = &#123;&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (seq[i] == <span class="string">'('</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> smallId = depth[<span class="number">0</span>] &gt; depth[<span class="number">1</span>];</span><br><span class="line">                res.push_back(smallId);</span><br><span class="line">                ++depth[smallId];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> bigId = depth[<span class="number">0</span>] &lt; depth[<span class="number">1</span>];</span><br><span class="line">                res.push_back(bigId);</span><br><span class="line">                --depth[bigId];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用-memcheck-检查内存泄漏"><a href="#使用-memcheck-检查内存泄漏" class="headerlink" title="使用 memcheck 检查内存泄漏"></a>使用 memcheck 检查内存泄漏</h2><p>memleak.cpp</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A() &#123;</span><br><span class="line">        a_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] a_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* a_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B() &#123;</span><br><span class="line">        b_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~B() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] b_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* b_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A* pa = <span class="keyword">new</span> B();</span><br><span class="line">    <span class="keyword">delete</span> pa;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -g memleak.cpp -o memleak</span><br><span class="line">valgrind --tool=memcheck ./memleak</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>--tool=memcheck</code> 可以省略，因为 <code>valgrind</code> 的默认工具就是 <code>memcheck</code> 。<br>可以检查出类B对象中的12个字节（3个int）内存泄漏（见下方 <code>definitely lost</code> ）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Memcheck, a memory error detector</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Copyright (C) 2002-2015, and GNU GPL&#39;d, by Julian Seward et al.</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Command: .&#x2F;memleak</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; HEAP SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;     in use at exit: 72,716 bytes in 2 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;   total heap usage: 4 allocs, 2 frees, 72,752 bytes allocated</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; LEAK SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    definitely lost: 12 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    indirectly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;      possibly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    still reachable: 72,704 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;         suppressed: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Rerun with --leak-check&#x3D;full to see details of leaked memory</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; For counts of detected and suppressed errors, rerun with: -v</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</span><br></pre></td></tr></table></figure>
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/23/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
