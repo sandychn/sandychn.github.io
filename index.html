@@ -140,7 +140,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 442 个字)
+                    3 分钟 读完 (大约 443 个字)
                 </span>
                 
                 
@@ -162,26 +162,17 @@
 <p>然而，当我们实际编译并运行它时，运行结果为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">default ctor</span><br><span class="line">dtor</span><br></pre></td></tr></table></figure>
 
-<p>发现所有的拷贝构造和临时对象的析构都被优化掉了。这就是NRV优化带来的性能上的好处。</p>
-<p>对下面这个代码也是同理的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"default ctor\n"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">int</span> x) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"ctor with int\n"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">const</span> A&amp; b) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"copy ctor\n"</span>; &#125;</span><br><span class="line">    ~A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"dtor\n"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A a = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>优化前</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctor with int</span><br><span class="line">copy ctor</span><br><span class="line">dtor</span><br><span class="line">dtor</span><br></pre></td></tr></table></figure>
-
-<p>优化后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctor with int</span><br><span class="line">dtor</span><br></pre></td></tr></table></figure>
-
-<p>值得一提的是，对于上面这一段代码，若使用括号（而不是等号）进行初始化，则无论是否开启优化都不会有临时对象的产生。即如下写法不会构造临时对象。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span> ... &#125;; <span class="comment">// 同上</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">A <span class="title">a</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用g++编译器我们可以加上 <code>-fno-elide-constructors</code> 参数，如此将关闭掉编译器对构造函数的优化，并输出未优化时的结果。</p>
-<p>可以在 <code>man g++</code> 中查到对该参数的描述。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-fno-elide-constructors</span><br><span class="line">  The C++ standard allows an implementation to omit creating a temporary that is only used to initialize another object of the same type.  Specifying this option disables that optimization, and forces G++ to call the copy constructor in all cases.</span><br></pre></td></tr></table></figure>
-
-
+<p>发现所有的拷贝构造和临时对象的析构都被优化掉了。这就是<strong>NRV优化</strong>带来的性能上的好处。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/04/19/C++%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
