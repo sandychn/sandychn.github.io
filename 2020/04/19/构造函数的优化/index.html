@@ -7,22 +7,20 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>multimap与multiset - Sandy&#39;s Blog</title>
+<title>构造函数的优化 - Sandy&#39;s Blog</title>
 
 
-    <meta name="description" content="multimap介绍基本与 map 相同，但除去了 operator[]， 因为其特点是相同 key 的值在 multimap 中可以多个存在。需要强调的，与 map 有明显不同的常用方法： 常用方法iterator insert(value) 插入键值对，返回插入后该元素的迭代器 size_type erase(key) 删除所有关键字与 key 相等的键值对，返回删除的元素个数 void er">
+    <meta name="description" content="下面这段代码 12345678910111213141516171819#include &lt;iostream&gt;using namespace std;class A &amp;#123;   public:    A() &amp;#123; cout &lt;&lt; &quot;default ctor\n&quot;; &amp;#125;    A(const A&amp; b) &amp;#123; cout &lt;&lt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="multimap与multiset">
-<meta property="og:url" content="https://sandychn.github.io/2019/08/06/multimap%E4%B8%8Emultiset/index.html">
+<meta property="og:title" content="构造函数的优化">
+<meta property="og:url" content="https://sandychn.github.io/2020/04/19/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
-<meta property="og:description" content="multimap介绍基本与 map 相同，但除去了 operator[]， 因为其特点是相同 key 的值在 multimap 中可以多个存在。需要强调的，与 map 有明显不同的常用方法： 常用方法iterator insert(value) 插入键值对，返回插入后该元素的迭代器 size_type erase(key) 删除所有关键字与 key 相等的键值对，返回删除的元素个数 void er">
+<meta property="og:description" content="下面这段代码 12345678910111213141516171819#include &lt;iostream&gt;using namespace std;class A &amp;#123;   public:    A() &amp;#123; cout &lt;&lt; &quot;default ctor\n&quot;; &amp;#125;    A(const A&amp; b) &amp;#123; cout &lt;&lt;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
-<meta property="article:published_time" content="2019-08-06T07:56:08.000Z">
-<meta property="article:modified_time" content="2020-03-11T17:51:24.959Z">
+<meta property="article:published_time" content="2020-04-19T10:19:09.000Z">
+<meta property="article:modified_time" content="2020-04-19T10:20:48.530Z">
 <meta property="article:author" content="SandyChen">
-<meta property="article:tag" content="STL">
-<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sandychn.github.io/images/og_image.png">
 
@@ -82,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/avatar.jpg" alt="multimap与multiset" height="28">
+                <img src="/avatar.jpg" alt="构造函数的优化" height="28">
             
             </a>
         </div>
@@ -115,10 +113,6 @@
                     
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -139,7 +133,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-06T07:56:08.000Z">2019-08-06</time>
+                <time class="level-item has-text-grey" datetime="2020-04-19T10:19:09.000Z">2020-04-19</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/C/">C++</a>
@@ -149,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 357 个字)
+                    3 分钟 读完 (大约 442 个字)
                 </span>
                 
                 
@@ -163,32 +157,37 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                multimap与multiset
+                构造函数的优化
             
         </h1>
         <div class="content">
-            <h2 id="multimap"><a href="#multimap" class="headerlink" title="multimap"></a>multimap</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>基本与 <code>map</code> 相同，但除去了 <code>operator[]</code>， 因为其特点是<strong>相同 <code>key</code> 的值在 <code>multimap</code> 中可以多个存在</strong>。需要强调的，与 <code>map</code> 有明显不同的常用方法：</p>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p><code>iterator insert(value)</code> 插入键值对，返回插入后该元素的迭代器</p>
-<p><code>size_type erase(key)</code> 删除所有关键字与 <code>key</code> 相等的键值对，返回删除的元素个数</p>
-<p><code>void erase(iterator pos)</code> 删除对应位置元素</p>
-<p><code>size_type count(key)</code> 统计关键字为 <code>key</code> 的元素个数</p>
-<p><code>iterator find(key)</code> 查找关键字与 <code>key</code> 相等的键值对，返回对应位置的迭代器。如果不存在则返回 <code>end()</code> 。<span style="color: red;">如果有多个关键字与 <code>key</code> 相等的键值对，返回的迭代器指向哪一个不定。</span></p>
-<p><code>pair&lt;iterator, iterator&gt; equal_range(key)</code> 查找关键字与 <code>key</code> 相等的键值对，返回迭代器对，描述与 <code>key</code> 相等的键值对的区间 <code>[first, last)</code> 。</p>
-<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt;::iterator iterType;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; mp;</span><br><span class="line">    mp.insert(make_pair(<span class="number">1</span>, <span class="string">'A'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'B'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'C'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">2</span>, <span class="string">'D'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">4</span>, <span class="string">'E'</span>));</span><br><span class="line">    mp.insert(make_pair(<span class="number">3</span>, <span class="string">'F'</span>));</span><br><span class="line">    pair&lt;iterType, iterType&gt; range = mp.equal_range(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span> (iterType it = range.first; it != range.second; ++it) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">' '</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>下面这段代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"default ctor\n"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">const</span> A&amp; b) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"copy ctor\n"</span>; &#125;</span><br><span class="line">    ~A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"dtor\n"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">A <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A b;</span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A a = foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">output</span><br><span class="line"></span><br><span class="line">2 B</span><br><span class="line">2 C</span><br><span class="line">2 D</span><br></pre></td></tr></table></figure>
+<p>理论上，它的运行结果应为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">default ctor &#x2F;&#x2F; foo函数第一行的对象b的构造</span><br><span class="line">copy ctor    &#x2F;&#x2F; 对象b拷贝到返回值临时对象</span><br><span class="line">dtor         &#x2F;&#x2F; 对象b析构</span><br><span class="line">copy ctor    &#x2F;&#x2F; 返回值临时对象拷贝到main中对象a</span><br><span class="line">dtor         &#x2F;&#x2F; 返回值临时对象析构</span><br><span class="line">dtor         &#x2F;&#x2F; main对象析构</span><br></pre></td></tr></table></figure>
 
-<h2 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>与上述 <code>multimap</code> 的用法基本相同，只是每个元素只有一个值 <code>key</code>，而没有对应的 <code>value</code>。</p>
+<p>然而，当我们实际编译并运行它时，运行结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">default ctor</span><br><span class="line">dtor</span><br></pre></td></tr></table></figure>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/STL/" rel="tag">STL</a>, <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
-                </div>
-            </div>
+<p>发现所有的拷贝构造和临时对象的析构都被优化掉了。这就是NRV优化带来的性能上的好处。</p>
+<p>对下面这个代码也是同理的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"default ctor\n"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">int</span> x) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"ctor with int\n"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">const</span> A&amp; b) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"copy ctor\n"</span>; &#125;</span><br><span class="line">    ~A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"dtor\n"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A a = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>优化前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctor with int</span><br><span class="line">copy ctor</span><br><span class="line">dtor</span><br><span class="line">dtor</span><br></pre></td></tr></table></figure>
+
+<p>优化后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctor with int</span><br><span class="line">dtor</span><br></pre></td></tr></table></figure>
+
+<p>值得一提的是，对于上面这一段代码，若使用括号（而不是等号）进行初始化，则无论是否开启优化都不会有临时对象的产生。即如下写法不会构造临时对象。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span> ... &#125;; <span class="comment">// 同上</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">A <span class="title">a</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用g++编译器我们可以加上 <code>-fno-elide-constructors</code> 参数，如此将关闭掉编译器对构造函数的优化，并输出未优化时的结果。</p>
+<p>可以在 <code>man g++</code> 中查到对该参数的描述。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-fno-elide-constructors</span><br><span class="line">  The C++ standard allows an implementation to omit creating a temporary that is only used to initialize another object of the same type.  Specifying this option disables that optimization, and forces G++ to call the copy constructor in all cases.</span><br></pre></td></tr></table></figure>
+
+
         </div>
         
         
@@ -203,17 +202,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/08/06/bitset/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">bitset</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/03/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">
-                <span class="level-item">后缀数组</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/15/LeetCode/4%E6%9C%88%E4%BB%BD%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                <span class="level-item">LeetCode 4月份每日一题做题记录</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -297,42 +289,6 @@
 </div>
     
         
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    目录
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#multimap">
-        <span class="has-mr-6">1</span>
-        <span>multimap</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#介绍">
-        <span class="has-mr-6">1.1</span>
-        <span>介绍</span>
-        </a></li><li>
-        <a class="is-flex" href="#常用方法">
-        <span class="has-mr-6">1.2</span>
-        <span>常用方法</span>
-        </a></li><li>
-        <a class="is-flex" href="#代码示例">
-        <span class="has-mr-6">1.3</span>
-        <span>代码示例</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#multiset">
-        <span class="has-mr-6">2</span>
-        <span>multiset</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#介绍-1">
-        <span class="has-mr-6">2.1</span>
-        <span>介绍</span>
-        </a></li></ul></li></ul>
-            </div>
-        </div>
-    </div>
-
     
         
 <div class="card widget">
@@ -632,7 +588,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/avatar.jpg" alt="multimap与multiset" height="28">
+                    <img src="/avatar.jpg" alt="构造函数的优化" height="28">
                 
                 </a>
                 <p class="is-size-7">
