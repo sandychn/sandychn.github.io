@@ -141,6 +141,93 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-02T19:10:47.000Z">2019-08-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1227 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">后缀数组</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="相关定义及其证明"><a href="#相关定义及其证明" class="headerlink" title="相关定义及其证明"></a>相关定义及其证明</h2><h3 id="sa-后缀数组-suffix-array"><a href="#sa-后缀数组-suffix-array" class="headerlink" title="sa 后缀数组 suffix array"></a>sa 后缀数组 suffix array</h3><p>保存 $0 \sim n-1$ 的全排列，含义是把所有后缀按字典序排序后，后缀在原串中的位置。$suffix(sa[i]) &lt; suffix(sa[i + 1])$</p>
+<p>$sa[,]$ 记录位置，即“排第i的后缀是谁”。</p>
+<h3 id="rk-名次数组-rank-array"><a href="#rk-名次数组-rank-array" class="headerlink" title="rk 名次数组 rank array"></a>rk 名次数组 rank array</h3><p>保存 $0 \sim n-1$ 的全排列，$rk[i]$ 的含义是 $suffix(i)$ 在所有后缀中按字典序排序的名次。</p>
+<p>$rk[,]$ 记录排名，即“第以第i个字符起始的后缀子串在所有后缀子串中排第几”。</p>
+<h3 id="sa-与-rk-的关系"><a href="#sa-与-rk-的关系" class="headerlink" title="sa 与 rk 的关系"></a>sa 与 rk 的关系</h3><p>$sa[,]$ 与 $rk[,]$ 是一一对应的关系，且互为逆运算。于是</p>
+<p>可用 $rk[,]$ 推导 $sa[,]$： <code>for (int i = 0; i &lt; n; ++i) sa[rk[i]] = i;</code></p>
+<p>可用 $sa[,]$ 推导 $rk[,]$： <code>for (int i = 0; i &lt; n; ++i) rk[sa[i]] = i;</code></p>
+<h3 id="LCP-最长公共前缀"><a href="#LCP-最长公共前缀" class="headerlink" title="LCP 最长公共前缀"></a>LCP 最长公共前缀</h3><p>LCP 即 Longest Common Prefix，最长公共前缀。</p>
+<p>记 $LCP(i, j)$ 为 $suffix(sa[i])$ 与 $suffix(sa[j])$ 的最长公共前缀长度，即排序后第 $i$ 个后缀与第 $j$ 个后缀的最长公共前缀长度</p>
+<h4 id="LCP-Lemma-LCP引理"><a href="#LCP-Lemma-LCP引理" class="headerlink" title="LCP Lemma (LCP引理)"></a>LCP Lemma (LCP引理)</h4><p>若 $0 \lt i \lt j \lt k \le n-1$，则 $LCP(i, k) = min{LCP(i, j),,LCP(j, k)}$。</p>
+<p><strong>证明</strong>：</p>
+<p>设 $p=min{LCP(i, j), LCP(j, k)}$ ，则 $LCP(i, j) \ge p ,;LCP(j, k) \ge p$。</p>
+<p>又设 <span style="color: blue">$suffix(sa[i])=u,;suffix(sa[j])=v,;suffix(sa[k])=w$ <strong>①</strong></span>。</p>
+<p>我们记 $a=_{len}b$表示字符串 $a$ 长度为 $len$ 的前缀与字符串 $b$ 的长度为 $len$ 的前缀相等。</p>
+<p>则由 $u=<em>{LCP(i,j)}v$ 可得 $u=</em>{p}v, ; v=_{p}w$ 。</p>
+<p>于是可得 $u=_{p}w$。即 $LCP(i, k) \ge p = min{LCP(i, j),,LCP(j, k)}$。</p>
+<p>现在我们再证 $LCP(i,k) \gt p$ 是不可能的。</p>
+<p>又设存在一个 $q \gt p$，$LCP(i, k) = q$。</p>
+<p>则可得 $u[i] = w[i]$ 对任意 $i \in [1, q]$ 均成立。由于 $q \gt p$，所以上式中的一个是 $u[p+1] = w[p+1]$。</p>
+<p>由 <strong><span style="color: blue">①</span></strong> 得 $u[p+1] \leq v[p+1] \leq w[p+1]$。结合上一行得 $u[p+1]=v[p+1]=w[p+1]$。</p>
+<p>而 $p=min{LCP(i, j), LCP(j, k)}$，即 $u[p+1] \neq v[p+1]$ 或 $v[p+1] \ne w[p+1]$。</p>
+<p>出现矛盾，故不存在 $q$ ，使得假设 $LCP(i, k) = q \gt p$ 成立。即得 $LCP(i, k) \le p$。</p>
+<p>故得 $LCP(i, k) \ge p$ 且 $LCP(i, k) \le p$。</p>
+<p>最后 $LCP(i, k) = min{LCP(i, j), LCP(j, k)}$。</p>
+<h4 id="LCP-Theorem-LCP定理"><a href="#LCP-Theorem-LCP定理" class="headerlink" title="LCP Theorem(LCP定理)"></a>LCP Theorem(LCP定理)</h4><p>若 $i \lt j$ 则 $LCP(i, j) = min{LCP(k - 1, k)},;i \lt k \le j$</p>
+<p><strong>证明</strong>：由 LCP Lemma 与数学归纳法可得。</p>
+<h3 id="height-高度数组"><a href="#height-高度数组" class="headerlink" title="height 高度数组"></a>height 高度数组</h3><p>$height[,]$ 是一个辅助数组，和最长公共前缀 (LCP) 相关。</p>
+<p>令 $height[i]=LCP(i-1,i),;1 \lt i \le n$ ，即 $suffix(sa[i-1])$ 与 $suffix(sa[i])$ 的最长公共前缀长度。</p>
+<p>为了描述方便，记 $h[i]$ 为 $height[rank[i]]$ ，即后缀 $suffix(i)$ 与 $suffix(sa[rank[i]-1])$ 的LCP长度。</p>
+<p>有一个很重要的性质可以让我们在 $O(N)$ 的时间内求得 $height[]$ 数组：$h[i] \ge h[i-1] - 1$ 。</p>
+<p><strong>证明</strong>：</p>
+<p>设 $suffix(k)$ 是排在 $suffix(i-1)$ 前一名的后缀，则它们的LCP长度为 $h[i-1]$。两者都去掉第一个字符，得到 $suffix(k+1)$ 与 $suffix(i)$ 。</p>
+<p>① 若 $h[i-1] \le 1$ ，即 $h[i-1]-1 \le 0$ ，则 $h[i] \ge h[i-1] - 1$ 显然成立。</p>
+<p>② 若 $h[i-1] \gt 1$ ，则在上面去掉第一个字符的过程中是去掉的两者LCP中的第一个字符，那么 $suffix(k+1)$ 与 $suffix(i)$ 的LCP长度就至少为 $h[i] \ge [h-1]-1$ 。</p>
+<p>故 $h[i] \ge h[i-1]-1$ 得证。</p>
+<h2 id="倍增-基数排序-求-sa-rk-height-三数组"><a href="#倍增-基数排序-求-sa-rk-height-三数组" class="headerlink" title="倍增+基数排序 求 sa, rk, height 三数组"></a>倍增+基数排序 求 sa, rk, height 三数组</h2><p>个人模板，供参考。设字符串长度为 $N$，则下面代码求三数组的复杂度为 $O(N;logN)$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="keyword">int</span> sa[N], rk[N], cnt[N], height[N], t1[N], t2[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calcSA</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = <span class="number">256</span>;</span><br><span class="line">    <span class="keyword">int</span> i, *x = t1, *y = t2;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; ++i) cnt[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) ++cnt[x[i] = s[i]];</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= m; ++i) cnt[i] += cnt[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (i = n; i &gt;= <span class="number">1</span>; --i) sa[cnt[x[i]]--] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = n - k + <span class="number">1</span>; i &lt;= n; ++i) y[++p] = i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            <span class="keyword">if</span> (sa[i] &gt; k) y[++p] = sa[i] - k;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; ++i) cnt[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) ++cnt[x[i]];</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= m; ++i) cnt[i] += cnt[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (i = n; i &gt;= <span class="number">1</span>; --i) sa[cnt[x[y[i]]]--] = y[i];</span><br><span class="line">        swap(x, y);</span><br><span class="line">        x[sa[<span class="number">1</span>]] = <span class="number">1</span>;</span><br><span class="line">        p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">            x[sa[i]] = (y[sa[i - <span class="number">1</span>]] == y[sa[i]] &amp;&amp; y[sa[i - <span class="number">1</span>] + k] == y[sa[i] + k]) ? p : ++p;</span><br><span class="line">        <span class="keyword">if</span> (p &gt;= n) <span class="keyword">break</span>;</span><br><span class="line">        m = p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) rk[sa[i]] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, k = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (rk[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            height[rk[i]] = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (k) --k;</span><br><span class="line">            <span class="keyword">int</span> j = sa[rk[i] - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">while</span> (i + k &lt;= n &amp;&amp; j + k &lt;= n &amp;&amp; s[i + k] == s[j + k]) ++k;</span><br><span class="line">            height[rk[i]] = k;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span><br><span class="line">    calcSA(s, len);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; ++i) <span class="built_in">printf</span>(<span class="string">"%d "</span>, sa[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p><a href="https://www.cnblogs.com/ECJTUACM-873284962/p/6618870.html">https://www.cnblogs.com/ECJTUACM-873284962/p/6618870.html</a></p>
+<p><a href="https://blog.csdn.net/qq_37774171/article/details/81776029">https://blog.csdn.net/qq_37774171/article/details/81776029</a></p>
+<p>从上两文中做了一些参考，但部分证明感觉并不浅显易懂，在加以个人理解后最后形成此文。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-07-23T07:51:16.000Z">2019-07-23</time>
                 
                 <div class="level-item">
@@ -331,7 +418,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -383,7 +470,7 @@
                 <span class="level-item">C++</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">13</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Go/">
@@ -450,6 +537,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-21T16:43:00.000Z">2020-04-22</time></div>
+                    <a href="/2020/04/C++%E7%9A%844%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++的4种类型转换</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-20T16:49:00.000Z">2020-04-21</time></div>
                     <a href="/2020/04/LeetCode/4%E6%9C%88%E4%BB%BD%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">LeetCode 4月份每日一题做题记录</a>
                     <p class="is-size-7 is-uppercase">
@@ -498,19 +598,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T18:10:09.000Z">2020-03-23</time></div>
-                    <a href="/2020/03/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Valgrind安装与memcheck简单使用</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -528,7 +615,7 @@
                     <span class="level-item">四月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
