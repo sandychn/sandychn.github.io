@@ -199,64 +199,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-22T17:18:30.000Z">2020-04-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 381 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/C++%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/">C++右值引用</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="Rvalue-references"><a href="#Rvalue-references" class="headerlink" title="Rvalue references"></a>Rvalue references</h2><p>在C++0x中介绍了一种新的引用类型：右值引用，它帮助解决了不必要的拷贝问题和允许了完美转发的存在。当赋值的右手边（right-hand side）是一个右值时，左手边（left-hand side）的对象就可以<strong>偷走</strong>右手边对象的资源，而不是进行一次独立的分配，也就诞生了”移动语义“。</p>
-<p>左值：可以出现在 <em>operator=</em> 左侧者。</p>
-<p>右值：只能出现在 <em>operator=</em> 右侧者。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">9</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">4</span>;</span><br><span class="line">    <span class="comment">// a + b = 42; // error: lvalue required as left operand of assignment</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">"Hello "</span>)</span></span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(<span class="string">"World"</span>)</span></span>;</span><br><span class="line">    s1 + s2 = s2; <span class="comment">// s1 + s2 可以当做左值！</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">string</span>() = <span class="string">"World"</span>; <span class="comment">// 可以对临时对象赋值！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>C++在用户自定义类型中会产生一些细微的问题，这些问题有关于修改或赋值动作。这种问题就导致上面的定义不正确。</p>
-<p>（但是仍然应把临时对象认为是右值。）</p>
-<p>当右值出现在 <em>operator=</em> （拷贝赋值，copy assignment）的右侧，我们认为对资源进行偷取/搬移（move）而非拷贝（copy）是合理的。则</p>
-<ol>
-<li>必须有语法让我们在调用端告诉编译器“这是个右值”</li>
-<li>必须有语法让我们在被调用端写出一个专门处理右值的所谓移动赋值（move assignment）函数</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 </div>
                 
                 
@@ -346,7 +288,7 @@
                 <span class="level-item">C++</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">13</span>
+                <span class="level-item tag">14</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Go/">
@@ -362,7 +304,7 @@
                 <span class="level-item">LeetCode</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
@@ -429,7 +371,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-22T17:18:30.000Z">2020-04-23</time></div>
                     <a href="/2020/04/C++%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C++右值引用</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
+                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
                     </p>
                 </div>
             </div>
@@ -645,7 +587,7 @@
                 
                 <br>
                 <span style="display: none;">
-                This page was updated on 2020-04-28, at 14:46:39.
+                This page was updated on 2020-04-29, at 16:30:32.
                 </span>
                 </p>
             </div>
