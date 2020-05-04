@@ -130,6 +130,68 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-04T06:43:37.000Z">2020-05-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 230 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/05/%E8%A7%A3%E5%86%B3Navicat%E8%BF%9E%E6%8E%A5MySQL%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98/">解决Navicat连接MySQL不成功的问题</a>
+            
+        </h1>
+        <div class="content">
+            <p>因为在虚拟机上使用MySQL不方便保存数据，尝试在Windows上使用Navicat连接Linux虚拟机上的MySQL。</p>
+<p>在Navicat中输入用户名/密码后，提示</p>
+<p><code>Can&#39;t connect to MySQL server on &#39;&lt;MySQL Server IP&gt;&#39; (10061 &quot;Unknown error&quot;)</code></p>
+<p><strong>解决方法：</strong></p>
+<ol>
+<li>修改 <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> ，将其中的 <code>bind-address = 127.0.0.1</code> 注释掉，保存。</li>
+<li>运行 <code>service mysql restart</code> ，重启 MySQL。</li>
+</ol>
+<p>接下来再尝试在Navicat中连接MySQL，又提示</p>
+<p><code>1130 - Host &#39;&lt;MySQL Server IP&gt;&#39; is not allowed to connect to this MySQL server</code></p>
+<p>因为默认情况下root用户只允许本机访问，即只能使用localhost访问。所以需要将root对应的host修改大一点，这里简单起见直接修改为所有IP访问。</p>
+<p><strong>解决方法：</strong></p>
+<p>在虚拟机上以root登录MySQL。然后执行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> host = <span class="string">'%'</span> <span class="keyword">where</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+
+<p>现在再用Navicat连接MySQL就可以连接成功了。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-27T16:07:15.000Z">2020-04-28</time>
                 
                 <div class="level-item">
@@ -418,98 +480,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-28T16:29:00.000Z">2020-03-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 分钟 读完 (大约 1659 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/TCP-IP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9ADNS/">TCP/IP学习笔记：DNS</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>DNS：Domain Name System，域名系统。它是：</p>
-<ol>
-<li>一个由分层的<strong>DNS服务器（DNS Server）</strong>实现的分布式数据库；</li>
-<li>一个使得主机能够查询分布式数据库的应用层协议。</li>
-</ol>
-<p>它<strong>运行在UDP之上，使用53号端口</strong>。</p>
-<p>它提供的服务：</p>
-<ol>
-<li><strong>主机名到IP地址转换的目录服务</strong>。</li>
-<li><strong>主机别名</strong>。有着复杂主机名的主机能拥有一个或多个别名。复杂主机名也称为规范主机名。如果存在主机别名，主机别名比规范主机名更加容易记忆。应用程序可以调用DNS来获得主机别名对应的规范主机名以及主机的IP地址。</li>
-<li><strong>邮件服务器别名</strong>。电子邮件应用程序可以调用DNS，对提供的主机名别名（如<code>yahoo.com</code>）进行解析，已获得该主机的规范主机名（如<code>relay1.west-coast.hotmail.com</code>）及其IP地址。</li>
-<li><strong>负载分配</strong>。DNS也用在冗余的服务器（如冗余的Web服务器）之间进行负载分配。繁忙的站点被冗余分布在多台服务器上，每台服务器均运行在不同的端系统上，每个都有着不同的IP地址。<strong>由于这些冗余的Web服务器，一个IP地址<span style="color:blue">集合</span>因此与同一个规范主机名相联系。</strong>DNS数据库中存储着这些IP地址集合。<strong>当客户对映射到某地址集合的名字发出一个DNS请求时，该服务器用IP地址的整个集合进行响应，但在每个回答中<span style="color:blue">循环</span>这些地址<span style="color:blue">次序</span></strong>。因为客户通常总是向IP地址排在最前面的服务器发送HTTP请求报文，所以DNS就在所有这些冗余的Web服务器之间循环分配了负载。</li>
-</ol>
-<h2 id="域名空间"><a href="#域名空间" class="headerlink" title="域名空间"></a>域名空间</h2><div align="center"> <img src="/pics/TCP-IP学习笔记：DNS/DNS域名空间.png" style="width: 75%"/> </div><br>
-
-<blockquote>
-<p>图源：《TCP/IP详解 卷1：协议》</p>
-</blockquote>
-<h2 id="DNS的分布式、层次数据库"><a href="#DNS的分布式、层次数据库" class="headerlink" title="DNS的分布式、层次数据库"></a>DNS的分布式、层次数据库</h2><p>大致说来，在DNS服务器的层次结构中有3种类型的DNS服务器：</p>
-<ul>
-<li>根DNS服务器：提供TLD服务器的IP地址。</li>
-<li>顶级域名（Top-Level-Domain, TLD）DNS服务器：提供权威DNS服务器的IP地址。</li>
-<li>权威DNS服务器：在因特网上具有公共可访问主机（如Web服务器和邮件服务器）的每个组织机构必须提供公共可访问的DNS记录，这些记录将这些主机的名字映射为IP地址。一个组织机构的权威DNS服务器收藏了这些DNS记录。</li>
-</ul>
-<p>还有一类重要的DNS服务器，严格而言它不属于DNS服务器的层次结构，但它对DNS层次结构至关重要。这一类DNS服务器是<strong>本地DNS服务器</strong>。每个ISP（如一个居民区的ISP或一个机构的ISP）都有一台本地DNS服务器（也叫<strong>默认名字服务器</strong>）。当主机与某个ISP连接时，该ISP提供一台主机的IP地址，该主机具有一台或多台其本地DNS服务器的IP地址（通常通过DHCP）。主机的本地DNS服务器通常“临近”本主机：对某机构ISP而言，本地DNS服务器可能就与主机在同一局域网中；对于某居民区ISP来说，本地DNS服务器通常与主机相隔不超过几台路由器。<strong>当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着代理的作用，并将该请求转发到DNS服务器层次结构中</strong>。</p>
-<p>查询分为<strong>递归查询</strong>与<strong>迭代查询</strong>。</p>
-<p>（具体例子见 《计算机网络：自顶向下方法（原书第7版）》P86-88）</p>
-<h2 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h2><p>在一个请求链中，当某DNS服务器接收一个DNS回答（如包含某主机名到IP地址的映射）时，它能将映射缓存在本地存储器中。由于主机和主机名与IP地址间的映射不是永久的，所以DNS服务器在一段时间后（通常设置为两天）将丢弃缓存的信息。</p>
-<p>本地DNS服务器也能够缓存TLD服务器的IP地址，因而允许本地DNS绕过查询链中的根DNS服务器。事实上，因为缓存，除了少数DNS查询以外，根服务器基本都被绕过了。</p>
-<h2 id="DNS记录"><a href="#DNS记录" class="headerlink" title="DNS记录"></a>DNS记录</h2><p>共同实现DNS分布式数据库的所有DNS服务器存储了<strong>资源记录（Resource Record，RR）</strong>，RR提供了主机名到IP地址的映射。资源记录是一个包含了以下字段的4元组：</p>
-<div style="text-align: center">(Name, Value, Type, TTL)</div>
-
-<ul>
-<li><p>TTL</p>
-<p>该记录的生存时间，它决定了资源记录应当从缓存中删除的时间。</p>
-</li>
-<li><p>Name、Value、Type</p>
-<ul>
-<li>若Type=A，则Name是主机名，Value是该主机名对应的IP地址。该类型的资源记录提供了标准的主机名到IP地址的映射。如<code>(relay1.bar.foo.com, 145.37.93.126, A)</code>。</li>
-<li>若Type=NS，则Name是个域（如<code>foo.com</code>），而Value是个知道如何获得该域中主机IP地址的权威DNS服务器的主机名。这个记录用于沿着查询链来路由DNS查询。如<code>(foo.com, dns.foo.com, NS)</code>。</li>
-<li>若Type=CNAME，则Value是别名为Name的主机对应的规范主机名。该记录能够向查询的主机提供一个主机名对应的规范主机名，例如<code>(foo.com, relay1.bar.foo.com, CNAME)</code>。</li>
-<li>若Type=MX，则Value是个别名为Name的邮件服务器的规范主机名。如<code>(foo.com, mail.bar.foo.com, MX)</code>。<strong>通过使用MX记录，一个公司的邮件服务器和其他服务器（如Web服务器）可以使用相同的别名</strong>。为了获得邮件服务器的规范主机名，DNS客户应当请求一条MX记录；而为了获得其他服务器的规范主机名，DNS客户应当请求CNAME记录。</li>
-</ul>
-</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>《计算机网络：自顶向下方法（原书第7版）》P83-92</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -570,7 +540,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            22
+                            23
                         </p>
                     </a>
                 </div>
@@ -582,7 +552,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            6
+                            7
                         </p>
                     </a>
                 </div>
@@ -594,7 +564,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            7
+                            9
                         </p>
                     </a>
                 </div>
@@ -649,6 +619,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/MySQL/">
+            <span class="level-start">
+                <span class="level-item">MySQL</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/TCP-IP/">
             <span class="level-start">
                 <span class="level-item">TCP/IP</span>
@@ -675,7 +653,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -684,6 +662,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-04T06:43:37.000Z">2020-05-04</time></div>
+                    <a href="/2020/05/%E8%A7%A3%E5%86%B3Navicat%E8%BF%9E%E6%8E%A5MySQL%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">解决Navicat连接MySQL不成功的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -737,19 +728,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T16:29:00.000Z">2020-03-29</time></div>
-                    <a href="/2020/03/TCP-IP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9ADNS/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TCP/IP学习笔记：DNS</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -760,6 +738,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -862,6 +851,20 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Navicat/">
+                        <span class="tag">Navicat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/STL/">
                         <span class="tag">STL</span>
                         <span class="tag is-grey">7</span>
@@ -921,7 +924,7 @@
                 
                 <br>
                 <span style="display: none;">
-                This page was updated on 2020-04-29, at 16:30:32.
+                This page was updated on 2020-05-04, at 14:46:18.
                 </span>
                 </p>
             </div>

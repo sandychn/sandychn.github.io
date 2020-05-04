@@ -7,16 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: memcheck - Sandy&#39;s Blog</title>
+<title>解决Navicat连接MySQL不成功的问题 - Sandy&#39;s Blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Sandy&#39;s Blog">
-<meta property="og:url" content="https://sandychn.github.io/tags/memcheck/index.html">
+    <meta name="description" content="因为在虚拟机上使用MySQL不方便保存数据，尝试在Windows上使用Navicat连接Linux虚拟机上的MySQL。 在Navicat中输入用户名&#x2F;密码后，提示 Can&#39;t connect to MySQL server on &#39;&lt;MySQL Server IP&gt;&#39; (10061 &quot;Unknown error&quot;) 解决方法：  修改 &#x2F;e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决Navicat连接MySQL不成功的问题">
+<meta property="og:url" content="https://sandychn.github.io/2020/05/%E8%A7%A3%E5%86%B3Navicat%E8%BF%9E%E6%8E%A5MySQL%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
+<meta property="og:description" content="因为在虚拟机上使用MySQL不方便保存数据，尝试在Windows上使用Navicat连接Linux虚拟机上的MySQL。 在Navicat中输入用户名&#x2F;密码后，提示 Can&#39;t connect to MySQL server on &#39;&lt;MySQL Server IP&gt;&#39; (10061 &quot;Unknown error&quot;) 解决方法：  修改 &#x2F;e">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-05-04T06:43:37.000Z">
+<meta property="article:modified_time" content="2020-05-04T06:45:26.513Z">
 <meta property="article:author" content="SandyChen">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Navicat">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sandychn.github.io/images/og_image.png">
 
@@ -76,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/avatar.jpg" alt="Sandy&#39;s Blog" height="28">
+                <img src="/avatar.jpg" alt="解决Navicat连接MySQL不成功的问题" height="28">
             
             </a>
         </div>
@@ -109,6 +115,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -122,70 +132,69 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">memcheck</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-22T18:10:09.000Z">2020-03-23</time>
+                <time class="level-item has-text-grey" datetime="2020-05-04T06:43:37.000Z">2020-05-04</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
+                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 378 个字)
+                    2 分钟 读完 (大约 230 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">...</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Valgrind安装与memcheck简单使用</a>
+                解决Navicat连接MySQL不成功的问题
             
         </h1>
         <div class="content">
-            <h2 id="安装-valgrind"><a href="#安装-valgrind" class="headerlink" title="安装 valgrind"></a>安装 valgrind</h2><p><code>sudo apt install valgrind</code></p>
-<p>安装后，查看一下版本以确认安装成功</p>
-<p><code>valgrind --version</code></p>
-<p>输出形如以下版本号信息就表示安装成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valgrind-3.11.0</span><br></pre></td></tr></table></figure>
+            <p>因为在虚拟机上使用MySQL不方便保存数据，尝试在Windows上使用Navicat连接Linux虚拟机上的MySQL。</p>
+<p>在Navicat中输入用户名/密码后，提示</p>
+<p><code>Can&#39;t connect to MySQL server on &#39;&lt;MySQL Server IP&gt;&#39; (10061 &quot;Unknown error&quot;)</code></p>
+<p><strong>解决方法：</strong></p>
+<ol>
+<li>修改 <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> ，将其中的 <code>bind-address = 127.0.0.1</code> 注释掉，保存。</li>
+<li>运行 <code>service mysql restart</code> ，重启 MySQL。</li>
+</ol>
+<p>接下来再尝试在Navicat中连接MySQL，又提示</p>
+<p><code>1130 - Host &#39;&lt;MySQL Server IP&gt;&#39; is not allowed to connect to this MySQL server</code></p>
+<p>因为默认情况下root用户只允许本机访问，即只能使用localhost访问。所以需要将root对应的host修改大一点，这里简单起见直接修改为所有IP访问。</p>
+<p><strong>解决方法：</strong></p>
+<p>在虚拟机上以root登录MySQL。然后执行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> host = <span class="string">'%'</span> <span class="keyword">where</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
 
-<h2 id="使用-memcheck-检查内存泄漏"><a href="#使用-memcheck-检查内存泄漏" class="headerlink" title="使用 memcheck 检查内存泄漏"></a>使用 memcheck 检查内存泄漏</h2><p>memleak.cpp</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A() &#123;</span><br><span class="line">        a_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] a_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* a_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B() &#123;</span><br><span class="line">        b_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~B() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] b_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* b_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A* pa = <span class="keyword">new</span> B();</span><br><span class="line">    <span class="keyword">delete</span> pa;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在再用Navicat连接MySQL就可以连接成功了。</p>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -g memleak.cpp -o memleak</span><br><span class="line">valgrind --tool=memcheck ./memleak</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>--tool=memcheck</code> 可以省略，因为 <code>valgrind</code> 的默认工具就是 <code>memcheck</code> 。<br>可以检查出类B对象中的12个字节（3个int）内存泄漏（见下方 <code>definitely lost</code> ）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Memcheck, a memory error detector</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Copyright (C) 2002-2015, and GNU GPL&#39;d, by Julian Seward et al.</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Command: .&#x2F;memleak</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; HEAP SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;     in use at exit: 72,716 bytes in 2 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;   total heap usage: 4 allocs, 2 frees, 72,752 bytes allocated</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; LEAK SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    definitely lost: 12 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    indirectly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;      possibly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    still reachable: 72,704 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;         suppressed: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Rerun with --leak-check&#x3D;full to see details of leaked memory</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; For counts of detected and suppressed errors, rerun with: -v</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</span><br></pre></td></tr></table></figure>
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MySQL/" rel="tag">MySQL</a>, <a class="has-link-grey -link" href="/tags/Navicat/" rel="tag">Navicat</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -195,7 +204,19 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/LeetCode/4%E6%9C%88%E4%BB%BD%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                <span class="level-item">LeetCode 4月份每日一题做题记录</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 
@@ -273,6 +294,7 @@
 </div>
     
         
+
     
         
 <div class="card widget">
@@ -605,7 +627,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/avatar.jpg" alt="Sandy&#39;s Blog" height="28">
+                    <img src="/avatar.jpg" alt="解决Navicat连接MySQL不成功的问题" height="28">
                 
                 </a>
                 <p class="is-size-7">
@@ -620,7 +642,7 @@
                 
                 <br>
                 <span style="display: none;">
-                This page was updated on 2020-05-04, at 14:46:18.
+                This page was updated on 2020-05-04, at 14:46:17.
                 </span>
                 </p>
             </div>
