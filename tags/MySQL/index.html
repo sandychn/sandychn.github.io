@@ -150,7 +150,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 230 个字)
+                    2 分钟 读完 (大约 235 个字)
                 </span>
                 
                 
@@ -176,7 +176,7 @@
 <p>因为默认情况下root用户只允许本机访问，即只能使用localhost访问。所以需要将root对应的host修改大一点，这里简单起见直接修改为所有IP访问。</p>
 <p><strong>解决方法：</strong></p>
 <p>在虚拟机上以root登录MySQL。然后执行</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> host = <span class="string">'%'</span> <span class="keyword">where</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user set host = '%' where user = 'root';</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
 
 <p>现在再用Navicat连接MySQL就可以连接成功了。</p>
 
@@ -616,7 +616,7 @@
                 
                 <br>
                 <span style="display: none;">
-                This page was updated on 2020-05-07, at 15:51:38.
+                This page was updated on 2020-05-23, at 13:31:22.
                 </span>
                 </p>
             </div>
