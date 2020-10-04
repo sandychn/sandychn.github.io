@@ -30,7 +30,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
 
@@ -130,6 +130,161 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-19T10:19:09.000Z">2020-04-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 443 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/cpp-optimizations-of-constructors/">C++构造函数的优化</a>
+            
+        </h1>
+        <div class="content">
+            <p>下面这段代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"default ctor\n"</span>; &#125;</span><br><span class="line">    A(<span class="keyword">const</span> A&amp; b) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"copy ctor\n"</span>; &#125;</span><br><span class="line">    ~A() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"dtor\n"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">A <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A b;</span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A a = foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>理论上，它的运行结果应为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">default ctor &#x2F;&#x2F; foo函数第一行的对象b的构造</span><br><span class="line">copy ctor    &#x2F;&#x2F; 对象b拷贝到返回值临时对象</span><br><span class="line">dtor         &#x2F;&#x2F; 对象b析构</span><br><span class="line">copy ctor    &#x2F;&#x2F; 返回值临时对象拷贝到main中对象a</span><br><span class="line">dtor         &#x2F;&#x2F; 返回值临时对象析构</span><br><span class="line">dtor         &#x2F;&#x2F; main对象析构</span><br></pre></td></tr></table></figure>
+
+<p>然而，当我们实际编译并运行它时，运行结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">default ctor</span><br><span class="line">dtor</span><br></pre></td></tr></table></figure>
+
+<p>发现所有的拷贝构造和临时对象的析构都被优化掉了。这就是<strong>NRV优化</strong>带来的性能上的好处。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/04/cpp-optimizations-of-constructors/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-28T16:29:00.000Z">2020-03-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 读完 (大约 1659 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/tcp-ip-dns/">TCP/IP学习笔记：DNS</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>DNS：Domain Name System，域名系统。它是：</p>
+<ol>
+<li>一个由分层的<strong>DNS服务器（DNS Server）</strong>实现的分布式数据库；</li>
+<li>一个使得主机能够查询分布式数据库的应用层协议。</li>
+</ol>
+<p>它<strong>运行在UDP之上，使用53号端口</strong>。</p>
+<p>它提供的服务：</p>
+<ol>
+<li><strong>主机名到IP地址转换的目录服务</strong>。</li>
+<li><strong>主机别名</strong>。有着复杂主机名的主机能拥有一个或多个别名。复杂主机名也称为规范主机名。如果存在主机别名，主机别名比规范主机名更加容易记忆。应用程序可以调用DNS来获得主机别名对应的规范主机名以及主机的IP地址。</li>
+<li><strong>邮件服务器别名</strong>。电子邮件应用程序可以调用DNS，对提供的主机名别名（如<code>yahoo.com</code>）进行解析，已获得该主机的规范主机名（如<code>relay1.west-coast.hotmail.com</code>）及其IP地址。</li>
+<li><strong>负载分配</strong>。DNS也用在冗余的服务器（如冗余的Web服务器）之间进行负载分配。繁忙的站点被冗余分布在多台服务器上，每台服务器均运行在不同的端系统上，每个都有着不同的IP地址。<strong>由于这些冗余的Web服务器，一个IP地址<span style="color:blue">集合</span>因此与同一个规范主机名相联系。</strong>DNS数据库中存储着这些IP地址集合。<strong>当客户对映射到某地址集合的名字发出一个DNS请求时，该服务器用IP地址的整个集合进行响应，但在每个回答中<span style="color:blue">循环</span>这些地址<span style="color:blue">次序</span></strong>。因为客户通常总是向IP地址排在最前面的服务器发送HTTP请求报文，所以DNS就在所有这些冗余的Web服务器之间循环分配了负载。</li>
+</ol>
+<h2 id="域名空间"><a href="#域名空间" class="headerlink" title="域名空间"></a>域名空间</h2><div align="center"> <img src="/pics/TCP-IP学习笔记：DNS/DNS域名空间.png" style="width: 75%"/> </div><br>
+
+<blockquote>
+<p>图源：《TCP/IP详解 卷1：协议》</p>
+</blockquote>
+<h2 id="DNS的分布式、层次数据库"><a href="#DNS的分布式、层次数据库" class="headerlink" title="DNS的分布式、层次数据库"></a>DNS的分布式、层次数据库</h2><p>大致说来，在DNS服务器的层次结构中有3种类型的DNS服务器：</p>
+<ul>
+<li>根DNS服务器：提供TLD服务器的IP地址。</li>
+<li>顶级域名（Top-Level-Domain, TLD）DNS服务器：提供权威DNS服务器的IP地址。</li>
+<li>权威DNS服务器：在因特网上具有公共可访问主机（如Web服务器和邮件服务器）的每个组织机构必须提供公共可访问的DNS记录，这些记录将这些主机的名字映射为IP地址。一个组织机构的权威DNS服务器收藏了这些DNS记录。</li>
+</ul>
+<p>还有一类重要的DNS服务器，严格而言它不属于DNS服务器的层次结构，但它对DNS层次结构至关重要。这一类DNS服务器是<strong>本地DNS服务器</strong>。每个ISP（如一个居民区的ISP或一个机构的ISP）都有一台本地DNS服务器（也叫<strong>默认名字服务器</strong>）。当主机与某个ISP连接时，该ISP提供一台主机的IP地址，该主机具有一台或多台其本地DNS服务器的IP地址（通常通过DHCP）。主机的本地DNS服务器通常“临近”本主机：对某机构ISP而言，本地DNS服务器可能就与主机在同一局域网中；对于某居民区ISP来说，本地DNS服务器通常与主机相隔不超过几台路由器。<strong>当主机发出DNS请求时，该请求被发往本地DNS服务器，它起着代理的作用，并将该请求转发到DNS服务器层次结构中</strong>。</p>
+<p>查询分为<strong>递归查询</strong>与<strong>迭代查询</strong>。</p>
+<p>（具体例子见 《计算机网络：自顶向下方法（原书第7版）》P86-88）</p>
+<h2 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h2><p>在一个请求链中，当某DNS服务器接收一个DNS回答（如包含某主机名到IP地址的映射）时，它能将映射缓存在本地存储器中。由于主机和主机名与IP地址间的映射不是永久的，所以DNS服务器在一段时间后（通常设置为两天）将丢弃缓存的信息。</p>
+<p>本地DNS服务器也能够缓存TLD服务器的IP地址，因而允许本地DNS绕过查询链中的根DNS服务器。事实上，因为缓存，除了少数DNS查询以外，根服务器基本都被绕过了。</p>
+<h2 id="DNS记录"><a href="#DNS记录" class="headerlink" title="DNS记录"></a>DNS记录</h2><p>共同实现DNS分布式数据库的所有DNS服务器存储了<strong>资源记录（Resource Record，RR）</strong>，RR提供了主机名到IP地址的映射。资源记录是一个包含了以下字段的4元组：</p>
+<div style="text-align: center">(Name, Value, Type, TTL)</div>
+
+<ul>
+<li><p>TTL</p>
+<p>该记录的生存时间，它决定了资源记录应当从缓存中删除的时间。</p>
+</li>
+<li><p>Name、Value、Type</p>
+<ul>
+<li>若Type=A，则Name是主机名，Value是该主机名对应的IP地址。该类型的资源记录提供了标准的主机名到IP地址的映射。如<code>(relay1.bar.foo.com, 145.37.93.126, A)</code>。</li>
+<li>若Type=NS，则Name是个域（如<code>foo.com</code>），而Value是个知道如何获得该域中主机IP地址的权威DNS服务器的主机名。这个记录用于沿着查询链来路由DNS查询。如<code>(foo.com, dns.foo.com, NS)</code>。</li>
+<li>若Type=CNAME，则Value是别名为Name的主机对应的规范主机名。该记录能够向查询的主机提供一个主机名对应的规范主机名，例如<code>(foo.com, relay1.bar.foo.com, CNAME)</code>。</li>
+<li>若Type=MX，则Value是个别名为Name的邮件服务器的规范主机名。如<code>(foo.com, mail.bar.foo.com, MX)</code>。<strong>通过使用MX记录，一个公司的邮件服务器和其他服务器（如Web服务器）可以使用相同的别名</strong>。为了获得邮件服务器的规范主机名，DNS客户应当请求一条MX记录；而为了获得其他服务器的规范主机名，DNS客户应当请求CNAME记录。</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>《计算机网络：自顶向下方法（原书第7版）》P83-92</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-28T11:20:00.000Z">2020-03-28</time>
                 
                 <div class="level-item">
@@ -149,7 +304,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/TCP-IP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AHTTP/">TCP/IP学习笔记：HTTP</a>
+                <a class="has-link-black-ter" href="/2020/03/tcp-ip-http/">TCP/IP学习笔记：HTTP</a>
             
         </h1>
         <div class="content">
@@ -294,7 +449,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Valgrind安装与memcheck简单使用</a>
+                <a class="has-link-black-ter" href="/2020/03/valgrind-installation-and-memcheck-usage/">Valgrind安装与memcheck简单使用</a>
             
         </h1>
         <div class="content">
@@ -317,7 +472,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/Valgrind%E5%AE%89%E8%A3%85%E4%B8%8Ememcheck%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/03/valgrind-installation-and-memcheck-usage/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -360,7 +515,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E4%B8%8E%E9%93%BE%E6%8E%A5/">操作系统——设备管理与链接</a>
+                <a class="has-link-black-ter" href="/2020/03/os-device-manage-and-linking/">操作系统——设备管理与链接</a>
             
         </h1>
         <div class="content">
@@ -378,168 +533,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86%E4%B8%8E%E9%93%BE%E6%8E%A5/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T18:56:05.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    26 分钟 读完 (大约 3917 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%AD%BB%E9%94%81%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">操作系统——死锁与内存管理</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h3><ul>
-<li>互斥：每个资源要么已经分配给了一个进程，要么就是可用的。</li>
-<li>占有和等待：已经得到了某个资源的进程可以再请求新的资源。</li>
-<li>不可抢占：已经分配给一个进程的资源不能强制性地被抢占，它只能被占有它的进程显式地释放。</li>
-<li>环路等待：有两个或者两个以上的进程组成一条环路，该环路中的每个进程都在等待下一个进程所占有的资源。</li>
-</ul>
-<h3 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h3><p>主要有以下四种方法：</p>
-<ul>
-<li>鸵鸟策略</li>
-<li>死锁检测与死锁恢复</li>
-<li>死锁预防</li>
-<li>死锁避免</li>
-</ul>
-<h4 id="鸵鸟策略"><a href="#鸵鸟策略" class="headerlink" title="鸵鸟策略"></a>鸵鸟策略</h4><p><strong>把头埋在沙子里，假装根本没发生问题</strong>。</p>
-<p>因为解决死锁问题的代价很高，因此鸵鸟策略这种不采取任务措施的方案会获得更高的性能。</p>
-<p>当发生死锁时不会对用户造成多大影响，或发生死锁的概率很低，可以采用鸵鸟策略。</p>
-<p>大多数操作系统，包括 Unix，Linux 和 Windows，处理死锁问题的办法仅仅是忽略它。</p>
-<h4 id="死锁检测与死锁恢复"><a href="#死锁检测与死锁恢复" class="headerlink" title="死锁检测与死锁恢复"></a>死锁检测与死锁恢复</h4><p>不试图阻止死锁，而是当检测到死锁发生时，采取措施进行恢复。</p>
-<h5 id="1-每种类型一个资源的死锁检测"><a href="#1-每种类型一个资源的死锁检测" class="headerlink" title="1. 每种类型一个资源的死锁检测"></a>1. 每种类型一个资源的死锁检测</h5><div align="center"> <img src="/pics/操作系统——死锁与内存管理/deadlock1.png"/> </div><br>
-
-<p>上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。</p>
-<p>图 a 可以抽取出环，如图 b，它满足了环路等待条件，因此会发生死锁。</p>
-<p><strong>每种类型一个资源</strong>的死锁检测算法是通过检测有向图是否存在环来实现，从一个节点出发进行深度优先搜索，对访问过的节点进行标记，如果访问了已经标记的节点，就表示有向图存在环，也就是检测到死锁的发生。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%AD%BB%E9%94%81%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-12T13:35:43.000Z">2020-03-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    34 分钟 读完 (大约 5117 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">操作系统——进程管理</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>进程是资源分配的基本单位；线程是独立调度的基本单位。</p>
-<p>一个进程中可以有多个线程，它们共享进程资源。</p>
-<p>QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 HTTP 请求线程、事件响应线程、渲染线程等等，线程的并发执行使得在浏览器中点击一个新链接从而发起 HTTP 请求时，浏览器还可以响应用户的其它事件。</p>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>Ⅰ 拥有资源</p>
-<p>进程是资源分配的基本单位，但是线程不拥有资源，线程可以访问隶属进程的资源。</p>
-<p>Ⅱ 调度</p>
-<p>线程是独立调度的基本单位，在同一进程中，线程的切换不会引起进程切换，从一个进程中的线程切换到另一个进程中的线程时，会引起进程切换。</p>
-<p>Ⅲ 系统开销</p>
-<p>由于创建或撤销进程时，系统都要为之分配或回收资源，如内存空间、I/O 设备等，所付出的开销远大于创建或撤销线程时的开销。类似地，在进行进程切换时，涉及当前执行进程 CPU 环境的保存及新调度进程 CPU 环境的设置，而线程切换时只需保存和设置少量寄存器内容，开销很小。</p>
-<p>Ⅳ 通信方面</p>
-<p>线程间可以通过直接读写同一进程中的数据进行通信，但是进程通信需要借助 IPC（Inter-Process Communication，进程间通信，提供了各种进程间通信的方法）。</p>
-<h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><h3 id="进程的3种基本状态（三态模型）"><a href="#进程的3种基本状态（三态模型）" class="headerlink" title="进程的3种基本状态（三态模型）"></a>进程的3种基本状态（三态模型）</h3><ol>
-<li><p><strong>就绪态</strong>：进程已获得除CPU外的所有必要资源，只等待CPU时的状态。一个系统会将多个处于就绪状态的进程排成一个就绪队列。</p>
-</li>
-<li><p><strong>执行态</strong>：进程已获CPU，正在执行。单处理机系统中，处于执行状态的进程只一个；多处理机系统中，有多个处于执行状态的进程。</p>
-</li>
-<li><p><strong>阻塞态</strong>：又称<strong>等待</strong>状态或<strong>封锁</strong>状态，正在执行的进程由于某种原因而暂时无法继续执行，便放弃处理机而处于暂停状态，即进程执行受阻。(通常导致进程阻塞的典型事件有：请求I/O，申请缓冲空间等。一般，将处于阻塞状态的进程排成一个队列，有的系统还根据阻塞原因不同把这些阻塞集成排成多个队列。)</p>
-</li>
-</ol>
-<h3 id="进程的5种状态（五态模型）"><a href="#进程的5种状态（五态模型）" class="headerlink" title="进程的5种状态（五态模型）"></a>进程的5种状态（五态模型）</h3><ol>
-<li><p><strong>新建态</strong>：此时，进程已经拥有了字节的PCB，但该进程所必需的资源或其它信息（如主存资源）尚未分配，进程自身还未进入主存，即创建工作尚未完成，进程还不能够被调度运行。（创建进程的两个步骤： 为一个新进程创建PCB，并填写必要管理信息；把该进程转入就绪状态并插入就绪队列。）</p>
-</li>
-<li><p><strong>就绪态</strong></p>
-</li>
-<li><p><strong>执行态</strong></p>
-</li>
-<li><p><strong>阻塞态</strong></p>
-</li>
-<li><p><strong>终止态</strong>：进程的终止首先要等待操作系统进行善后处理，然后将其PCB清零，并将PCB空间返还系统。(当一个进程到达自然结束点或出现了无法克服的错误，或是被操作系统或其它有终止权的进程所终结，它将进入终止状态。进入终止状态的进程不能再执行，但在操作系统中依然保留一个记录，其中保存状态码和一些计时统计数据，供其它进程收集。一旦其它进程完成了对终止状态进程的信息提取之后，操作系统将删除该进程。)</p>
-</li>
-</ol>
-<h2 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h2><p>不同环境的调度算法目标不同，因此需要针对不同环境来讨论调度算法。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/03/os-device-manage-and-linking/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -620,7 +614,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            26
+                            28
                         </p>
                     </a>
                 </div>
@@ -632,7 +626,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            8
+                            9
                         </p>
                     </a>
                 </div>
@@ -683,6 +677,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/LeetCode/">
             <span class="level-start">
                 <span class="level-item">LeetCode</span>
@@ -720,7 +722,7 @@
                 <span class="level-item">TCP/IP</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
@@ -755,8 +757,34 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time></div>
+                    <a href="/2020/10/tcp-ip-transport-layer/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TCP/IP学习笔记：传输层</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-03T03:10:31.000Z">2020-10-03</time></div>
+                    <a href="/2020/10/hexo-icarus-blog-problems-solutions/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo与Icarus博客搭建遇到问题与解决</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/Python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习3</a>
+                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
                     </p>
@@ -769,7 +797,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/Python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习2</a>
+                    <a href="/2020/06/python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点2</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
                     </p>
@@ -782,35 +810,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/Python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习1</a>
+                    <a href="/2020/06/python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T19:02:06.000Z">2020-05-06</time></div>
-                    <a href="/2020/05/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">STL中_Rb_tree的探索</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-04T06:43:37.000Z">2020-05-04</time></div>
-                    <a href="/2020/05/%E8%A7%A3%E5%86%B3Navicat%E8%BF%9E%E6%8E%A5MySQL%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">解决Navicat连接MySQL不成功的问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
                     </p>
                 </div>
             </div>
@@ -826,6 +828,17 @@
             文章
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/06/">
@@ -1022,9 +1035,6 @@
                 </span>
                 
                 <br>
-                <span style="display: none;">
-                This page was updated on 2020-06-17, at 20:43:19.
-                </span>
                 </p>
             </div>
             <div class="level-end">

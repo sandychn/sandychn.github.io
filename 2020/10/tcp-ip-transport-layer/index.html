@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>TCP/IP学习笔记：传输层 - Sandy&#39;s Blog</title>
+
+
+    <meta name="description" content="传输层传输层也称为运输层（Transport Layer）。在此层的分组，TCP称为“报文段”，UDP称为“数据报“。 进程到进程的数据交付（多路复用与多路分解）和差错检查是两种最低限度的传输层服务，也是UDP所能提供的仅有的两种服务。 端口号端口号为一个16比特的值，即范围为 0-65535。其中 0-1023 称为“周知端口号”。 UDP套接字由一个二元组全面标识：目的IP地址、目的端口号。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP学习笔记：传输层">
+<meta property="og:url" content="https://sandychn.github.io/2020/10/tcp-ip-transport-layer/index.html">
+<meta property="og:site_name" content="Sandy&#39;s Blog">
+<meta property="og:description" content="传输层传输层也称为运输层（Transport Layer）。在此层的分组，TCP称为“报文段”，UDP称为“数据报“。 进程到进程的数据交付（多路复用与多路分解）和差错检查是两种最低限度的传输层服务，也是UDP所能提供的仅有的两种服务。 端口号端口号为一个16比特的值，即范围为 0-65535。其中 0-1023 称为“周知端口号”。 UDP套接字由一个二元组全面标识：目的IP地址、目的端口号。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
+<meta property="article:published_time" content="2020-10-04T15:39:14.000Z">
+<meta property="article:modified_time" content="2020-10-04T15:48:58.916Z">
+<meta property="article:author" content="SandyChen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sandychn.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/avatar.jpg" alt="TCP/IP学习笔记：传输层" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">文章</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/sandychn">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    24 分钟 读完 (大约 3634 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">...</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                TCP/IP学习笔记：传输层
+            
+        </h1>
+        <div class="content">
+            <h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>传输层也称为运输层（Transport Layer）。在此层的分组，TCP称为“报文段”，UDP称为“数据报“。</p>
+<p>进程到进程的数据交付（多路复用与多路分解）和差错检查是两种最低限度的传输层服务，也是UDP所能提供的仅有的两种服务。</p>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>端口号为一个16比特的值，即范围为 0-65535。其中 0-1023 称为“周知端口号”。</p>
+<p>UDP套接字由一个二元组全面标识：目的IP地址、目的端口号。</p>
+<p>TCP套接字由一个四元组全面标识：源IP地址、源端口号、目的IP地址、目的端口号。</p>
+<h2 id="TCP与UDP的比较"><a href="#TCP与UDP的比较" class="headerlink" title="TCP与UDP的比较"></a>TCP与UDP的比较</h2><p>相比TCP，UDP满足：</p>
+<ol>
+<li>关于发送什么数据以及何时发送的应用层控制更精细</li>
+<li>无需连接建立</li>
+<li>无连接状态（无须保存与维护连接状态，节约资源）</li>
+<li>分组的首部开销小。（TCP：20 Bytes，UDP：8 Bytes）</li>
+</ol>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="报文段格式"><a href="#报文段格式" class="headerlink" title="报文段格式"></a>报文段格式</h3><ul>
+<li>源端口号 (2 bytes)</li>
+<li>目的端口号 (2 bytes)</li>
+<li>长度 (2 bytes)</li>
+<li>检验和 (2 bytes)</li>
+<li>应用数据</li>
+</ul>
+<p>当一台主机接收一个UDP分组，它的目的端口与运行中的任一UDP套接字都不匹配，则该主机发送一个特殊的ICMP数据报。</p>
+<h2 id="可靠数据传输"><a href="#可靠数据传输" class="headerlink" title="可靠数据传输"></a>可靠数据传输</h2><p>解决流水线的差错恢复有2种基本方法：</p>
+<ul>
+<li>回退N步（Go-Back N，GBN），即“滑动窗口协议”（Sliding-Window Protocol）</li>
+<li>选择重传（Selective Repeat，SR）。选择重传协议通过让发送方仅重传那些它怀疑在接收方出错（即丢失/受损）的分组而避免了不必要的重传。这种个别的、按需的重传要求接收方<strong>逐个</strong>确认正确接收的分组。对于选择重传协议，其窗口长度必须小于等于序号空间的一半。</li>
+</ul>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>发起连接的称为客户，另一方称为服务器。</li>
+<li>TCP可从缓存中取出并放入报文段中的数据数量受限于最大报文段长度MSS（Maximum Segment Size）。MSS通常根据最初确定的由本地发送主机发送的最大链路层帧长度（最大传输单元MTU，Maximum Transmission Unit）。该MSS要保证一个TCP报文段（当封装在一个IP数据报中）加上TCP/IP首部长度（通常为40字节 <span style="color: green;">[TCP首部20字节，IP首部20字节]</span>）须能放入单个链路层帧中。以太网和PPP链路层协议都具有1500字节的MTU，因此MSS的典型值为1460字节。<span style="color: blue;">注意MSS是指在报文段里应用层数据的最大长度而非指包括首部的TCP报文段的最大长度。</span></li>
+</ul>
+<a id="more"></a>
+
+<h3 id="TCP报文段首部"><a href="#TCP报文段首部" class="headerlink" title="TCP报文段首部"></a>TCP报文段首部</h3><ul>
+<li><p>源端口号 (16 bits)</p>
+</li>
+<li><p>目的端口号 (16 bits)</p>
+</li>
+<li><p>序号 (32 bits)</p>
+</li>
+<li><p>确认号 (32 bits)</p>
+</li>
+<li><p>首部长度 (4 bits)</p>
+<ul>
+<li>以 32 bits (4 bytes) 的字为单位的TCP首部长度</li>
+<li>典型长度为20字节，即值为5 (20 bytes = 5 * 4 bytes)</li>
+<li>最大范围：$2^4 \times 32 \ bits=16 \times 4 \ bytes=64 \ bytes$</li>
+</ul>
+</li>
+<li><p>保留未用 (4 bits)</p>
+</li>
+<li><p>CWR (1 bit)</p>
+</li>
+<li><p>ECE (1 bit)</p>
+</li>
+<li><p>URG (1 bit)：指示报文段里存在着被发送端的上层实体置为紧急的数据</p>
+</li>
+<li><p>ACK (1 bit)</p>
+</li>
+<li><p>PSH (1 bit)：指示接收方应立即将数据交给上层</p>
+</li>
+<li><p>RST (1 bit)</p>
+</li>
+<li><p>SYN (1 bit)</p>
+</li>
+<li><p>FIN (1 bit)</p>
+</li>
+<li><p>接收窗口 (16 bits)：用于流量控制，指示接收方愿意接受的字节数量</p>
+</li>
+<li><p>因特网检验和 (16 bits)</p>
+</li>
+<li><p>紧急数据指针 (16 bits)：指出紧急数据的最后一个字节；当紧急数据存在并给出指向紧急数据尾指针时，TCP必须通知接收端的上层实体</p>
+</li>
+<li><p>选项 (可选且变长)</p>
+</li>
+</ul>
+<h4 id="序号SYN与确认号ACK"><a href="#序号SYN与确认号ACK" class="headerlink" title="序号SYN与确认号ACK"></a>序号SYN与确认号ACK</h4><ul>
+<li><p>主机A填充进报文段的确认号是主机A期望从主机B收到的下一字节的序号</p>
+</li>
+<li><p>TCP只确认该流中至第一个丢失字节为止的字节，所以TCP被称为提供<strong>累计确认（cumulative acknowledgment）</strong></p>
+</li>
+<li><p>一条TCP连接的双方均可随机地选择初始序号，这样做可以减少<span style="color:blue;">将那些仍在网络中存在的，来自两台主机之间先前已终止的连接的报文段误认为是后来这两台主机之间新建的连接所产生的有效报文段</span>的可能性（且该新连接碰巧与旧连接使用了相同的端口号）</p>
+</li>
+<li><p>该客户到服务器的数据的确认被装载在一个承载服务器到客户的数据的报文段中，这种确认被称为是<strong>捎带（piggybacked）</strong>在服务器到客户的报文段中的。</p>
+</li>
+</ul>
+<h3 id="估计往返时间（定时器时长的设定）"><a href="#估计往返时间（定时器时长的设定）" class="headerlink" title="估计往返时间（定时器时长的设定）"></a>估计往返时间（定时器时长的设定）</h3><p>报文段的样本RTT（表示为 $SampleRTT$）就是从某报文段被发出（即交给IP）到对该报文段的确认被收到之间的时间量。</p>
+<p>大部分TCP的实现仅能某个时刻做一次 $SampleRTT$ 测量，而不是为每个发送的报文段估计 $SampleRTT$，从而产生一个接近每个RTT的新 $SampleRTT$ 值。</p>
+<p>另外，<strong>TCP绝不为已被重传的报文段计算</strong> $SampleRTT$。</p>
+<p>显然随各种环境变化，报文段的 $SampleRTT$ 会波动，由于这种波动的存在，任何指定的 $SampleRTT$ 值可能都不是特定的。于是为估计一个相对典型的RTT，要采取某种对 $SampleRTT$ 取平均的方法，TCP维持一个 $SampleRTT$ 均值（称为 $EstimatedRTT$）。一旦获得一个新的 $SampleRTT$ 时，TCP就会根据以下公式求得（更新）$EstimatedRTT$：</p>
+<p>$$EstimatedRTT=(1-\alpha) \cdot EstimatedRTT + \alpha \cdot SampleRTT$$</p>
+<p>在 RFC 6298 中给出的 $\alpha$ 推荐值为 $\alpha = 0.125$，从统计学观点讲，这种平均被称为<strong>“指数加权移动平均”（Exponential Weighted Moving Average，EWMA）</strong>。这种加权平均对最近的样本赋予的权值要大于对旧样本赋予的权值。</p>
+<p>除估算RTT外，测量RTT的变化也是有价值的。RFC 6298 中也定义了RTT偏差 $DevRTT$，用于估算 $SampleRTT$ 一般会偏离 $EstimatedRTT$ 的程度：</p>
+<p>$$DevRTT = (1-\beta) \cdot DevRTT + \beta \cdot\lvert SampleRTT-EstimatedRTT \rvert$$</p>
+<p>$DevRTT$ 是一个 $SampleRTT$ 与 $EstimatedRTT$ 之间差值的 EWMA，其中 $\beta$ 的推荐值为 $\beta = 0.25$。</p>
+<h3 id="设置和管理重传超时间隔"><a href="#设置和管理重传超时间隔" class="headerlink" title="设置和管理重传超时间隔"></a>设置和管理重传超时间隔</h3><p>将超时间隔设为 $EstimatedRTT$ 加上一个余量，当 $SampleRTT$ 值波动较大时，这个余量应该大些；反之应小些。$DevRTT$ 在此发挥作用：</p>
+<p>$$TimeoutInterval = EstimatedRTT + 4 \cdot DevRTT$$</p>
+<p><span style="color: red;">事实上大多数TCP实现，只是在每次重传时将 $TimeoutInterval$ 变为2倍。</span></p>
+<p>推荐的初始 $TimeoutInterval$ 的值为1秒，在出现超时该值将加倍，以免即将被确认的后继报文段过早超时，然而<span style="color:red;">只要收到报文段并更新 $EstimatedRTT$，就使用上式更新 $TimeoutInterval$</span> [每当定时器在另两个事件(收到上层应用的数据/收到ACK)中的任意一个启动时，$TimeoutInterval$ 由最近的 $EstimatedRTT$ 与 $DevRTT$ 值推算得到]。</p>
+<p>有些版本的TCP还有一个隐式NAK机制，在TCP的快速重传机制下，收到对一个特定报文段的3个冗余ACK就可作为对后面报文段的一个隐式NAK，从而在超时之前触发对该报文段的重传。</p>
+<h3 id="快速重传-Fast-Retransmit"><a href="#快速重传-Fast-Retransmit" class="headerlink" title="快速重传 Fast Retransmit"></a>快速重传 Fast Retransmit</h3><ul>
+<li>冗余ACK（Duplicate ACK）：再次确认某个报文段的ACK，而发送方先前已经收到对该报文段的确认；</li>
+<li>因为TCP不使用否定确认，所以接收方不能向发送方发回一个显式的否定确认。相反，它只是对已经接收到的最后一个按序字节数据进行重复确认；</li>
+<li>因为发送方经常一个接一个地发送大量的报文段，若一个报文段的丢失，就很可能引起许多一个接一个的冗余ACK。若TCP发送方接收到对相同数据的3个冗余ACK，它把这当作一种指示，说明跟在这个已被确认过3次的报文段之后的报文段已丢失。一旦收到3个冗余ACK，TCP就执行快速重传。</li>
+</ul>
+<h3 id="产生TCP-ACK的建议-RFC-5681"><a href="#产生TCP-ACK的建议-RFC-5681" class="headerlink" title="产生TCP ACK的建议 (RFC 5681)"></a>产生TCP ACK的建议 (RFC 5681)</h3><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>TCP接收方动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>具有所期望序号的按序报文段到达，所有在期望序号及以前的数据都已被确认</td>
+<td>延迟的ACK。对另一个按序报文段的到达最多等待 500ms，若一个按序报文段在此时间间隔内未到达，则发送一个ACK。</td>
+</tr>
+<tr>
+<td>具有所期望序号的按序报文段到达，另一个按序报文段等待ACK传输</td>
+<td>立即发送单个累积ACK，以确认两个按序报文段</td>
+</tr>
+<tr>
+<td>比期望序号大的失序报文段到达，检测出间隔</td>
+<td>立即发送冗余ACK，指示下一个期待字节的序号（即间隔的低端序号）</td>
+</tr>
+<tr>
+<td>能部分或完全填充接收数据间隔的报文段到达</td>
+<td>倘若该报文段起始于间隔的低端，则立即发送ACK</td>
+</tr>
+</tbody></table>
+<h3 id="流量控制-Flow-Control-Service"><a href="#流量控制-Flow-Control-Service" class="headerlink" title="流量控制 Flow-Control Service"></a>流量控制 Flow-Control Service</h3><ul>
+<li><p>消除发送方使接收方缓存溢出的可能性</p>
+</li>
+<li><p>速度匹配服务，即发送方的发送速率与接收方的接受速率匹配</p>
+</li>
+<li><p>接收窗口大小 $rwnd=RcvBuffer - (LastByteRcvd - LastByteRead)$</p>
+<p>则发送方在该连接的整个生命周期须保证 $LastByteSent - LastByteAcked \le rwnd$</p>
+<p>当接收方的窗口满时使 $rwnd=0$，按上述方案可能导致发送方一直等待接收方。为此TCP规定要求：当接收方的接收窗口为 $0$ 时发送方继续发送只有一个字节数据的报文段，这些报文段会被接收方确认，最终缓存将开始清空，且确认报文里将包含一个非 $0$ 的 $rwnd$ 值。</p>
+</li>
+</ul>
+<h3 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h3><p><img src="/pics/tcp-ip-transport-layer/tcp-three-way-handshake.png" alt="TCP三次握手"></p>
+<h3 id="RST"><a href="#RST" class="headerlink" title="RST"></a>RST</h3><p>当一台主机收到一个TCP报文段，但其端口号或源IP地址与该主机上进行中的套接字都不匹配时，该主机将向源发送一个特殊重置报文段，即RST标志位置1。当主机发送一个重置报文段时，它告诉该源”我没有那个报文段的套接字，请不要再发送该报文段了“。</p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><h4 id="概括"><a href="#概括" class="headerlink" title="概括"></a>概括</h4><p>运行在发送方的TCP拥塞控制机制跟踪一个额外的变量，“拥塞窗口” $cwnd$ （congestion window）：</p>
+<p>$$LastByteSent-LastByteAcked \le min(rwnd, cwnd)$$</p>
+<p>“丢包事件”定义为：出现超时或收到来自接收方的3个冗余ACK（即4个确认，一个初始ACK和其后的3个冗余ACK）。</p>
+<p>一个丢失的报文段表示拥塞出现，因此当丢失报文段时应当降低TCP发送方的速率。</p>
+<p>一个确认报文段指示该网络正在向接收方交付发送方的报文段，因此当对先前未确认报文段的确认到达时，能够增加发送方的速率。（确认的到达被认为是“一切顺利”的隐含指示）</p>
+<h4 id="具体算法"><a href="#具体算法" class="headerlink" title="具体算法"></a>具体算法</h4><blockquote>
+<p>《计算机网络：自顶向下方法》P179 图3-51</p>
+</blockquote>
+<h3 id="公平性"><a href="#公平性" class="headerlink" title="公平性"></a>公平性</h3><h4 id="公平性与UDP"><a href="#公平性与UDP" class="headerlink" title="公平性与UDP"></a>公平性与UDP</h4><p>从TCP的视角来看，UDP不与其它连接合作，也不适时地调整其传输速率，因为TCP拥塞控制在面临拥塞增加（丢包）时，将降低其传输速率，而UDP源则不必这样做，如此UDP源有可能压制TCP流量。</p>
+<h4 id="公平性与并行TCP连接"><a href="#公平性与并行TCP连接" class="headerlink" title="公平性与并行TCP连接"></a>公平性与并行TCP连接</h4><p>例如Web服务器通常使用多个并行TCP连接来传送一个Web页中的多个对象。当一个应用使用多条并行连接时，它占用了一条拥塞链路中较大比例的带宽。</p>
+<h3 id="明确拥塞通告：网络辅助拥塞控制"><a href="#明确拥塞通告：网络辅助拥塞控制" class="headerlink" title="明确拥塞通告：网络辅助拥塞控制"></a>明确拥塞通告：网络辅助拥塞控制</h3><p>一个TCP发送方不会收到来自网络层的明确拥塞指示，而是通过观察分组丢失来推断拥塞，然而对于IP和TCP的扩展方案RFC 3168已经提出并已经实现和部署，该方案允许网络明确向TCP发送方和接收方发出拥塞信号，这种形式的网络辅助拥塞控制称为<strong>明确拥塞通告（Explicit Congestion Notification，ECN）</strong>。</p>
+<p>在网络层，IP数据包首部的服务类型字段中的两个比特被用于ECN。路由器所使用的一种ECN比特设置指示该路由器正在历经拥塞。该拥塞指示则由被标记的IP数据报所携带，送给目的主机，再由目的主机通知发送主机。</p>
+<p>RFC 3168推荐仅当拥塞持续不断存在时才设置ECN比特。（发送主机所使用的另一种ECN比特设置通知路由器发送方和接收方是ECN使能的，因此能够对于ECN指示的网络拥塞采取行动）</p>
+<p>当接收主机中的TCP通过一个接收到的数据报收到了一个ECN拥塞指示时，接收主机中的TCP通过在接收方到发送方的TCP ACK报文段中设置ECE（明确拥塞通告回显，ECN Echo）比特，通知发送主机中的TCP收到拥塞指示。接下来，TCP发送方通过减半拥塞窗口对一个具有ECE拥塞指示的ACK作出回应，就像它对丢失报文段使用快速重传作出回应一样，并且在下一个传输的TCP发送方到接收方的报文段首部中对CWR（拥塞窗口缩减）比特进行设置。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>James F. Kurose and Keith W. Ross, <em>Computer Networking: A Top-Down Approach, 7E</em>, Pearson Education, 2017. 中译版：陈鸣译，2019年，机械工艺出版社。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/hexo-icarus-blog-problems-solutions/">
+                <span class="level-item">Hexo与Icarus博客搭建遇到问题与解决</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/avatar.jpg" alt="Sandy Chen">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Sandy Chen
+                    </p>
+                    
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            28
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            9
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            9
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#传输层">
+        <span class="has-mr-6">1</span>
+        <span>传输层</span>
+        </a></li><li>
+        <a class="is-flex" href="#端口号">
+        <span class="has-mr-6">2</span>
+        <span>端口号</span>
+        </a></li><li>
+        <a class="is-flex" href="#TCP与UDP的比较">
+        <span class="has-mr-6">3</span>
+        <span>TCP与UDP的比较</span>
+        </a></li><li>
+        <a class="is-flex" href="#UDP">
+        <span class="has-mr-6">4</span>
+        <span>UDP</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#报文段格式">
+        <span class="has-mr-6">4.1</span>
+        <span>报文段格式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#可靠数据传输">
+        <span class="has-mr-6">5</span>
+        <span>可靠数据传输</span>
+        </a></li><li>
+        <a class="is-flex" href="#TCP">
+        <span class="has-mr-6">6</span>
+        <span>TCP</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#概念">
+        <span class="has-mr-6">6.1</span>
+        <span>概念</span>
+        </a></li><li>
+        <a class="is-flex" href="#TCP报文段首部">
+        <span class="has-mr-6">6.2</span>
+        <span>TCP报文段首部</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#序号SYN与确认号ACK">
+        <span class="has-mr-6">6.2.1</span>
+        <span>序号SYN与确认号ACK</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#估计往返时间（定时器时长的设定）">
+        <span class="has-mr-6">6.3</span>
+        <span>估计往返时间（定时器时长的设定）</span>
+        </a></li><li>
+        <a class="is-flex" href="#设置和管理重传超时间隔">
+        <span class="has-mr-6">6.4</span>
+        <span>设置和管理重传超时间隔</span>
+        </a></li><li>
+        <a class="is-flex" href="#快速重传-Fast-Retransmit">
+        <span class="has-mr-6">6.5</span>
+        <span>快速重传 Fast Retransmit</span>
+        </a></li><li>
+        <a class="is-flex" href="#产生TCP-ACK的建议-RFC-5681">
+        <span class="has-mr-6">6.6</span>
+        <span>产生TCP ACK的建议 (RFC 5681)</span>
+        </a></li><li>
+        <a class="is-flex" href="#流量控制-Flow-Control-Service">
+        <span class="has-mr-6">6.7</span>
+        <span>流量控制 Flow-Control Service</span>
+        </a></li><li>
+        <a class="is-flex" href="#TCP三次握手">
+        <span class="has-mr-6">6.8</span>
+        <span>TCP三次握手</span>
+        </a></li><li>
+        <a class="is-flex" href="#RST">
+        <span class="has-mr-6">6.9</span>
+        <span>RST</span>
+        </a></li><li>
+        <a class="is-flex" href="#拥塞控制">
+        <span class="has-mr-6">6.10</span>
+        <span>拥塞控制</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#概括">
+        <span class="has-mr-6">6.10.1</span>
+        <span>概括</span>
+        </a></li><li>
+        <a class="is-flex" href="#具体算法">
+        <span class="has-mr-6">6.10.2</span>
+        <span>具体算法</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#公平性">
+        <span class="has-mr-6">6.11</span>
+        <span>公平性</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#公平性与UDP">
+        <span class="has-mr-6">6.11.1</span>
+        <span>公平性与UDP</span>
+        </a></li><li>
+        <a class="is-flex" href="#公平性与并行TCP连接">
+        <span class="has-mr-6">6.11.2</span>
+        <span>公平性与并行TCP连接</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#明确拥塞通告：网络辅助拥塞控制">
+        <span class="has-mr-6">6.12</span>
+        <span>明确拥塞通告：网络辅助拥塞控制</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Reference">
+        <span class="has-mr-6">7</span>
+        <span>Reference</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/C/">
+            <span class="level-start">
+                <span class="level-item">C++</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Go/">
+            <span class="level-start">
+                <span class="level-item">Go</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LeetCode/">
+            <span class="level-start">
+                <span class="level-item">LeetCode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/MySQL/">
+            <span class="level-start">
+                <span class="level-item">MySQL</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TCP-IP/">
+            <span class="level-start">
+                <span class="level-item">TCP/IP</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+            <span class="level-start">
+                <span class="level-item">操作系统</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time></div>
+                    <a href="/2020/10/tcp-ip-transport-layer/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TCP/IP学习笔记：传输层</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-03T03:10:31.000Z">2020-10-03</time></div>
+                    <a href="/2020/10/hexo-icarus-blog-problems-solutions/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo与Icarus博客搭建遇到问题与解决</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
+                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time></div>
+                    <a href="/2020/06/python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点2</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time></div>
+                    <a href="/2020/06/python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            文章
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ACM/">
+                        <span class="tag">ACM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Navicat/">
+                        <span class="tag">Navicat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Valgrind/">
+                        <span class="tag">Valgrind</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/memcheck/">
+                        <span class="tag">memcheck</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/avatar.jpg" alt="TCP/IP学习笔记：传输层" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 SandyChen&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                <br>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/sandychn">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://sandychn.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

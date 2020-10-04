@@ -30,7 +30,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
 
@@ -130,6 +130,141 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    24 分钟 读完 (大约 3634 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/10/tcp-ip-transport-layer/">TCP/IP学习笔记：传输层</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>传输层也称为运输层（Transport Layer）。在此层的分组，TCP称为“报文段”，UDP称为“数据报“。</p>
+<p>进程到进程的数据交付（多路复用与多路分解）和差错检查是两种最低限度的传输层服务，也是UDP所能提供的仅有的两种服务。</p>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>端口号为一个16比特的值，即范围为 0-65535。其中 0-1023 称为“周知端口号”。</p>
+<p>UDP套接字由一个二元组全面标识：目的IP地址、目的端口号。</p>
+<p>TCP套接字由一个四元组全面标识：源IP地址、源端口号、目的IP地址、目的端口号。</p>
+<h2 id="TCP与UDP的比较"><a href="#TCP与UDP的比较" class="headerlink" title="TCP与UDP的比较"></a>TCP与UDP的比较</h2><p>相比TCP，UDP满足：</p>
+<ol>
+<li>关于发送什么数据以及何时发送的应用层控制更精细</li>
+<li>无需连接建立</li>
+<li>无连接状态（无须保存与维护连接状态，节约资源）</li>
+<li>分组的首部开销小。（TCP：20 Bytes，UDP：8 Bytes）</li>
+</ol>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="报文段格式"><a href="#报文段格式" class="headerlink" title="报文段格式"></a>报文段格式</h3><ul>
+<li>源端口号 (2 bytes)</li>
+<li>目的端口号 (2 bytes)</li>
+<li>长度 (2 bytes)</li>
+<li>检验和 (2 bytes)</li>
+<li>应用数据</li>
+</ul>
+<p>当一台主机接收一个UDP分组，它的目的端口与运行中的任一UDP套接字都不匹配，则该主机发送一个特殊的ICMP数据报。</p>
+<h2 id="可靠数据传输"><a href="#可靠数据传输" class="headerlink" title="可靠数据传输"></a>可靠数据传输</h2><p>解决流水线的差错恢复有2种基本方法：</p>
+<ul>
+<li>回退N步（Go-Back N，GBN），即“滑动窗口协议”（Sliding-Window Protocol）</li>
+<li>选择重传（Selective Repeat，SR）。选择重传协议通过让发送方仅重传那些它怀疑在接收方出错（即丢失/受损）的分组而避免了不必要的重传。这种个别的、按需的重传要求接收方<strong>逐个</strong>确认正确接收的分组。对于选择重传协议，其窗口长度必须小于等于序号空间的一半。</li>
+</ul>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>发起连接的称为客户，另一方称为服务器。</li>
+<li>TCP可从缓存中取出并放入报文段中的数据数量受限于最大报文段长度MSS（Maximum Segment Size）。MSS通常根据最初确定的由本地发送主机发送的最大链路层帧长度（最大传输单元MTU，Maximum Transmission Unit）。该MSS要保证一个TCP报文段（当封装在一个IP数据报中）加上TCP/IP首部长度（通常为40字节 <span style="color: green;">[TCP首部20字节，IP首部20字节]</span>）须能放入单个链路层帧中。以太网和PPP链路层协议都具有1500字节的MTU，因此MSS的典型值为1460字节。<span style="color: blue;">注意MSS是指在报文段里应用层数据的最大长度而非指包括首部的TCP报文段的最大长度。</span></li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/10/tcp-ip-transport-layer/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-03T03:10:31.000Z">2020-10-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 64 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/10/hexo-icarus-blog-problems-solutions/">Hexo与Icarus博客搭建遇到问题与解决</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="FontAwesome库很慢或404"><a href="#FontAwesome库很慢或404" class="headerlink" title="FontAwesome库很慢或404"></a>FontAwesome库很慢或404</h2><p>修改 <code>blog\themes\icarus\includes\helpers\cdn.js</code> 文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> icon_providers = &#123;</span><br><span class="line">    <span class="comment">/* fontawesome: 'https://use.fontawesome.com/releases/v5.4.1/css/all.css' */</span></span><br><span class="line">    fontawesome: <span class="string">'https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>修改后执行 <code>hexo cl &amp;&amp; hexo s</code> 即可看到效果。</p>
+<blockquote>
+<p>Reference: <a href="https://blog.csdn.net/t270153399/article/details/105345602">https://blog.csdn.net/t270153399/article/details/105345602</a></p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time>
                 
                 <div class="level-item">
@@ -149,7 +284,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/06/Python-topic3/">Python知识点复习3</a>
+                <a class="has-link-black-ter" href="/2020/06/python-topic3/">Python知识点3</a>
             
         </h1>
         <div class="content">
@@ -299,7 +434,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/Python-topic3/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/06/python-topic3/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -342,7 +477,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/06/Python-topic2/">Python知识点复习2</a>
+                <a class="has-link-black-ter" href="/2020/06/python-topic2/">Python知识点2</a>
             
         </h1>
         <div class="content">
@@ -409,7 +544,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/Python-topic2/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/06/python-topic2/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -443,7 +578,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    19 分钟 读完 (大约 2784 个字)
+                    19 分钟 读完 (大约 2817 个字)
                 </span>
                 
                 
@@ -452,7 +587,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/06/Python-topic1/">Python知识点复习1</a>
+                <a class="has-link-black-ter" href="/2020/06/python-topic1/">Python知识点1</a>
             
         </h1>
         <div class="content">
@@ -493,7 +628,7 @@
 <td>字典</td>
 <td>dict</td>
 <td>{1: “one”, 2: “two”}</td>
-<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素形式为<code>键:值</code></td>
+<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素形式为<code>键:值</code>。字典由于可变，所以本身不可哈希</td>
 </tr>
 <tr>
 <td>元组</td>
@@ -505,7 +640,7 @@
 <td>集合</td>
 <td>set, frozenset</td>
 <td>{‘a’, ‘b’, ‘c’}, frozenset({‘a’, ‘b’, ‘c’})</td>
-<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素不允许重复。set可变，而frozenset是不可变</td>
+<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素不允许重复。set可变，而frozenset不可变。set由于可变，故本身不可哈希；frozenset可以</td>
 </tr>
 <tr>
 <td>布尔</td>
@@ -572,134 +707,10 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/Python-topic1/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/06/python-topic1/#more">阅读更多</a>
                 </div>
             </div>
         </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-05-05T19:02:06.000Z">2020-05-06</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 924 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/05/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/">STL中_Rb_tree的探索</a>
-            
-        </h1>
-        <div class="content">
-            <p>我们知道STL中我们常用的<code>set</code>与<code>multiset</code>和<code>map</code>与<code>multimap</code>都是基于红黑树。本文介绍了它们的在STL中的底层数据结构<code>_Rb_tree</code>的直接用法与部分函数。难点主要是<code>_Rb_tree</code>的各个参数的确定。</p>
-<p>特别注意在如下代码的<code>Selector</code>类用于从<code>Node</code>中选出用于排序的key值，这个仿函数必须返回<code>const int&amp;</code>而不能是<code>int</code>，否则<code>less&lt;int&gt;::operator(const int&amp;, const int&amp;)</code>会抛出<code>segmentation fault</code>。一开始写成<code>int</code>，看了很多源码才发现是这个原因，一定要注意。（<strong>Update on 2020-5-6</strong>：通过对源码阅读，终于彻底明白为何出现写<code>int</code>会出现问题，见文末）</p>
-<p>接下来是样例代码，里面都有注释了。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 原则上不要直接引用这个头文件，这里只是为了测试</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stl_tree.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> first, second;</span><br><span class="line">    Node(<span class="keyword">int</span> _first, <span class="keyword">int</span> _second) : first(_first), second(_second)&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; outs, <span class="keyword">const</span> Node&amp; node) &#123;</span><br><span class="line">        outs &lt;&lt; <span class="string">'&#123;'</span> &lt;&lt; node.first &lt;&lt; <span class="string">','</span> &lt;&lt; node.second &lt;&lt; <span class="string">'&#125;'</span>;</span><br><span class="line">        <span class="keyword">return</span> outs;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">Selector</span> &#123;</span></span><br><span class="line">    <span class="comment">// MUST return const int&amp;, not int.</span></span><br><span class="line">    <span class="comment">// if return int, segmentation fault will occur.</span></span><br><span class="line">    <span class="comment">// I have spent much time because of this.</span></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">int</span>&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> T&amp; obj)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obj.first;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// _Rb_tree: red-black tree in STL.</span></span><br><span class="line">    <span class="keyword">using</span> tree_type = _Rb_tree&lt;<span class="keyword">int</span>, Node, Selector&lt;Node&gt;, less&lt;<span class="keyword">int</span>&gt;&gt;;</span><br><span class="line">    <span class="keyword">using</span> iterator_type = tree_type::iterator;</span><br><span class="line">    <span class="keyword">using</span> result_pair_type = pair&lt;tree_type::iterator, <span class="keyword">bool</span>&gt;;</span><br><span class="line">    tree_type tree;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素Node(1, 2)</span></span><br><span class="line">    result_pair_type res = tree._M_insert_unique(Node(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert address = "</span> &lt;&lt; res.first._M_node &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert result = "</span> &lt;&lt; boolalpha &lt;&lt; res.second &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">    iterator_type it = tree.begin();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"begin address = "</span> &lt;&lt; it._M_node &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    it = tree.find(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"address = "</span> &lt;&lt; it._M_node &lt;&lt; <span class="string">", value = "</span> &lt;&lt; *it &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 再插入元素Node(1, 2)但是因为调用的是insert_unique</span></span><br><span class="line">    <span class="comment">// 它不会添加重复值，所以插入会被拒绝</span></span><br><span class="line">    res = tree._M_insert_unique(Node(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"insert result = "</span> &lt;&lt; boolalpha &lt;&lt; res.second &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 再插入元素Node(1, 2)但这次调用insert_equal</span></span><br><span class="line">    <span class="comment">// multiset和multimap就是利用这个函数来插入重复值</span></span><br><span class="line">    <span class="comment">// 也就是这个函数允许重复值，所以插入成功</span></span><br><span class="line">    tree._M_insert_equal(Node(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"size = "</span> &lt;&lt; tree.size() &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 大小就变为2</span></span><br><span class="line"></span><br><span class="line">    pair&lt;iterator_type, iterator_type&gt; result = tree.equal_range(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (iterator_type ite = result.first; ite != result.second; ++ite) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"address = "</span> &lt;&lt; ite._M_node &lt;&lt; <span class="string">", value = "</span> &lt;&lt; *ite &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>程序的输出为（内存地址不定）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">insert address &#x3D; 0xf91be0</span><br><span class="line">insert result &#x3D; true</span><br><span class="line">begin address &#x3D; 0xf91be0</span><br><span class="line">address &#x3D; 0xf91be0, value &#x3D; &#123;1,2&#125;</span><br><span class="line">insert result &#x3D; false</span><br><span class="line">size &#x3D; 2</span><br><span class="line">address &#x3D; 0xf91be0, value &#x3D; &#123;1,2&#125;</span><br><span class="line">address &#x3D; 0xf91c10, value &#x3D; &#123;1,3&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Update on 2020-5-6</strong></p>
-<p>当将<code>Selector::operator()</code>的返回值写为<code>int</code>时，执行时会在<code>main()</code>中的<code>it = tree.find(1)</code>时抛出<code>Segmentation Fault</code>。以下给出调用过程。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp, main()</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    it = tree.find(<span class="number">1</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// stl_tree.h, std::_Rb_tree::find(const _Key&amp;)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Key, <span class="keyword">typename</span> _Val, <span class="keyword">typename</span> _KeyOfValue,</span><br><span class="line">         <span class="keyword">typename</span> _Compare, <span class="keyword">typename</span> _Alloc&gt;</span><br><span class="line"><span class="keyword">typename</span> _Rb_tree&lt;_Key, _Val, _KeyOfValue, _Compare, _Alloc&gt;::iterator</span><br><span class="line">    _Rb_tree&lt;_Key, _Val, _KeyOfValue, _Compare, _Alloc&gt;::</span><br><span class="line">    find(<span class="keyword">const</span> _Key&amp; __k) &#123;</span><br><span class="line">        iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);</span><br><span class="line">        <span class="keyword">return</span> (__j == end() || _M_impl._M_key_compare(__k,</span><br><span class="line">            _S_key(__j._M_node))) ? end() : __j;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// stl_tree.h, std::_Rb_tree::_M_lower_bound(_Link_type, _Link_type, const _Key&amp;)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Key, <span class="keyword">typename</span> _Val, <span class="keyword">typename</span> _KeyOfValue,</span><br><span class="line">         <span class="keyword">typename</span> _Compare, <span class="keyword">typename</span> _Alloc&gt;</span><br><span class="line"><span class="keyword">typename</span> _Rb_tree&lt;_Key, _Val, _KeyOfValue, _Compare, _Alloc&gt;::iterator</span><br><span class="line">    _Rb_tree&lt;_Key, _Val, _KeyOfValue, _Compare, _Alloc&gt;::</span><br><span class="line">    _M_lower_bound(_Link_type __x, _Link_type __y, <span class="keyword">const</span> _Key&amp; __k) &#123;</span><br><span class="line">        <span class="keyword">while</span> (__x != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> (!_M_impl._M_key_compare(_S_key(__x), __k))</span><br><span class="line">                __y = __x, __x = _S_left(__x);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                __x = _S_right(__x);</span><br><span class="line">        <span class="keyword">return</span> iterator(__y);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在此处的 <code>_M_impl._M_key_compare</code> 也就是比较仿函数对象，在这里即<code>less&lt;int&gt;</code>对象。异常就是在这个函数里抛出的，可见问题出现在 <code>_S_key(__x)</code> 中。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// stl_tree.h, std::_Rb_tree::_S_key(_Const_Base_ptr)</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> _Key&amp; _S_key(_Const_Base_ptr __x) &#123;</span><br><span class="line">    <span class="keyword">return</span> _KeyOfValue()(_S_value(__x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里的 <code>_KeyOfValue()</code> 就是我们给的 <code>Selector</code> 了。所以在这里如果将 <code>operator()</code> 的返回值写为 <code>int</code> ，则这里将其以 <code>const _Key&amp;</code> 返回，就是<strong>返回局部对象的引用</strong>，后面又在 <code>less&lt;int&gt;::operator()</code> 里面使用了这个引用（这个引用实际上指向一个已过期的栈上数据： <code>_KeyOfValue()</code> 的返回值），这个行为导致了<code>Segmentation Fault</code>。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-05-04T06:43:37.000Z">2020-05-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 235 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/05/%E8%A7%A3%E5%86%B3Navicat%E8%BF%9E%E6%8E%A5MySQL%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98/">解决Navicat连接MySQL不成功的问题</a>
-            
-        </h1>
-        <div class="content">
-            <p>因为在虚拟机上使用MySQL不方便保存数据，尝试在Windows上使用Navicat连接Linux虚拟机上的MySQL。</p>
-<p>在Navicat中输入用户名/密码后，提示</p>
-<p><code>Can&#39;t connect to MySQL server on &#39;&lt;MySQL Server IP&gt;&#39; (10061 &quot;Unknown error&quot;)</code></p>
-<p><strong>解决方法：</strong></p>
-<ol>
-<li>修改 <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> ，将其中的 <code>bind-address = 127.0.0.1</code> 注释掉，保存。</li>
-<li>运行 <code>service mysql restart</code> ，重启 MySQL。</li>
-</ol>
-<p>接下来再尝试在Navicat中连接MySQL，又提示</p>
-<p><code>1130 - Host &#39;&lt;MySQL Server IP&gt;&#39; is not allowed to connect to this MySQL server</code></p>
-<p>因为默认情况下root用户只允许本机访问，即只能使用localhost访问。所以需要将root对应的host修改大一点，这里简单起见直接修改为所有IP访问。</p>
-<p><strong>解决方法：</strong></p>
-<p>在虚拟机上以root登录MySQL。然后执行</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user set host = '%' where user = 'root';</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-
-<p>现在再用Navicat连接MySQL就可以连接成功了。</p>
-
-        </div>
-        
         
         
     </div>
@@ -773,7 +784,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            26
+                            28
                         </p>
                     </a>
                 </div>
@@ -785,7 +796,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            8
+                            9
                         </p>
                     </a>
                 </div>
@@ -836,6 +847,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/LeetCode/">
             <span class="level-start">
                 <span class="level-item">LeetCode</span>
@@ -873,7 +892,7 @@
                 <span class="level-item">TCP/IP</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
@@ -908,8 +927,34 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time></div>
+                    <a href="/2020/10/tcp-ip-transport-layer/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TCP/IP学习笔记：传输层</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-03T03:10:31.000Z">2020-10-03</time></div>
+                    <a href="/2020/10/hexo-icarus-blog-problems-solutions/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo与Icarus博客搭建遇到问题与解决</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/Python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习3</a>
+                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
                     </p>
@@ -922,7 +967,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/Python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习2</a>
+                    <a href="/2020/06/python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点2</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
                     </p>
@@ -935,35 +980,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/Python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习1</a>
+                    <a href="/2020/06/python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T19:02:06.000Z">2020-05-06</time></div>
-                    <a href="/2020/05/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">STL中_Rb_tree的探索</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-04T06:43:37.000Z">2020-05-04</time></div>
-                    <a href="/2020/05/%E8%A7%A3%E5%86%B3Navicat%E8%BF%9E%E6%8E%A5MySQL%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">解决Navicat连接MySQL不成功的问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
                     </p>
                 </div>
             </div>
@@ -979,6 +998,17 @@
             文章
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/06/">
@@ -1175,9 +1205,6 @@
                 </span>
                 
                 <br>
-                <span style="display: none;">
-                This page was updated on 2020-06-17, at 20:43:19.
-                </span>
                 </p>
             </div>
             <div class="level-end">

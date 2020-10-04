@@ -30,7 +30,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
 
@@ -141,6 +141,88 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    24 分钟 读完 (大约 3634 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/10/tcp-ip-transport-layer/">TCP/IP学习笔记：传输层</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><p>传输层也称为运输层（Transport Layer）。在此层的分组，TCP称为“报文段”，UDP称为“数据报“。</p>
+<p>进程到进程的数据交付（多路复用与多路分解）和差错检查是两种最低限度的传输层服务，也是UDP所能提供的仅有的两种服务。</p>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><p>端口号为一个16比特的值，即范围为 0-65535。其中 0-1023 称为“周知端口号”。</p>
+<p>UDP套接字由一个二元组全面标识：目的IP地址、目的端口号。</p>
+<p>TCP套接字由一个四元组全面标识：源IP地址、源端口号、目的IP地址、目的端口号。</p>
+<h2 id="TCP与UDP的比较"><a href="#TCP与UDP的比较" class="headerlink" title="TCP与UDP的比较"></a>TCP与UDP的比较</h2><p>相比TCP，UDP满足：</p>
+<ol>
+<li>关于发送什么数据以及何时发送的应用层控制更精细</li>
+<li>无需连接建立</li>
+<li>无连接状态（无须保存与维护连接状态，节约资源）</li>
+<li>分组的首部开销小。（TCP：20 Bytes，UDP：8 Bytes）</li>
+</ol>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><h3 id="报文段格式"><a href="#报文段格式" class="headerlink" title="报文段格式"></a>报文段格式</h3><ul>
+<li>源端口号 (2 bytes)</li>
+<li>目的端口号 (2 bytes)</li>
+<li>长度 (2 bytes)</li>
+<li>检验和 (2 bytes)</li>
+<li>应用数据</li>
+</ul>
+<p>当一台主机接收一个UDP分组，它的目的端口与运行中的任一UDP套接字都不匹配，则该主机发送一个特殊的ICMP数据报。</p>
+<h2 id="可靠数据传输"><a href="#可靠数据传输" class="headerlink" title="可靠数据传输"></a>可靠数据传输</h2><p>解决流水线的差错恢复有2种基本方法：</p>
+<ul>
+<li>回退N步（Go-Back N，GBN），即“滑动窗口协议”（Sliding-Window Protocol）</li>
+<li>选择重传（Selective Repeat，SR）。选择重传协议通过让发送方仅重传那些它怀疑在接收方出错（即丢失/受损）的分组而避免了不必要的重传。这种个别的、按需的重传要求接收方<strong>逐个</strong>确认正确接收的分组。对于选择重传协议，其窗口长度必须小于等于序号空间的一半。</li>
+</ul>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>发起连接的称为客户，另一方称为服务器。</li>
+<li>TCP可从缓存中取出并放入报文段中的数据数量受限于最大报文段长度MSS（Maximum Segment Size）。MSS通常根据最初确定的由本地发送主机发送的最大链路层帧长度（最大传输单元MTU，Maximum Transmission Unit）。该MSS要保证一个TCP报文段（当封装在一个IP数据报中）加上TCP/IP首部长度（通常为40字节 <span style="color: green;">[TCP首部20字节，IP首部20字节]</span>）须能放入单个链路层帧中。以太网和PPP链路层协议都具有1500字节的MTU，因此MSS的典型值为1460字节。<span style="color: blue;">注意MSS是指在报文段里应用层数据的最大长度而非指包括首部的TCP报文段的最大长度。</span></li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/10/tcp-ip-transport-layer/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-28T16:29:00.000Z">2020-03-29</time>
                 
                 <div class="level-item">
@@ -160,7 +242,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/TCP-IP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9ADNS/">TCP/IP学习笔记：DNS</a>
+                <a class="has-link-black-ter" href="/2020/03/tcp-ip-dns/">TCP/IP学习笔记：DNS</a>
             
         </h1>
         <div class="content">
@@ -252,7 +334,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/TCP-IP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9AHTTP/">TCP/IP学习笔记：HTTP</a>
+                <a class="has-link-black-ter" href="/2020/03/tcp-ip-http/">TCP/IP学习笔记：HTTP</a>
             
         </h1>
         <div class="content">
@@ -408,7 +490,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            26
+                            28
                         </p>
                     </a>
                 </div>
@@ -420,7 +502,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            8
+                            9
                         </p>
                     </a>
                 </div>
@@ -471,6 +553,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/LeetCode/">
             <span class="level-start">
                 <span class="level-item">LeetCode</span>
@@ -508,7 +598,7 @@
                 <span class="level-item">TCP/IP</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
@@ -543,8 +633,34 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time></div>
+                    <a href="/2020/10/tcp-ip-transport-layer/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TCP/IP学习笔记：传输层</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-03T03:10:31.000Z">2020-10-03</time></div>
+                    <a href="/2020/10/hexo-icarus-blog-problems-solutions/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo与Icarus博客搭建遇到问题与解决</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/Python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习3</a>
+                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
                     </p>
@@ -557,7 +673,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/Python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习2</a>
+                    <a href="/2020/06/python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点2</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
                     </p>
@@ -570,35 +686,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/Python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点复习1</a>
+                    <a href="/2020/06/python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-05T19:02:06.000Z">2020-05-06</time></div>
-                    <a href="/2020/05/STL%E4%B8%AD_Rb_tree%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">STL中_Rb_tree的探索</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-04T06:43:37.000Z">2020-05-04</time></div>
-                    <a href="/2020/05/%E8%A7%A3%E5%86%B3Navicat%E8%BF%9E%E6%8E%A5MySQL%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98/" class="title has-link-black-ter is-size-6 has-text-weight-normal">解决Navicat连接MySQL不成功的问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/MySQL/">MySQL</a>
                     </p>
                 </div>
             </div>
@@ -614,6 +704,17 @@
             文章
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/06/">
@@ -810,9 +911,6 @@
                 </span>
                 
                 <br>
-                <span style="display: none;">
-                This page was updated on 2020-06-17, at 20:43:19.
-                </span>
                 </p>
             </div>
             <div class="level-end">
