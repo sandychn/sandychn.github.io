@@ -130,6 +130,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 143 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/10/vmware-notes/">VMware使用相关</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="压缩自增长的虚拟磁盘体积"><a href="#压缩自增长的虚拟磁盘体积" class="headerlink" title="压缩自增长的虚拟磁盘体积"></a>压缩自增长的虚拟磁盘体积</h2><p>运行前应保证虚拟磁盘所在的宿主机硬盘分区下有足够空间。</p>
+<p>在虚拟机下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install open-vm-tools</span><br><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+
+<h2 id="将自增长的虚拟磁盘切换为预分配"><a href="#将自增长的虚拟磁盘切换为预分配" class="headerlink" title="将自增长的虚拟磁盘切换为预分配"></a>将自增长的虚拟磁盘切换为预分配</h2><p>在 VMware 安装目录下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager -r <span class="string">"原vmdk名"</span> -s 30GB -t 2 <span class="string">"新vmdk名"</span></span><br></pre></td></tr></table></figure>
+
+<p>可将自增长的虚拟磁盘切换为预分配30GB。</p>
+<h2 id="虚拟磁盘重命名"><a href="#虚拟磁盘重命名" class="headerlink" title="虚拟磁盘重命名"></a>虚拟磁盘重命名</h2><p>在 VMware 安装目录下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager -n <span class="string">"原vmdk名"</span> <span class="string">"新vmdk名"</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time>
                 
                 <div class="level-item">
@@ -561,169 +614,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    19 分钟 读完 (大约 2817 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/python-topic1/">Python知识点1</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="Python对象类型"><a href="#Python对象类型" class="headerlink" title="Python对象类型"></a>Python对象类型</h3><table>
-<thead>
-<tr>
-<th>对象类型</th>
-<th>对应类型</th>
-<th>实例</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>数字</td>
-<td>int, float, complex</td>
-<td>1234, 3.14, 1.3e5, 3+4j</td>
-<td>数字大小没有限制，内置支持复数及其运算。</td>
-</tr>
-<tr>
-<td>字符串</td>
-<td>str</td>
-<td>‘abcd’, “abcd”, ‘’’ab’’’, “””ab”””, r’abc’, R’abc’</td>
-<td>不可变，使用单引号、双引号、三引号作为定界符，或以字母r或R引导的原始字符串。<br>单引号、双引号、三单引号、三双引号可以互相嵌套，用来表示复杂字符串。<br>三引号表示的字符串可以换行，支持排版较为复杂的字符串；三引号还可以在程序中表示较长的注释。</td>
-</tr>
-<tr>
-<td>字符串</td>
-<td>bytes</td>
-<td>b’Hello World’</td>
-<td>不可变，以字母b引导，使用单引号、双引号、三引号作为定界符</td>
-</tr>
-<tr>
-<td>列表</td>
-<td>list</td>
-<td>[1, 2, 3], [[1, 2, 3], None]</td>
-<td>所有元素放在一对方括号[]中，元素之间使用逗号分隔，其中的元素可以是任意类型</td>
-</tr>
-<tr>
-<td>字典</td>
-<td>dict</td>
-<td>{1: “one”, 2: “two”}</td>
-<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素形式为<code>键:值</code>。字典由于可变，所以本身不可哈希</td>
-</tr>
-<tr>
-<td>元组</td>
-<td>tuple</td>
-<td>(2, 3, 4), (-3,)</td>
-<td><strong>不可变</strong>，所有元素放在一对圆括号()中，元素之间使用逗号分隔，如果元组中只有一个元素的话，该元素后面需加一个逗号</td>
-</tr>
-<tr>
-<td>集合</td>
-<td>set, frozenset</td>
-<td>{‘a’, ‘b’, ‘c’}, frozenset({‘a’, ‘b’, ‘c’})</td>
-<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素不允许重复。set可变，而frozenset不可变。set由于可变，故本身不可哈希；frozenset可以</td>
-</tr>
-<tr>
-<td>布尔</td>
-<td>bool</td>
-<td>True, False</td>
-<td>逻辑值，关系运算符、成员测试运算符、同一性测试运算符组成的表达式的值一般为True或False</td>
-</tr>
-<tr>
-<td>空类型</td>
-<td>NoneType</td>
-<td>None</td>
-<td>空值</td>
-</tr>
-<tr>
-<td>异常</td>
-<td>BaseException</td>
-<td>Exception, ValueError…</td>
-<td>Python内置大量异常类，分别对应不同类型的异常</td>
-</tr>
-<tr>
-<td>文件</td>
-<td></td>
-<td>f = open(‘data.dat’, ‘rb’)</td>
-<td>open是Python内置函数，使用指定的模式打开文件，返回文件对象</td>
-</tr>
-<tr>
-<td>其它可迭代对象</td>
-<td>生成器对象、<br>range对象、<br/>zip对象、<br/>enumerate对象、<br/>map对象、<br/>filter对象等</td>
-<td>range(1, 3), …</td>
-<td>具有<strong>惰性求值</strong>的特点，除range对象之外，其他对象中的元素只能看一次</td>
-</tr>
-<tr>
-<td>编程单元</td>
-<td>函数、类、模块（类型为module）</td>
-<td></td>
-<td>类和函数都属于<strong>可调用对象</strong>，模块用来集中存放函数、类、常量或其他对象</td>
-</tr>
-</tbody></table>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3</span> + <span class="number">4j</span></span><br><span class="line">b = <span class="number">5</span> + <span class="number">6j</span></span><br><span class="line">c = a + b</span><br><span class="line">print(c)  <span class="comment"># (8+10j)</span></span><br><span class="line">print(c.real, c.imag, c.conjugate())  <span class="comment"># 8.0 10.0 (8-10j)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 3.6.x开始支持在数字中间位置使用单个下划线作为分隔来提高</span></span><br><span class="line"><span class="comment"># 数字的可读性，类似于数学上使用逗号作为千位分隔符。</span></span><br><span class="line"></span><br><span class="line">print(<span class="number">1</span>_000_000)   <span class="comment"># 1000000</span></span><br><span class="line">print(<span class="number">1</span>_2_3_4)     <span class="comment"># 1234</span></span><br><span class="line">print(<span class="number">1</span>_2 + <span class="number">3</span>_4j)  <span class="comment"># (12+34j)</span></span><br><span class="line">print(<span class="number">1</span>_2<span class="number">.3</span>_45)    <span class="comment"># 12.345</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Python运算符"><a href="#Python运算符" class="headerlink" title="Python运算符"></a>Python运算符</h3><h4 id="取反"><a href="#取反" class="headerlink" title="取反"></a>取反</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span></span><br><span class="line">print(~a)  <span class="comment"># -3</span></span><br><span class="line"><span class="comment"># 2的二进制表示为 010，其中最高位为符号位</span></span><br><span class="line"><span class="comment"># 取反得 101，将其取反+1可以得到它对应的正数 011，即 +3</span></span><br><span class="line"><span class="comment"># 所以补码 101 为 -3，即上述 print 结果。</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h4><p>集合的交集、并集、对称差集等运算借助于位运算符来实现，而差集则使用减号运算符实现（<strong>并集运算符不是加号</strong>）。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; | &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 并集，自动去除重复元素 a.union(b)</span></span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; &amp; &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 交集 a.intersection(b)</span></span><br><span class="line">&#123;<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; ^ &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 对称差集 a.symmetric_difference(b)</span></span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; - &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 差集 a.difference(b)</span></span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="矩阵相乘运算符"><a href="#矩阵相乘运算符" class="headerlink" title="矩阵相乘运算符@"></a>矩阵相乘运算符@</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__matmul__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        print(<span class="string">'__matmul__'</span>, value)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__rmatmul__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        print(<span class="string">'__rmatmul__'</span>, value)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__imatmul__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        print(<span class="string">'__imatmul__'</span>, value)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = Test()</span><br><span class="line">b = Test()</span><br><span class="line">c = a @ b  <span class="comment"># __matmul__ &lt;__main__.Test object at 0x000001E098F8A2E0&gt;</span></span><br><span class="line">d = <span class="number">1</span> @ a  <span class="comment"># __rmatmul__ 1</span></span><br><span class="line">e = a @ <span class="number">2</span>  <span class="comment"># __matmul__ 2</span></span><br><span class="line">c @= c     <span class="comment"># __imatmul__ &lt;__main__.Test object at 0x000001E098F2A550&gt;</span></span><br><span class="line">d @= <span class="number">3</span>     <span class="comment"># __imatmul__ 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">x = np.ones(<span class="number">3</span>)</span><br><span class="line">y = np.eye(<span class="number">3</span>) * <span class="number">3</span></span><br><span class="line">y[<span class="number">0</span>, <span class="number">2</span>] = <span class="number">5</span></span><br><span class="line">y[<span class="number">2</span>, <span class="number">0</span>] = <span class="number">3</span></span><br><span class="line">print(x @ y)  <span class="comment"># [6. 3. 8.]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><p><strong>iter()</strong> 返回指定对象的可迭代对象</p>
-<p><strong>locals()</strong> 返回包含当前作用域内局部变量及其值的字典</p>
-<p><strong>next(iterator[, default])</strong>  返回可迭代对象中的下一个元素，允许指定迭代结束之后继续迭代时的返回值</p>
-<p><strong>reduce(func, sequence[, initial])</strong>  将双参数的函数 $func$ 以迭代的方式从左到右依次应用至序列 $sequence$ 中每个元素，最终返回单个值作为结果。在Python 2.x中该函数为内置函数，在Python 3.x中需要从functools中导入reduce函数再使用</p>
-<p><strong>repr(obj)</strong>  返回对象 $obj$ 的规范化字符串表示形式，对于大多数对象有 $eval(repr(obj)) == obj$。</p>
-<p><strong>str(obj)</strong>  把对象 $obj$ 直接转换为字符串</p>
-<p><strong>reversed(seq)</strong>  返回 $seq$ 的反向迭代器</p>
-<p><strong>sorted(iterable, key=None, reverse=False)</strong>  返回排序后的列表，其中 $iterable$ 表示要排序的序列或迭代对象，$key$ 用来指定排序规则或依据，$reverse$ 用来指定升序或降序。该函数不改变 $iterable$ 内任何元素的顺序</p>
-<p><strong>zip(seq1 [, seq2 […]])</strong>  返回 $zip$ 对象，其中元素为 $(seq1[i], seq2[i], …)$ 形式的元组，最终结果中包含的元素个数取决于所有参数序列或可迭代对象中最短的那个</p>
-<p><strong>sum(iterable, start=0)</strong>  求和，其中 $sum$ 为初值。</p>
-<p><strong>isinstance(obj, class_or_tuple)</strong>  判断 $obj$ 是否是该类或该类的子类的对象。<code>instance(x, (A, B, ...))</code> 等价于 ``isinstance(x, A) or isinstance(x, B) or …`。</p>
-<p><strong>filter(function or None, iterable)</strong>  返回一个 $filter$ 对象，生成满足 $function(item) == True$ 的元素，其中 $item$ 为 $iterable$ 中的元素。若第一参数为 $None$，则判定条件变为元素与 $True$ 等价。</p>
-<p><strong>enumerate(iterable, start=0)</strong>  返回一个 $enumerate$ 对象，生成一个个由 $count$ 和 $value$ 组成的元组。即该对象会返回 $(0, seq[0]), (1, seq[1]), (2, seq[2]), …$。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/python-topic1/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -784,7 +674,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            28
+                            29
                         </p>
                     </a>
                 </div>
@@ -808,7 +698,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            9
+                            10
                         </p>
                     </a>
                 </div>
@@ -913,7 +803,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware-Linux/" style="font-size: 10px;">VMware - Linux</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -922,6 +812,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time></div>
+                    <a href="/2020/10/vmware-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">VMware使用相关</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -975,19 +878,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1005,7 +895,7 @@
                     <span class="level-item">十月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1150,6 +1040,13 @@
                     <a class="tags has-addons" href="/tags/STL/">
                         <span class="tag">STL</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware-Linux/">
+                        <span class="tag">VMware - Linux</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

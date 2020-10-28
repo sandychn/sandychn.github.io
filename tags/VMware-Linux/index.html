@@ -7,24 +7,16 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>FJUTOJ-3682-LRU算法的实现2 - Sandy&#39;s Blog</title>
+<title>标签: VMware - Linux - Sandy&#39;s Blog</title>
 
 
-    <meta name="description" content="传送门 此题让我们实现一个LRU的模板类。本题较简便且高效的写法是维护一个std::list和一个std::unordered_map。 std::list 与 std::unordered_map 中存放的内容std::list中存放各key，类型为K。链表中各键码存放的顺序是按照访问顺序存放的。 std::unordered_map中以key为第一维，第二维为一个pair，其first和sec">
-<meta property="og:type" content="article">
-<meta property="og:title" content="FJUTOJ-3682-LRU算法的实现2">
-<meta property="og:url" content="https://sandychn.github.io/2019/03/fjutoj-3682/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Sandy&#39;s Blog">
+<meta property="og:url" content="https://sandychn.github.io/tags/VMware-Linux/index.html">
 <meta property="og:site_name" content="Sandy&#39;s Blog">
-<meta property="og:description" content="传送门 此题让我们实现一个LRU的模板类。本题较简便且高效的写法是维护一个std::list和一个std::unordered_map。 std::list 与 std::unordered_map 中存放的内容std::list中存放各key，类型为K。链表中各键码存放的顺序是按照访问顺序存放的。 std::unordered_map中以key为第一维，第二维为一个pair，其first和sec">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
-<meta property="article:published_time" content="2019-03-16T15:16:09.000Z">
-<meta property="article:modified_time" content="2020-10-03T03:44:20.229Z">
 <meta property="article:author" content="SandyChen">
-<meta property="article:tag" content="STL">
-<meta property="article:tag" content="数据结构">
-<meta property="article:tag" content="C++11">
-<meta property="article:tag" content="ACM">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://sandychn.github.io/images/og_image.png">
 
@@ -84,7 +76,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/avatar.jpg" alt="FJUTOJ-3682-LRU算法的实现2" height="28">
+                <img src="/avatar.jpg" alt="Sandy&#39;s Blog" height="28">
             
             </a>
         </div>
@@ -117,10 +109,6 @@
                     
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -134,72 +122,55 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">VMware - Linux</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-16T15:16:09.000Z">2019-03-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
+                <time class="level-item has-text-grey" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 821 个字)
+                    1 分钟 读完 (大约 143 个字)
                 </span>
                 
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">...</span>次访问
-                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                FJUTOJ-3682-LRU算法的实现2
+                <a class="has-link-black-ter" href="/2020/10/vmware-notes/">VMware使用相关</a>
             
         </h1>
         <div class="content">
-            <p><a href="http://www.fjutacm.com/Problem.jsp?pid=3682">传送门</a></p>
-<p>此题让我们实现一个LRU的模板类。本题较简便且高效的写法是维护一个<code>std::list</code>和一个<code>std::unordered_map</code>。</p>
-<h2 id="std-list-与-std-unordered-map-中存放的内容"><a href="#std-list-与-std-unordered-map-中存放的内容" class="headerlink" title="std::list 与 std::unordered_map 中存放的内容"></a>std::list 与 std::unordered_map 中存放的内容</h2><p><code>std::list</code>中存放各key，类型为K。链表中<strong>各键码存放的顺序是按照访问顺序存放的</strong>。</p>
-<p><code>std::unordered_map</code>中以key为第一维，第二维为一个<code>pair</code>，其<code>first</code>和<code>second</code>分别为：</p>
-<p><code>first</code>: 该key对应的value。</p>
-<p><code>second</code>:该key在<code>std::list</code>中的迭代器方便访问。</p>
-<p>为方便，下面用“链表”来指代<code>std::list</code>，用“哈希表”来指代<code>std::unordered_map</code>。</p>
-<h2 id="各操作实现"><a href="#各操作实现" class="headerlink" title="各操作实现"></a>各操作实现</h2><p><code>insert</code>操作：用哈希表判断该键是否已经存在。若存在，先在链表中删除该key，然后再新加一个该key到链表尾部，并更新在哈希表中的value和链表的迭代器。若不存在，则直接加至链表尾部，并在哈希表中插入该key，伴随着对应的value和链表迭代器。</p>
-<p><code>get</code>操作：直接从哈希表中获得其value即可。代码实现未检测该key是否存在，严谨来说应该加上异常处理。</p>
-<p><code>contains</code>操作：直接在哈希表中查询是否存在该key即可。</p>
-<p><code>vis</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，然后再将其加至链表尾部，并更新哈希表中对应链表迭代器。</p>
-<p><code>pop</code>操作：判断是否整个容器已经为空。若为空，则本操作无效。否则，将链表头部元素从链表中删除，并在哈希表中删除对应键值信息。</p>
-<p><code>remove</code>操作：用哈希表判断该键是否存在。若不存在，则本操作无效。否则，将该键从链表中删除，并在哈希表中删除对应键值信息。</p>
-<p><code>empty</code>操作：哈希表或链表判空即可。</p>
-<p><code>size</code>操作：取哈希表或链表大小即可。</p>
-<p><code>clear</code>操作：清空哈希表和链表即可。</p>
-<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>各操作基于对链表和哈希表的修改。期望复杂度均为$O(1)$。</p>
-<a id="more"></a>
+            <h2 id="压缩自增长的虚拟磁盘体积"><a href="#压缩自增长的虚拟磁盘体积" class="headerlink" title="压缩自增长的虚拟磁盘体积"></a>压缩自增长的虚拟磁盘体积</h2><p>运行前应保证虚拟磁盘所在的宿主机硬盘分区下有足够空间。</p>
+<p>在虚拟机下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install open-vm-tools</span><br><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
 
-<h2 id="参考代码实现"><a href="#参考代码实现" class="headerlink" title="参考代码实现"></a>参考代码实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> K, <span class="keyword">typename</span> V&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRU</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;K&gt;::iterator listIter;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;K, <span class="built_in">std</span>::pair&lt;V, listIter&gt;&gt;::iterator unorderedMapIter;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">list</span>&lt;K&gt; lst;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;K, <span class="built_in">std</span>::pair&lt;V, listIter&gt;&gt; mp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">const</span> K &amp;key, <span class="keyword">const</span> V &amp;value)</span> </span>&#123;</span><br><span class="line">        unorderedMapIter it = mp.find(key);</span><br><span class="line">        <span class="keyword">if</span> (it == mp.end()) &#123;</span><br><span class="line">            lst.emplace_back(key);</span><br><span class="line">            mp.insert(<span class="built_in">std</span>::make_pair(key, <span class="built_in">std</span>::make_pair(value, --lst.end())));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            lst.erase(it-&gt;second.second);</span><br><span class="line">            lst.emplace_back(key);</span><br><span class="line">            it-&gt;second = <span class="built_in">std</span>::make_pair(value, --lst.end());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If Key doesn't exist, this will create one &lt;Key, zero&gt;</span></span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mp[key].first;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">contains</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mp.count(key) == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">vis</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        unorderedMapIter it = mp.find(key);</span><br><span class="line">        <span class="keyword">if</span> (it != mp.end()) &#123;</span><br><span class="line">            lst.erase(it-&gt;second.second);</span><br><span class="line">            lst.emplace_back(key);</span><br><span class="line">            it-&gt;second.second = --lst.end();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!lst.empty()) &#123;</span><br><span class="line">            mp.erase(lst.front());</span><br><span class="line">            lst.pop_front();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">const</span> K &amp;key)</span> </span>&#123;</span><br><span class="line">        unorderedMapIter it = mp.find(key);</span><br><span class="line">        <span class="keyword">if</span> (it != mp.end()) &#123;</span><br><span class="line">            lst.erase(it-&gt;second.second);</span><br><span class="line">            mp.erase(it);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">emtpy</span><span class="params">()</span> </span>&#123; <span class="comment">// 本题要求此函数名为emtpy</span></span><br><span class="line">        <span class="keyword">return</span> lst.empty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lst.size();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        lst.clear();</span><br><span class="line">        mp.clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="将自增长的虚拟磁盘切换为预分配"><a href="#将自增长的虚拟磁盘切换为预分配" class="headerlink" title="将自增长的虚拟磁盘切换为预分配"></a>将自增长的虚拟磁盘切换为预分配</h2><p>在 VMware 安装目录下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager -r <span class="string">"原vmdk名"</span> -s 30GB -t 2 <span class="string">"新vmdk名"</span></span><br></pre></td></tr></table></figure>
+
+<p>可将自增长的虚拟磁盘切换为预分配30GB。</p>
+<h2 id="虚拟磁盘重命名"><a href="#虚拟磁盘重命名" class="headerlink" title="虚拟磁盘重命名"></a>虚拟磁盘重命名</h2><p>在 VMware 安装目录下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager -n <span class="string">"原vmdk名"</span> <span class="string">"新vmdk名"</span></span><br></pre></td></tr></table></figure>
 
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/ACM/" rel="tag">ACM</a>, <a class="has-link-grey -link" href="/tags/C-11/" rel="tag">C++11</a>, <a class="has-link-grey -link" href="/tags/STL/" rel="tag">STL</a>, <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
-                </div>
-            </div>
         </div>
         
         
@@ -211,19 +182,7 @@
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/07/binary-heap-and-priority-queue/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">二叉堆基础与优先队列</span>
-            </a>
-        </div>
-        
-        
-    </div>
-</div>
+
 
 
 
@@ -301,34 +260,6 @@
 </div>
     
         
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    目录
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#std-list-与-std-unordered-map-中存放的内容">
-        <span class="has-mr-6">1</span>
-        <span>std::list 与 std::unordered_map 中存放的内容</span>
-        </a></li><li>
-        <a class="is-flex" href="#各操作实现">
-        <span class="has-mr-6">2</span>
-        <span>各操作实现</span>
-        </a></li><li>
-        <a class="is-flex" href="#时间复杂度">
-        <span class="has-mr-6">3</span>
-        <span>时间复杂度</span>
-        </a></li><li>
-        <a class="is-flex" href="#参考代码实现">
-        <span class="has-mr-6">4</span>
-        <span>参考代码实现</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
-
     
         
 <div class="card widget">
@@ -706,7 +637,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/avatar.jpg" alt="FJUTOJ-3682-LRU算法的实现2" height="28">
+                    <img src="/avatar.jpg" alt="Sandy&#39;s Blog" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -130,6 +130,169 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    19 分钟 读完 (大约 2817 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/python-topic1/">Python知识点1</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="Python对象类型"><a href="#Python对象类型" class="headerlink" title="Python对象类型"></a>Python对象类型</h3><table>
+<thead>
+<tr>
+<th>对象类型</th>
+<th>对应类型</th>
+<th>实例</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数字</td>
+<td>int, float, complex</td>
+<td>1234, 3.14, 1.3e5, 3+4j</td>
+<td>数字大小没有限制，内置支持复数及其运算。</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>str</td>
+<td>‘abcd’, “abcd”, ‘’’ab’’’, “””ab”””, r’abc’, R’abc’</td>
+<td>不可变，使用单引号、双引号、三引号作为定界符，或以字母r或R引导的原始字符串。<br>单引号、双引号、三单引号、三双引号可以互相嵌套，用来表示复杂字符串。<br>三引号表示的字符串可以换行，支持排版较为复杂的字符串；三引号还可以在程序中表示较长的注释。</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>bytes</td>
+<td>b’Hello World’</td>
+<td>不可变，以字母b引导，使用单引号、双引号、三引号作为定界符</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>list</td>
+<td>[1, 2, 3], [[1, 2, 3], None]</td>
+<td>所有元素放在一对方括号[]中，元素之间使用逗号分隔，其中的元素可以是任意类型</td>
+</tr>
+<tr>
+<td>字典</td>
+<td>dict</td>
+<td>{1: “one”, 2: “two”}</td>
+<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素形式为<code>键:值</code>。字典由于可变，所以本身不可哈希</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>tuple</td>
+<td>(2, 3, 4), (-3,)</td>
+<td><strong>不可变</strong>，所有元素放在一对圆括号()中，元素之间使用逗号分隔，如果元组中只有一个元素的话，该元素后面需加一个逗号</td>
+</tr>
+<tr>
+<td>集合</td>
+<td>set, frozenset</td>
+<td>{‘a’, ‘b’, ‘c’}, frozenset({‘a’, ‘b’, ‘c’})</td>
+<td>所有元素放在一对大括号{}中，元素之间使用逗号分隔，元素不允许重复。set可变，而frozenset不可变。set由于可变，故本身不可哈希；frozenset可以</td>
+</tr>
+<tr>
+<td>布尔</td>
+<td>bool</td>
+<td>True, False</td>
+<td>逻辑值，关系运算符、成员测试运算符、同一性测试运算符组成的表达式的值一般为True或False</td>
+</tr>
+<tr>
+<td>空类型</td>
+<td>NoneType</td>
+<td>None</td>
+<td>空值</td>
+</tr>
+<tr>
+<td>异常</td>
+<td>BaseException</td>
+<td>Exception, ValueError…</td>
+<td>Python内置大量异常类，分别对应不同类型的异常</td>
+</tr>
+<tr>
+<td>文件</td>
+<td></td>
+<td>f = open(‘data.dat’, ‘rb’)</td>
+<td>open是Python内置函数，使用指定的模式打开文件，返回文件对象</td>
+</tr>
+<tr>
+<td>其它可迭代对象</td>
+<td>生成器对象、<br>range对象、<br/>zip对象、<br/>enumerate对象、<br/>map对象、<br/>filter对象等</td>
+<td>range(1, 3), …</td>
+<td>具有<strong>惰性求值</strong>的特点，除range对象之外，其他对象中的元素只能看一次</td>
+</tr>
+<tr>
+<td>编程单元</td>
+<td>函数、类、模块（类型为module）</td>
+<td></td>
+<td>类和函数都属于<strong>可调用对象</strong>，模块用来集中存放函数、类、常量或其他对象</td>
+</tr>
+</tbody></table>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3</span> + <span class="number">4j</span></span><br><span class="line">b = <span class="number">5</span> + <span class="number">6j</span></span><br><span class="line">c = a + b</span><br><span class="line">print(c)  <span class="comment"># (8+10j)</span></span><br><span class="line">print(c.real, c.imag, c.conjugate())  <span class="comment"># 8.0 10.0 (8-10j)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Python 3.6.x开始支持在数字中间位置使用单个下划线作为分隔来提高</span></span><br><span class="line"><span class="comment"># 数字的可读性，类似于数学上使用逗号作为千位分隔符。</span></span><br><span class="line"></span><br><span class="line">print(<span class="number">1</span>_000_000)   <span class="comment"># 1000000</span></span><br><span class="line">print(<span class="number">1</span>_2_3_4)     <span class="comment"># 1234</span></span><br><span class="line">print(<span class="number">1</span>_2 + <span class="number">3</span>_4j)  <span class="comment"># (12+34j)</span></span><br><span class="line">print(<span class="number">1</span>_2<span class="number">.3</span>_45)    <span class="comment"># 12.345</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Python运算符"><a href="#Python运算符" class="headerlink" title="Python运算符"></a>Python运算符</h3><h4 id="取反"><a href="#取反" class="headerlink" title="取反"></a>取反</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span></span><br><span class="line">print(~a)  <span class="comment"># -3</span></span><br><span class="line"><span class="comment"># 2的二进制表示为 010，其中最高位为符号位</span></span><br><span class="line"><span class="comment"># 取反得 101，将其取反+1可以得到它对应的正数 011，即 +3</span></span><br><span class="line"><span class="comment"># 所以补码 101 为 -3，即上述 print 结果。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h4><p>集合的交集、并集、对称差集等运算借助于位运算符来实现，而差集则使用减号运算符实现（<strong>并集运算符不是加号</strong>）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; | &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 并集，自动去除重复元素 a.union(b)</span></span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; &amp; &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 交集 a.intersection(b)</span></span><br><span class="line">&#123;<span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; ^ &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 对称差集 a.symmetric_difference(b)</span></span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; - &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;         <span class="comment"># 差集 a.difference(b)</span></span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="矩阵相乘运算符"><a href="#矩阵相乘运算符" class="headerlink" title="矩阵相乘运算符@"></a>矩阵相乘运算符@</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__matmul__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        print(<span class="string">'__matmul__'</span>, value)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__rmatmul__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        print(<span class="string">'__rmatmul__'</span>, value)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__imatmul__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        print(<span class="string">'__imatmul__'</span>, value)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = Test()</span><br><span class="line">b = Test()</span><br><span class="line">c = a @ b  <span class="comment"># __matmul__ &lt;__main__.Test object at 0x000001E098F8A2E0&gt;</span></span><br><span class="line">d = <span class="number">1</span> @ a  <span class="comment"># __rmatmul__ 1</span></span><br><span class="line">e = a @ <span class="number">2</span>  <span class="comment"># __matmul__ 2</span></span><br><span class="line">c @= c     <span class="comment"># __imatmul__ &lt;__main__.Test object at 0x000001E098F2A550&gt;</span></span><br><span class="line">d @= <span class="number">3</span>     <span class="comment"># __imatmul__ 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">x = np.ones(<span class="number">3</span>)</span><br><span class="line">y = np.eye(<span class="number">3</span>) * <span class="number">3</span></span><br><span class="line">y[<span class="number">0</span>, <span class="number">2</span>] = <span class="number">5</span></span><br><span class="line">y[<span class="number">2</span>, <span class="number">0</span>] = <span class="number">3</span></span><br><span class="line">print(x @ y)  <span class="comment"># [6. 3. 8.]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><p><strong>iter()</strong> 返回指定对象的可迭代对象</p>
+<p><strong>locals()</strong> 返回包含当前作用域内局部变量及其值的字典</p>
+<p><strong>next(iterator[, default])</strong>  返回可迭代对象中的下一个元素，允许指定迭代结束之后继续迭代时的返回值</p>
+<p><strong>reduce(func, sequence[, initial])</strong>  将双参数的函数 $func$ 以迭代的方式从左到右依次应用至序列 $sequence$ 中每个元素，最终返回单个值作为结果。在Python 2.x中该函数为内置函数，在Python 3.x中需要从functools中导入reduce函数再使用</p>
+<p><strong>repr(obj)</strong>  返回对象 $obj$ 的规范化字符串表示形式，对于大多数对象有 $eval(repr(obj)) == obj$。</p>
+<p><strong>str(obj)</strong>  把对象 $obj$ 直接转换为字符串</p>
+<p><strong>reversed(seq)</strong>  返回 $seq$ 的反向迭代器</p>
+<p><strong>sorted(iterable, key=None, reverse=False)</strong>  返回排序后的列表，其中 $iterable$ 表示要排序的序列或迭代对象，$key$ 用来指定排序规则或依据，$reverse$ 用来指定升序或降序。该函数不改变 $iterable$ 内任何元素的顺序</p>
+<p><strong>zip(seq1 [, seq2 […]])</strong>  返回 $zip$ 对象，其中元素为 $(seq1[i], seq2[i], …)$ 形式的元组，最终结果中包含的元素个数取决于所有参数序列或可迭代对象中最短的那个</p>
+<p><strong>sum(iterable, start=0)</strong>  求和，其中 $sum$ 为初值。</p>
+<p><strong>isinstance(obj, class_or_tuple)</strong>  判断 $obj$ 是否是该类或该类的子类的对象。<code>instance(x, (A, B, ...))</code> 等价于 ``isinstance(x, A) or isinstance(x, B) or …`。</p>
+<p><strong>filter(function or None, iterable)</strong>  返回一个 $filter$ 对象，生成满足 $function(item) == True$ 的元素，其中 $item$ 为 $iterable$ 中的元素。若第一参数为 $None$，则判定条件变为元素与 $True$ 等价。</p>
+<p><strong>enumerate(iterable, start=0)</strong>  返回一个 $enumerate$ 对象，生成一个个由 $count$ 和 $value$ 组成的元组。即该对象会返回 $(0, seq[0]), (1, seq[1]), (2, seq[2]), …$。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/06/python-topic1/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-05-05T19:02:06.000Z">2020-05-06</time>
                 
                 <div class="level-item">
@@ -374,115 +537,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-21T16:43:00.000Z">2020-04-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/C/">C++</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    34 分钟 读完 (大约 5115 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/cpp-4-type-casts/">C++的4种类型转换</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><p>用隐式和用户定义转换的组合在类型间转换。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>static_cast &lt;new_type&gt; (expression)</code> 返回 <code>new_type</code> 类型的值。</p>
-<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>唯有下列转换能用 <code>static_cast</code> 执行，但<strong>若转换会转型走<em>常量性</em>或<em>易变性</em>则亦不允许</strong>。</p>
-<ol>
-<li><p>若存在从 <em>expression</em> 到 <em>new_type</em> 的<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">隐式转换序列</a>，或者若针对以 <em>expression</em> 到 <em>new_type</em> 类型的对象或引用所进行的<a href="https://zh.cppreference.com/w/cpp/language/direct_initialization">直接初始化</a>的重载决议，找到至少一个可行函数，则 <code>static_cast &lt;new_type&gt; (expression)</code> 返回如同以 <code>new_type Temp(expression);</code> 所初始化的一个虚构变量 <code>Temp</code>，它可能涉及<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">隐式转换</a>，对 <em>new_type</em> 的<a href="https://zh.cppreference.com/w/cpp/language/constructor">构造函数</a>的调用，或对<a href="https://zh.cppreference.com/w/cpp/language/cast_operator">用户定义转换运算符</a>的调用。<span style="color: gray">对于非引用的 <em>new_type</em>，static_cast 纯右值表达式的结果对象是其直接初始化的对象。 (C++17 起)</span></p>
-</li>
-<li><p>若 <em>new_type</em> 是某类类型 <code>D</code> 的左值或指向它的指针纯右值，而 <em>expression</em> 的类型是到其非虚基类 <code>B</code> 的指针或引用，则 <code>static_cast</code> 进行向下转型（downcast）。若 <code>B</code> 是 <code>D</code> 的有歧义、不可访问或虚的基类（或虚基类的基类），则此向下转型非良构。这种 <code>static_cast</code> 并不进行用以确保该对象的运行时类型确实是 <code>D</code> 的运行时检查，而且仅当这项前提条件由其他方法所保证时才能安全使用，例如在实现<a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism">静多态</a>时。可以用 <code>dynamic_cast</code> 执行安全的向下转型。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span> &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> :</span> B &#123; &#125;;</span><br><span class="line">D d;</span><br><span class="line">B&amp; br = d;</span><br><span class="line"><span class="keyword">static_cast</span>&lt;D&amp;&gt;(br); <span class="comment">// 左值指代原初的 d 对象</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><em>(本条自C++11起)</em> 若 <em>new_type</em> 是右值引用类型，则 <code>static_cast</code> 将泛左值、类纯右值或数组纯右值 (C++17 前) <span style="color: gray">任何左值 (C++17 起)</span> <em>expression</em> 的值转换为与该表达式指代相同对象，或指代其基类子对象（取决于 <em>new_type</em>）的<em>亡值</em>。若目标类型是表达式的不可访问或有歧义基类，则程序非良构。若表达式是<a href="https://zh.cppreference.com/w/cpp/language/bit_field">位域</a>左值，则它首先被转换成底层类型的纯右值。这种 <code>static_cast</code> 用于在 <code>std::move</code> 中实现移动语义。</p>
-</li>
-<li><p>若 <em>new_type</em> 是（可为 cv 限定的）void 类型，则 <code>static_cast</code> 在<strong>求值 <em>expression</em> 后</strong>舍弃其值。</p>
-</li>
-<li><p>若存在从 <em>new_type</em> 到 <em>expression</em> 类型的<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">标准转换</a>序列，且它不包含左值到右值、数组到指针、函数到指针、空指针、空成员指针、<span style="color: gray">函数指针 (C++17 起)</span>或布尔转换，则 <code>static_cast</code> 能进行该隐式转换的逆转换。</p>
-</li>
-<li><p>若从 <em>expression</em> 到 <em>new_type</em> 涉及左值到右值、数组到指针或函数到指针转换，则能显式用 <code>static_cast</code> 进行。</p>
-</li>
-<li><p><a href="https://zh.cppreference.com/w/cpp/language/enum">有作用域枚举</a>类型(C++11)能转换成整数或浮点类型。</p>
-<ol>
-<li>当目标类型为 <em>cv</em> bool 时，若原值为零则结果为 false，而对所有其他值结果为 true。对于其余整型类型，若该枚举的值能以目标类型表示，则结果为其值，否则结果未指明。(C++20前)</li>
-<li>其结果与从枚举的底层类型<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">隐式转换</a>成目标类型的结果相同。  (C++20 起)</li>
-</ol>
-</li>
-<li><p>整数或枚举类型值可转换为任何完整枚举类型。</p>
-<ul>
-<li><p>若底层类型不固定，则当 <em>expression</em> 的值落在范围（范围是大到足以保有目标枚举的所有枚举项的最小位域的所有可能值）外时，结果未指明 (C++17 前) 或 为未定义行为 (C++17 起)。</p>
-</li>
-<li><p>若底层类型固定，则其结果与<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion#.E6.95.B4.E6.95.B0.E7.B1.BB.E5.9E.8B.E8.BD.AC.E6.8D.A2">转换</a>原值到枚举的底层类型再到该枚举类型的结果相同。</p>
-<p>浮点类型的值也可转换为任何完整枚举类型。</p>
-</li>
-<li><p>其结果与<a href="https://zh.cppreference.com/w/cpp/language/implicit_cast#Floating.E2.80.93integral_conversions">转换</a>原值到枚举的底层类型再到该枚举类型的结果相同。</p>
-</li>
-</ul>
-</li>
-<li><p>指向某类 <code>D</code> 的成员的指针可以向上转型（upcast）为指向其无歧义、可访问的基类 <code>B</code> 的成员。这种 <code>static_cast</code> 不进行用以确保成员实际存在于所指向对象的运行时类型的检查。</p>
-</li>
-<li><p>指向（可有 cv 限定）void 的指针类型的纯右值可转换到指向任何对象的指针类型。若原<a href="https://zh.cppreference.com/w/cpp/language/pointer#.E6.8C.87.E9.92.88">指针值</a>所表示的内存中字节地址不满足目标类型的对齐要求，则结果指针值未指明。否则，若原指针值指向对象 <em>a</em>，且存在与 <em>a</em> <em>指针可互转换<em>（定义于下文）的目标类型的（忽略 cv 限定）对象 *b</em>，则结果为指向 *b</em> 的指针。否则指针值不改变。任何指针转换到 void 指针，再转换回原（或更为 cv 限定的）类型的指针，都保持其原值。</p>
-</li>
-</ol>
-<p>同所有转型表达式，结果是：</p>
-<ul>
-<li>左值，若 <em>new_type</em> 是左值引用或到函数类型的右值引用；</li>
-<li>亡值，若 <em>new_type</em> 是到对象类型的右值引用；</li>
-<li>否则为纯右值。</li>
-</ul>
-<p>满足以下条件时，两个对象 <em>a</em> 与 <em>b</em> <em>指针可互转换（pointer-interconvertible）</em>：</p>
-<ul>
-<li>它们为同一对象，或</li>
-<li>一个是 union 对象而另一个是该对象的非静态数据成员，或</li>
-<li>一个是<a href="https://zh.cppreference.com/w/cpp/language/data_members#.E6.A0.87.E5.87.86.E5.B8.83.E5.B1.80">标准布局</a>类对象，而另一个是该对象的首个非静态数据成员，或若该对象无非静态数据成员，则为该对象的任何基类子对象，或</li>
-<li>存在对象 <em>c</em> 使得 <em>a</em> 与 <em>c</em> 指针可互转换，而 <em>c</em> 与 <em>b</em> 指针可互转换。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> U &#123; <span class="keyword">int</span> a; <span class="keyword">double</span> b; &#125; u;</span><br><span class="line"><span class="keyword">void</span>* x = &amp;u;                        <span class="comment">// x 的值为“指向 u 的指针”</span></span><br><span class="line"><span class="keyword">double</span>* y = <span class="keyword">static_cast</span>&lt;<span class="keyword">double</span>*&gt;(x); <span class="comment">// y 的值为“指向 u.b 的指针”</span></span><br><span class="line"><span class="keyword">char</span>* z = <span class="keyword">static_cast</span>&lt;<span class="keyword">char</span>*&gt;(x);     <span class="comment">// z 的值为“指向 u 的指针”</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p><code>static_cast</code> 亦可用于通过进行到指定类型的函数到指针转换，来消解函数重载的歧义。如</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::for_each(files.begin(), files.end(),</span><br><span class="line">              <span class="keyword">static_cast</span>&lt;<span class="built_in">std</span>::ostream&amp;(*)(<span class="built_in">std</span>::ostream&amp;)&gt;(<span class="built_in">std</span>::flush));</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/04/cpp-4-type-casts/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -545,7 +599,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            28
+                            29
                         </p>
                     </a>
                 </div>
@@ -569,7 +623,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            9
+                            10
                         </p>
                     </a>
                 </div>
@@ -674,7 +728,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware-Linux/" style="font-size: 10px;">VMware - Linux</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -683,6 +737,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time></div>
+                    <a href="/2020/10/vmware-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">VMware使用相关</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -736,19 +803,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -766,7 +820,7 @@
                     <span class="level-item">十月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -911,6 +965,13 @@
                     <a class="tags has-addons" href="/tags/STL/">
                         <span class="tag">STL</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware-Linux/">
+                        <span class="tag">VMware - Linux</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

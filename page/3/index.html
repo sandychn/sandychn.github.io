@@ -130,6 +130,115 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-21T16:43:00.000Z">2020-04-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    34 分钟 读完 (大约 5115 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/cpp-4-type-casts/">C++的4种类型转换</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><p>用隐式和用户定义转换的组合在类型间转换。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p><code>static_cast &lt;new_type&gt; (expression)</code> 返回 <code>new_type</code> 类型的值。</p>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>唯有下列转换能用 <code>static_cast</code> 执行，但<strong>若转换会转型走<em>常量性</em>或<em>易变性</em>则亦不允许</strong>。</p>
+<ol>
+<li><p>若存在从 <em>expression</em> 到 <em>new_type</em> 的<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">隐式转换序列</a>，或者若针对以 <em>expression</em> 到 <em>new_type</em> 类型的对象或引用所进行的<a href="https://zh.cppreference.com/w/cpp/language/direct_initialization">直接初始化</a>的重载决议，找到至少一个可行函数，则 <code>static_cast &lt;new_type&gt; (expression)</code> 返回如同以 <code>new_type Temp(expression);</code> 所初始化的一个虚构变量 <code>Temp</code>，它可能涉及<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">隐式转换</a>，对 <em>new_type</em> 的<a href="https://zh.cppreference.com/w/cpp/language/constructor">构造函数</a>的调用，或对<a href="https://zh.cppreference.com/w/cpp/language/cast_operator">用户定义转换运算符</a>的调用。<span style="color: gray">对于非引用的 <em>new_type</em>，static_cast 纯右值表达式的结果对象是其直接初始化的对象。 (C++17 起)</span></p>
+</li>
+<li><p>若 <em>new_type</em> 是某类类型 <code>D</code> 的左值或指向它的指针纯右值，而 <em>expression</em> 的类型是到其非虚基类 <code>B</code> 的指针或引用，则 <code>static_cast</code> 进行向下转型（downcast）。若 <code>B</code> 是 <code>D</code> 的有歧义、不可访问或虚的基类（或虚基类的基类），则此向下转型非良构。这种 <code>static_cast</code> 并不进行用以确保该对象的运行时类型确实是 <code>D</code> 的运行时检查，而且仅当这项前提条件由其他方法所保证时才能安全使用，例如在实现<a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern#Static_polymorphism">静多态</a>时。可以用 <code>dynamic_cast</code> 执行安全的向下转型。</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span> &#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">D</span> :</span> B &#123; &#125;;</span><br><span class="line">D d;</span><br><span class="line">B&amp; br = d;</span><br><span class="line"><span class="keyword">static_cast</span>&lt;D&amp;&gt;(br); <span class="comment">// 左值指代原初的 d 对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>(本条自C++11起)</em> 若 <em>new_type</em> 是右值引用类型，则 <code>static_cast</code> 将泛左值、类纯右值或数组纯右值 (C++17 前) <span style="color: gray">任何左值 (C++17 起)</span> <em>expression</em> 的值转换为与该表达式指代相同对象，或指代其基类子对象（取决于 <em>new_type</em>）的<em>亡值</em>。若目标类型是表达式的不可访问或有歧义基类，则程序非良构。若表达式是<a href="https://zh.cppreference.com/w/cpp/language/bit_field">位域</a>左值，则它首先被转换成底层类型的纯右值。这种 <code>static_cast</code> 用于在 <code>std::move</code> 中实现移动语义。</p>
+</li>
+<li><p>若 <em>new_type</em> 是（可为 cv 限定的）void 类型，则 <code>static_cast</code> 在<strong>求值 <em>expression</em> 后</strong>舍弃其值。</p>
+</li>
+<li><p>若存在从 <em>new_type</em> 到 <em>expression</em> 类型的<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">标准转换</a>序列，且它不包含左值到右值、数组到指针、函数到指针、空指针、空成员指针、<span style="color: gray">函数指针 (C++17 起)</span>或布尔转换，则 <code>static_cast</code> 能进行该隐式转换的逆转换。</p>
+</li>
+<li><p>若从 <em>expression</em> 到 <em>new_type</em> 涉及左值到右值、数组到指针或函数到指针转换，则能显式用 <code>static_cast</code> 进行。</p>
+</li>
+<li><p><a href="https://zh.cppreference.com/w/cpp/language/enum">有作用域枚举</a>类型(C++11)能转换成整数或浮点类型。</p>
+<ol>
+<li>当目标类型为 <em>cv</em> bool 时，若原值为零则结果为 false，而对所有其他值结果为 true。对于其余整型类型，若该枚举的值能以目标类型表示，则结果为其值，否则结果未指明。(C++20前)</li>
+<li>其结果与从枚举的底层类型<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion">隐式转换</a>成目标类型的结果相同。  (C++20 起)</li>
+</ol>
+</li>
+<li><p>整数或枚举类型值可转换为任何完整枚举类型。</p>
+<ul>
+<li><p>若底层类型不固定，则当 <em>expression</em> 的值落在范围（范围是大到足以保有目标枚举的所有枚举项的最小位域的所有可能值）外时，结果未指明 (C++17 前) 或 为未定义行为 (C++17 起)。</p>
+</li>
+<li><p>若底层类型固定，则其结果与<a href="https://zh.cppreference.com/w/cpp/language/implicit_conversion#.E6.95.B4.E6.95.B0.E7.B1.BB.E5.9E.8B.E8.BD.AC.E6.8D.A2">转换</a>原值到枚举的底层类型再到该枚举类型的结果相同。</p>
+<p>浮点类型的值也可转换为任何完整枚举类型。</p>
+</li>
+<li><p>其结果与<a href="https://zh.cppreference.com/w/cpp/language/implicit_cast#Floating.E2.80.93integral_conversions">转换</a>原值到枚举的底层类型再到该枚举类型的结果相同。</p>
+</li>
+</ul>
+</li>
+<li><p>指向某类 <code>D</code> 的成员的指针可以向上转型（upcast）为指向其无歧义、可访问的基类 <code>B</code> 的成员。这种 <code>static_cast</code> 不进行用以确保成员实际存在于所指向对象的运行时类型的检查。</p>
+</li>
+<li><p>指向（可有 cv 限定）void 的指针类型的纯右值可转换到指向任何对象的指针类型。若原<a href="https://zh.cppreference.com/w/cpp/language/pointer#.E6.8C.87.E9.92.88">指针值</a>所表示的内存中字节地址不满足目标类型的对齐要求，则结果指针值未指明。否则，若原指针值指向对象 <em>a</em>，且存在与 <em>a</em> <em>指针可互转换<em>（定义于下文）的目标类型的（忽略 cv 限定）对象 *b</em>，则结果为指向 *b</em> 的指针。否则指针值不改变。任何指针转换到 void 指针，再转换回原（或更为 cv 限定的）类型的指针，都保持其原值。</p>
+</li>
+</ol>
+<p>同所有转型表达式，结果是：</p>
+<ul>
+<li>左值，若 <em>new_type</em> 是左值引用或到函数类型的右值引用；</li>
+<li>亡值，若 <em>new_type</em> 是到对象类型的右值引用；</li>
+<li>否则为纯右值。</li>
+</ul>
+<p>满足以下条件时，两个对象 <em>a</em> 与 <em>b</em> <em>指针可互转换（pointer-interconvertible）</em>：</p>
+<ul>
+<li>它们为同一对象，或</li>
+<li>一个是 union 对象而另一个是该对象的非静态数据成员，或</li>
+<li>一个是<a href="https://zh.cppreference.com/w/cpp/language/data_members#.E6.A0.87.E5.87.86.E5.B8.83.E5.B1.80">标准布局</a>类对象，而另一个是该对象的首个非静态数据成员，或若该对象无非静态数据成员，则为该对象的任何基类子对象，或</li>
+<li>存在对象 <em>c</em> 使得 <em>a</em> 与 <em>c</em> 指针可互转换，而 <em>c</em> 与 <em>b</em> 指针可互转换。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> U &#123; <span class="keyword">int</span> a; <span class="keyword">double</span> b; &#125; u;</span><br><span class="line"><span class="keyword">void</span>* x = &amp;u;                        <span class="comment">// x 的值为“指向 u 的指针”</span></span><br><span class="line"><span class="keyword">double</span>* y = <span class="keyword">static_cast</span>&lt;<span class="keyword">double</span>*&gt;(x); <span class="comment">// y 的值为“指向 u.b 的指针”</span></span><br><span class="line"><span class="keyword">char</span>* z = <span class="keyword">static_cast</span>&lt;<span class="keyword">char</span>*&gt;(x);     <span class="comment">// z 的值为“指向 u 的指针”</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p><code>static_cast</code> 亦可用于通过进行到指定类型的函数到指针转换，来消解函数重载的歧义。如</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::for_each(files.begin(), files.end(),</span><br><span class="line">              <span class="keyword">static_cast</span>&lt;<span class="built_in">std</span>::ostream&amp;(*)(<span class="built_in">std</span>::ostream&amp;)&gt;(<span class="built_in">std</span>::flush));</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/04/cpp-4-type-casts/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-19T10:19:09.000Z">2020-04-19</time>
                 
                 <div class="level-item">
@@ -489,67 +598,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-13T08:13:33.000Z">2020-03-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 分钟 读完 (大约 1432 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/os-device-manage-and-linking/">操作系统——设备管理与链接</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h2><h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><ul>
-<li>盘面（Platter）：一个磁盘有多个盘面；</li>
-<li>磁道（Track）：盘面上的圆形带状区域，一个盘面可以有多个磁道；</li>
-<li>扇区（Track Sector）：磁道上的一个弧段，一个磁道可以有多个扇区，它是最小的物理储存单位，目前主要有 512 bytes 与 4 K 两种大小；</li>
-<li>磁头（Head）：与盘面非常接近，能够将盘面上的磁场转换为电信号（读），或者将电信号转换为盘面的磁场（写）；</li>
-<li>制动手臂（Actuator arm）：用于在磁道之间移动磁头；</li>
-<li>主轴（Spindle）：使整个盘面转动。</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/os-device-manage-and-linking/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -614,7 +662,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            28
+                            29
                         </p>
                     </a>
                 </div>
@@ -638,7 +686,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            9
+                            10
                         </p>
                     </a>
                 </div>
@@ -743,7 +791,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware-Linux/" style="font-size: 10px;">VMware - Linux</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -752,6 +800,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time></div>
+                    <a href="/2020/10/vmware-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">VMware使用相关</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -805,19 +866,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T07:07:46.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/python-topic1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -835,7 +883,7 @@
                     <span class="level-item">十月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -980,6 +1028,13 @@
                     <a class="tags has-addons" href="/tags/STL/">
                         <span class="tag">STL</span>
                         <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware-Linux/">
+                        <span class="tag">VMware - Linux</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
