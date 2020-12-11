@@ -140,6 +140,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 143 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/10/vmware-notes/">VMware使用相关</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="压缩自增长的虚拟磁盘体积"><a href="#压缩自增长的虚拟磁盘体积" class="headerlink" title="压缩自增长的虚拟磁盘体积"></a>压缩自增长的虚拟磁盘体积</h2><p>运行前应保证虚拟磁盘所在的宿主机硬盘分区下有足够空间。</p>
+<p>在虚拟机下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install open-vm-tools</span><br><span class="line">sudo vmware-toolbox-cmd disk shrink /</span><br></pre></td></tr></table></figure>
+
+<h2 id="将自增长的虚拟磁盘切换为预分配"><a href="#将自增长的虚拟磁盘切换为预分配" class="headerlink" title="将自增长的虚拟磁盘切换为预分配"></a>将自增长的虚拟磁盘切换为预分配</h2><p>在 VMware 安装目录下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager -r <span class="string">"原vmdk名"</span> -s 30GB -t 2 <span class="string">"新vmdk名"</span></span><br></pre></td></tr></table></figure>
+
+<p>可将自增长的虚拟磁盘切换为预分配30GB。</p>
+<h2 id="虚拟磁盘重命名"><a href="#虚拟磁盘重命名" class="headerlink" title="虚拟磁盘重命名"></a>虚拟磁盘重命名</h2><p>在 VMware 安装目录下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmware-vdiskmanager -n <span class="string">"原vmdk名"</span> <span class="string">"新vmdk名"</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-22T18:10:09.000Z">2020-03-23</time>
                 
                 <div class="level-item">
@@ -365,7 +418,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware-Linux/" style="font-size: 10px;">VMware - Linux</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -580,7 +633,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Linux/">
                         <span class="tag">Linux</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -606,8 +659,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/VMware-Linux/">
-                        <span class="tag">VMware - Linux</span>
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
