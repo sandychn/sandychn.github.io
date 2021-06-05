@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Boost学习笔记 - Sandy&#39;s Blog</title>
+
+
+    <meta name="description" content="notes1234567891011121314151617181920212223242526272829whereis python3  # &#x2F;usr&#x2F;bin&#x2F;python3.5msudo apt install python3-dev  # 此命令会安装python3相关头文件到&#x2F;usr&#x2F;include&#x2F;python3*下tar -xzvf boost_1_76_0.tar.gzrm boo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Boost学习笔记">
+<meta property="og:url" content="https://sandychn.github.io/2021/06/boost-notes/index.html">
+<meta property="og:site_name" content="Sandy&#39;s Blog">
+<meta property="og:description" content="notes1234567891011121314151617181920212223242526272829whereis python3  # &#x2F;usr&#x2F;bin&#x2F;python3.5msudo apt install python3-dev  # 此命令会安装python3相关头文件到&#x2F;usr&#x2F;include&#x2F;python3*下tar -xzvf boost_1_76_0.tar.gzrm boo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sandychn.github.io/images/og_image.png">
+<meta property="article:published_time" content="2021-06-05T11:12:37.000Z">
+<meta property="article:modified_time" content="2021-06-05T11:14:39.121Z">
+<meta property="article:author" content="SandyChen">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sandychn.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/avatar.jpg" alt="Boost学习笔记" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">文章</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/sandychn">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-06-05T11:12:37.000Z">2021-06-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Boost/">Boost</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 486 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">...</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Boost学习笔记
+            
+        </h1>
+        <div class="content">
+            <h2 id="notes"><a href="#notes" class="headerlink" title="notes"></a>notes</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">whereis python3  <span class="comment"># /usr/bin/python3.5m</span></span><br><span class="line">sudo apt install python3-dev  <span class="comment"># 此命令会安装python3相关头文件到/usr/include/python3*下</span></span><br><span class="line"></span><br><span class="line">tar -xzvf boost_1_76_0.tar.gz</span><br><span class="line">rm boost_1_76_0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> boost_1_76_0/</span><br><span class="line">sudo bootstrap.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里需要配置 project_config</span></span><br><span class="line"><span class="comment"># 不进行此配置时的报错为:</span></span><br><span class="line"><span class="comment"># No python installation configured and autoconfiguration failed. See</span></span><br><span class="line"><span class="comment"># http://www.boost.org/libs/python/doc/building.html for configuration</span></span><br><span class="line"><span class="comment"># instructions or pass --without-python to suppress this message and</span></span><br><span class="line"><span class="comment"># silently skip all Boost.Python targets</span></span><br><span class="line"></span><br><span class="line">vim project_config.jam</span><br><span class="line"><span class="comment"># 添加以下内容到 project-config-jam 结尾，注意配置文件中的空格不能省略</span></span><br><span class="line"><span class="comment"># Python configuration</span></span><br><span class="line"><span class="comment"># executable path : header path : library path</span></span><br><span class="line">using python : 3.5 : /usr/bin/python3.5m : /usr/include/python3.5m : /usr/lib/python3.5 ;</span><br><span class="line"></span><br><span class="line">sudo ./b2  <span class="comment"># compile</span></span><br><span class="line">sudo ./b2 install --with-python  <span class="comment"># install</span></span><br><span class="line"><span class="comment"># 可以在默认编译路径/usr/local/lib下找到相关的libboost*.so</span></span><br><span class="line"><span class="comment"># boost在/usr/local/include/boost下</span></span><br><span class="line"></span><br><span class="line">mkdir demo_boost</span><br><span class="line"><span class="built_in">cd</span> demo_boost</span><br><span class="line">vim test.cpp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/python.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="keyword">const</span>* <span class="title">greet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"hello, world"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BOOST_PYTHON_MODULE(test) &#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> boost::python;</span><br><span class="line">    def(<span class="string">"greet"</span>, greet);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将/usr/local/lib添加到动态链接库查找路径中，否则链接时会出错 cannot find -lboost_python35</span></span><br><span class="line"></span><br><span class="line">sudo vim /etc/ld.so.conf</span><br><span class="line"><span class="comment"># 添加以下内容到结尾</span></span><br><span class="line">/usr/<span class="built_in">local</span>/lib</span><br><span class="line"></span><br><span class="line">sudo ldconfig</span><br><span class="line">g++ -I/usr/include/python3.5m -fPIC test.cpp -lboost_python35 -shared -o test.so</span><br><span class="line">vim test_py.py</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test_py.py</span></span><br><span class="line"><span class="keyword">import</span> test</span><br><span class="line"></span><br><span class="line">print(dir(test))</span><br><span class="line">print(test.greet())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 test_py.py</span><br></pre></td></tr></table></figure>
+
+<p>另一个例子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// demo.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/python.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bonjour</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">// Private attribute</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> m_msg;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Constructor</span></span><br><span class="line">    Bonjour(<span class="built_in">std</span>::<span class="built_in">string</span> msg) :m_msg(msg) &#123; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Destructor</span></span><br><span class="line">    ~Bonjour() &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"destructed "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Methods</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greet</span><span class="params">()</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; m_msg &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getter/Setter functions for the attribute</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">set_msg</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> msg)</span> </span>&#123; <span class="keyword">this</span>-&gt;m_msg = msg; &#125;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">get_msg</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_msg; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">BOOST_PYTHON_MODULE(demo)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> boost::python;</span><br><span class="line">    class_&lt;Bonjour&gt;(<span class="string">"Bonjour"</span>, init&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;())</span><br><span class="line">        .def(<span class="string">"greet"</span>, &amp;Bonjour::greet)</span><br><span class="line">        .add_property(<span class="string">"msg"</span>, &amp;Bonjour::get_msg, &amp;Bonjour::set_msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="references"><a href="#references" class="headerlink" title="references"></a>references</h2><p><strong>tar解压缩命令</strong>：[<a href="https://www.cnblogs.com/wangluochong/p/7194037.html">linux tar.gz zip 解压缩 压缩命令</a></p>
+<p><strong>安装与编译</strong>：<a href="https://blog.csdn.net/weixin_41923935/article/details/106967144">linux下安装boost python详解</a></p>
+<p><strong>编译</strong>：<a href="https://blog.csdn.net/zsf10220208/article/details/102571611">Linux 编译boost (for python3)</a></p>
+<p><strong>动态库问题</strong>：<a href="https://blog.csdn.net/weixin_41038905/article/details/80921316">cannot open shared object file: No such file or directory解决方法</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/C/" rel="tag">C++</a>, <a class="has-link-grey -link" href="/tags/Python/" rel="tag">Python</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/vmware-notes/">
+                <span class="level-item">VMware使用相关</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/avatar.jpg" alt="Sandy Chen">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        Sandy Chen
+                    </p>
+                    
+                    
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            30
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            10
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            12
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        
+        
+    </div>
+</div>
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#notes">
+        <span class="has-mr-6">1</span>
+        <span>notes</span>
+        </a></li><li>
+        <a class="is-flex" href="#references">
+        <span class="has-mr-6">2</span>
+        <span>references</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Boost/">
+            <span class="level-start">
+                <span class="level-item">Boost</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/C/">
+            <span class="level-start">
+                <span class="level-item">C++</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Go/">
+            <span class="level-start">
+                <span class="level-item">Go</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LeetCode/">
+            <span class="level-start">
+                <span class="level-item">LeetCode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/MySQL/">
+            <span class="level-start">
+                <span class="level-item">MySQL</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TCP-IP/">
+            <span class="level-start">
+                <span class="level-item">TCP/IP</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+            <span class="level-start">
+                <span class="level-item">操作系统</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-05T11:12:37.000Z">2021-06-05</time></div>
+                    <a href="/2021/06/boost-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Boost学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Boost/">Boost</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time></div>
+                    <a href="/2020/10/vmware-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">VMware使用相关</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-04T15:39:14.000Z">2020-10-04</time></div>
+                    <a href="/2020/10/tcp-ip-transport-layer/" class="title has-link-black-ter is-size-6 has-text-weight-normal">TCP/IP学习笔记：传输层</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-03T03:10:31.000Z">2020-10-03</time></div>
+                    <a href="/2020/10/hexo-icarus-blog-problems-solutions/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo与Icarus博客搭建遇到问题与解决</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
+                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            文章
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ACM/">
+                        <span class="tag">ACM</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C/">
+                        <span class="tag">C++</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/C-11/">
+                        <span class="tag">C++11</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Navicat/">
+                        <span class="tag">Navicat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/STL/">
+                        <span class="tag">STL</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Valgrind/">
+                        <span class="tag">Valgrind</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/memcheck/">
+                        <span class="tag">memcheck</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/avatar.jpg" alt="Boost学习笔记" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 SandyChen&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                
+                <br>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="My GitHub" href="https://github.com/sandychn">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://sandychn.github.io',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

@@ -130,6 +130,69 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-06-05T11:12:37.000Z">2021-06-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Boost/">Boost</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 486 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2021/06/boost-notes/">Boost学习笔记</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="notes"><a href="#notes" class="headerlink" title="notes"></a>notes</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">whereis python3  <span class="comment"># /usr/bin/python3.5m</span></span><br><span class="line">sudo apt install python3-dev  <span class="comment"># 此命令会安装python3相关头文件到/usr/include/python3*下</span></span><br><span class="line"></span><br><span class="line">tar -xzvf boost_1_76_0.tar.gz</span><br><span class="line">rm boost_1_76_0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> boost_1_76_0/</span><br><span class="line">sudo bootstrap.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里需要配置 project_config</span></span><br><span class="line"><span class="comment"># 不进行此配置时的报错为:</span></span><br><span class="line"><span class="comment"># No python installation configured and autoconfiguration failed. See</span></span><br><span class="line"><span class="comment"># http://www.boost.org/libs/python/doc/building.html for configuration</span></span><br><span class="line"><span class="comment"># instructions or pass --without-python to suppress this message and</span></span><br><span class="line"><span class="comment"># silently skip all Boost.Python targets</span></span><br><span class="line"></span><br><span class="line">vim project_config.jam</span><br><span class="line"><span class="comment"># 添加以下内容到 project-config-jam 结尾，注意配置文件中的空格不能省略</span></span><br><span class="line"><span class="comment"># Python configuration</span></span><br><span class="line"><span class="comment"># executable path : header path : library path</span></span><br><span class="line">using python : 3.5 : /usr/bin/python3.5m : /usr/include/python3.5m : /usr/lib/python3.5 ;</span><br><span class="line"></span><br><span class="line">sudo ./b2  <span class="comment"># compile</span></span><br><span class="line">sudo ./b2 install --with-python  <span class="comment"># install</span></span><br><span class="line"><span class="comment"># 可以在默认编译路径/usr/local/lib下找到相关的libboost*.so</span></span><br><span class="line"><span class="comment"># boost在/usr/local/include/boost下</span></span><br><span class="line"></span><br><span class="line">mkdir demo_boost</span><br><span class="line"><span class="built_in">cd</span> demo_boost</span><br><span class="line">vim test.cpp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/python.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="keyword">const</span>* <span class="title">greet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"hello, world"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BOOST_PYTHON_MODULE(test) &#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> boost::python;</span><br><span class="line">    def(<span class="string">"greet"</span>, greet);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将/usr/local/lib添加到动态链接库查找路径中，否则链接时会出错 cannot find -lboost_python35</span></span><br><span class="line"></span><br><span class="line">sudo vim /etc/ld.so.conf</span><br><span class="line"><span class="comment"># 添加以下内容到结尾</span></span><br><span class="line">/usr/<span class="built_in">local</span>/lib</span><br><span class="line"></span><br><span class="line">sudo ldconfig</span><br><span class="line">g++ -I/usr/include/python3.5m -fPIC test.cpp -lboost_python35 -shared -o test.so</span><br><span class="line">vim test_py.py</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test_py.py</span></span><br><span class="line"><span class="keyword">import</span> test</span><br><span class="line"></span><br><span class="line">print(dir(test))</span><br><span class="line">print(test.greet())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 test_py.py</span><br></pre></td></tr></table></figure>
+
+<p>另一个例子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// demo.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;boost/python.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bonjour</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">// Private attribute</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> m_msg;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// Constructor</span></span><br><span class="line">    Bonjour(<span class="built_in">std</span>::<span class="built_in">string</span> msg) :m_msg(msg) &#123; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Destructor</span></span><br><span class="line">    ~Bonjour() &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"destructed "</span> &lt;&lt; <span class="keyword">this</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Methods</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">greet</span><span class="params">()</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; m_msg &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getter/Setter functions for the attribute</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">set_msg</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> msg)</span> </span>&#123; <span class="keyword">this</span>-&gt;m_msg = msg; &#125;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">get_msg</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> m_msg; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">BOOST_PYTHON_MODULE(demo)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> boost::python;</span><br><span class="line">    class_&lt;Bonjour&gt;(<span class="string">"Bonjour"</span>, init&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;())</span><br><span class="line">        .def(<span class="string">"greet"</span>, &amp;Bonjour::greet)</span><br><span class="line">        .add_property(<span class="string">"msg"</span>, &amp;Bonjour::get_msg, &amp;Bonjour::set_msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="references"><a href="#references" class="headerlink" title="references"></a>references</h2><p><strong>tar解压缩命令</strong>：[<a href="https://www.cnblogs.com/wangluochong/p/7194037.html">linux tar.gz zip 解压缩 压缩命令</a></p>
+<p><strong>安装与编译</strong>：<a href="https://blog.csdn.net/weixin_41923935/article/details/106967144">linux下安装boost python详解</a></p>
+<p><strong>编译</strong>：<a href="https://blog.csdn.net/zsf10220208/article/details/102571611">Linux 编译boost (for python3)</a></p>
+<p><strong>动态库问题</strong>：<a href="https://blog.csdn.net/weixin_41038905/article/details/80921316">cannot open shared object file: No such file or directory解决方法</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-10-28T13:10:26.000Z">2020-10-28</time>
                 
                 
@@ -507,116 +570,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    32 分钟 读完 (大约 4817 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/python-topic2/">Python知识点2</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="函数-function"><a href="#函数-function" class="headerlink" title="函数 function"></a>函数 function</h2><h3 id="默认值参数"><a href="#默认值参数" class="headerlink" title="默认值参数"></a>默认值参数</h3><p><strong>默认值参数只在函数定义时被解释一次</strong>，可以使用 <code>函数名.__defaults__</code> 查看所有默认参数的当前值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x=<span class="number">3</span>)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">print(f.__defaults__)  <span class="comment"># (3,)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="可变长度参数、序列解包"><a href="#可变长度参数、序列解包" class="headerlink" title="可变长度参数、序列解包"></a>可变长度参数、序列解包</h3><p><strong>可变长度参数：</strong>可变长度参数主要有两种形式：在参数名前加1个<code>*</code>或2个<code>**</code></p>
-<ul>
-<li><p><code>*parameter</code>用来接收多个位置实参并将其放在一个<strong>元组</strong>中</p>
-</li>
-<li><p><code>**parameter</code>接收多个关键参数并存放到<strong>字典</strong>中</p>
-</li>
-</ul>
-<p>传递参数时，可以通过在实参序列前加一个星号将其解包，然后传递给多个单变量形参。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    print(a + b + c)</span><br><span class="line"></span><br><span class="line">seq = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">demo(*seq)</span><br></pre></td></tr></table></figure>
-
-<p>如果函数实参是字典，可以在前面加两个星号进行解包，等价于关键参数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    print(a + b + c)</span><br><span class="line"></span><br><span class="line">dic = &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>, <span class="string">'c'</span>: <span class="number">3</span>&#125;</span><br><span class="line">demo(**dic)</span><br></pre></td></tr></table></figure>
-
-<p>调用函数时对实参序列使用一个星号<code>*</code>进行解包后的实参将会被当做普通位置参数对待，并且会在关键参数和使用两个星号<code>**</code>进行序列解包的参数<strong>之前</strong>进行处理。</p>
-<p>序列解包（的位置）不能在关键参数解包之后。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">demo(a=<span class="number">1</span>, *(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: demo() got multiple values <span class="keyword">for</span> argument <span class="string">'a'</span></span><br><span class="line"></span><br><span class="line">demo(b=<span class="number">1</span>, *(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: demo() got multiple values <span class="keyword">for</span> argument <span class="string">'b'</span></span><br><span class="line"></span><br><span class="line">demo(c=<span class="number">1</span>, *(<span class="number">2</span>, <span class="number">3</span>))  <span class="comment"># ok</span></span><br><span class="line"></span><br><span class="line">demo(**&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;, *(<span class="number">3</span>,))</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span></span><br><span class="line">SyntaxError: iterable argument unpacking follows keyword argument unpacking</span><br><span class="line"></span><br><span class="line">demo(*(<span class="number">3</span>,), **&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: demo() got multiple values <span class="keyword">for</span> argument <span class="string">'a'</span></span><br><span class="line"></span><br><span class="line">demo(*(<span class="number">3</span>,), **&#123;<span class="string">'c'</span>:<span class="number">1</span>, <span class="string">'b'</span>:<span class="number">2</span>&#125;)  <span class="comment"># ok</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><h4 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h4><p>在某个作用域内任意位置只要有为变量赋值的操作，该变量在这个作用域内就是局部变量，除非使用 <em>global</em> 进行了声明。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    print(x)</span><br><span class="line">    x = <span class="number">5</span></span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line">f()</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">2</span>, <span class="keyword">in</span> f</span><br><span class="line">UnboundLocalError: local variable <span class="string">'x'</span> referenced before assignment</span><br></pre></td></tr></table></figure>
-
-<h4 id="多模块间共享变量"><a href="#多模块间共享变量" class="headerlink" title="多模块间共享变量"></a>多模块间共享变量</h4><p>如果需要在同一个程序的不同模块之间共享全局变量的话，可以编写一个专门的模块来实现这一目的。例如，假设在模块A.py中有如下变量定义：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">global_variable = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>则可以在其他模块中包含以下用来设置/获取全局变量的语句：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> A</span><br><span class="line">A.global_variable = <span class="number">1</span></span><br><span class="line">print(A.global_variable)</span><br></pre></td></tr></table></figure>
-
-<h4 id="nonlocal变量"><a href="#nonlocal变量" class="headerlink" title="nonlocal变量"></a>nonlocal变量</h4><p>除了局部变量和全局变量，Python还支持使用 <em>nonlocal</em> 关键字定义一种介于二者之间的变量。<strong>关键字 <em>nonlocal</em> 声明的变量会引用<span style="color: red">距离最近的非全局作用域的变量</span>，要求声明的变量已经存在，关键字 <em>nonlocal</em> 不会创建新变量</strong>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scope_test</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_local</span><span class="params">()</span>:</span></span><br><span class="line">        var = <span class="string">"local variable"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_nonlocal</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">nonlocal</span> var           <span class="comment"># 要求var必须是已存在的变量</span></span><br><span class="line">        var = <span class="string">"nonlocal variable"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_global</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">global</span> var             <span class="comment"># 如果全局作用域内没有var，就自动新建一个</span></span><br><span class="line">        var = <span class="string">"global variable"</span></span><br><span class="line"></span><br><span class="line">    var = <span class="string">"original"</span></span><br><span class="line">    do_local()</span><br><span class="line">    print(<span class="string">"after do_local:"</span>, var)</span><br><span class="line">    do_nonlocal()</span><br><span class="line">    print(<span class="string">"after do_nonlocal:"</span>, var)</span><br><span class="line">    do_global()</span><br><span class="line">    print(<span class="string">"after_do_global:"</span>, var)</span><br><span class="line"></span><br><span class="line">scope_test()</span><br><span class="line">print(<span class="string">"global:"</span>, var)</span><br><span class="line"></span><br><span class="line"><span class="comment"># after do_local: original</span></span><br><span class="line"><span class="comment"># after do_nonlocal: nonlocal variable</span></span><br><span class="line"><span class="comment"># after_do_global: nonlocal variable</span></span><br><span class="line"><span class="comment"># global: global variable</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="变量访问时的搜索顺序"><a href="#变量访问时的搜索顺序" class="headerlink" title="变量访问时的搜索顺序"></a>变量访问时的搜索顺序</h4><p>变量访问时的LEGB顺序：Local ==&gt; Enclosing ==&gt; Global ==&gt; Builtin</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">3</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></span><br><span class="line">    y = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这个自定义函数和内置函数名字相同，会在当前作用域和更内层作用域中影响内置函数map()的正常使用</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">map</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'fake map()'</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        x = <span class="number">7</span></span><br><span class="line">        y = <span class="number">9</span></span><br><span class="line">        <span class="comment"># 最内层的作用域内，局部变量（Local）x,y优先被访问</span></span><br><span class="line">        <span class="comment"># 在局部域、闭包、全局作用域内都不存在函数max，最后在内置作用域（Builtin）内搜索到函数max</span></span><br><span class="line">        <span class="comment"># 当前作用域中不存在map，但在外层的闭包作用域内搜索到了，并没有调用内置函数map</span></span><br><span class="line">        print(<span class="string">'inner:'</span>, x, y, max(x,y), map())</span><br><span class="line">        </span><br><span class="line">    inner()</span><br><span class="line">    <span class="comment"># 在当前作用域（闭包，Enclosing）内，y可以直接访问</span></span><br><span class="line">    <span class="comment"># 当在当前作用域内不存在x，继续到全局作用域（Global）去搜索</span></span><br><span class="line">    <span class="comment"># 当前作用域内不存在函数max，外层全局作用域也不存在，最后在内置作用域（Builtin）内搜索到函数max</span></span><br><span class="line">    <span class="comment"># 当前作用域中有个map，直接调用了，没有调用内置函数map</span></span><br><span class="line">    print(<span class="string">'outer:'</span>, x, y, max(x,y), map())</span><br><span class="line">    </span><br><span class="line">outer()</span><br><span class="line"><span class="comment"># 当前作用域中有x，可以直接访问，但不存在y</span></span><br><span class="line"><span class="comment"># 由于当前处于全局作用域，按Python变量搜索顺序，会继续在内置作用域搜索</span></span><br><span class="line"><span class="comment"># 不会去搜索Enclosing和Local作用域，但在内置作用域内也不存在y，代码引发异常</span></span><br><span class="line">print(<span class="string">'outside:'</span>, x, y, max(x,y))</span><br></pre></td></tr></table></figure>
-
-<h3 id="生成器函数-generator"><a href="#生成器函数-generator" class="headerlink" title="生成器函数 generator"></a>生成器函数 generator</h3><p>包含yield语句的函数可以用来创建生成器对象，这样的函数也称生成器函数。</p>
-<p>每次执行到yield语句会返回一个值然后暂停或挂起后面代码的执行，下次通过生成器对象的<code>__next__()</code>方法、内置函数<code>next()</code>、for循环遍历生成器对象元素或其他方式显式“索要”数据时恢复执行。</p>
-<p>生成器对象具有惰性求值的特点，适合大数据处理。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    a = f()</span><br><span class="line">    print(a)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        print(next(a), end = <span class="string">' '</span>)</span><br><span class="line"><span class="keyword">except</span> StopIteration:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;generator object f at 0x0000017AFC12BA50&gt;</span></span><br><span class="line"><span class="comment"># 0 1 2 3 4 5 6 7 8 9</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> <span class="string">'abcdefghijklmnopqrstuvwxyz'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    a = f()</span><br><span class="line">    print(a)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        print(next(a), end = <span class="string">' '</span>)</span><br><span class="line"><span class="keyword">except</span> StopIteration:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;generator object f at 0x000002B26498BA50&gt;</span></span><br><span class="line"><span class="comment"># a b c d e f g h i j k l m n o p q r s t u v w x y z</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line">a, b, c = f()</span><br><span class="line">print(a, b, c)</span><br></pre></td></tr></table></figure>
-
-<h3 id="装饰器-decorator"><a href="#装饰器-decorator" class="headerlink" title="装饰器 decorator"></a>装饰器 decorator</h3><p>修饰器（decorator）是函数嵌套定义的另一个重要应用。修饰器本质上也是一个函数，只不过这个函数接收其他函数作为参数并对其进行一定的改造之后返回新函数。</p>
-<p>Python面向对象程序设计中的静态方法、类方法、属性等也都是通过修饰器实现的，Python中还有很多这样的用法。</p>
-<p>下面的代码演示了修饰器的定义与使用方法，定义其他函数调用之前或之后需要执行的通用代码。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">before</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        print(<span class="string">'Before function'</span>)</span><br><span class="line">        <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">after</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        result = func(*args, **kwargs)</span><br><span class="line">        print(<span class="string">'After function'</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@before</span></span><br><span class="line"><span class="meta">@after</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">test()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Before function</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># After function</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="偏函数-函数柯里化"><a href="#偏函数-函数柯里化" class="headerlink" title="偏函数/函数柯里化"></a>偏函数/函数柯里化</h3><p>偏函数（partial function）和函数柯里化（function currying）是函数式编程中常用的技术。有时候我们在复用已有函数时可能需要固定其中的部分参数，这除了可以通过默认值参数来实现之外，还可以使用偏函数。例如，有个函数用来实现3个数字相加：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add3</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a + b + c</span><br></pre></td></tr></table></figure>
-
-<p>如果现在需要一个类似的函数，与上面的函数add3()的区别仅在于参数b固定为一个数字（例如3），这时就可以使用偏函数的技术来复用上面的函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add2</span><span class="params">(a, c)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> add3(a, <span class="number">3</span>, c)</span><br><span class="line"></span><br><span class="line">print(add2(<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-
-<p>或者使用标准库functools提供的<code>partial()</code>方法创建指定函数的偏函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"></span><br><span class="line">add2 = partial(add3, b=<span class="number">3</span>)</span><br><span class="line">print(add2(a=<span class="number">1</span>, c=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/python-topic2/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -677,7 +630,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            29
+                            30
                         </p>
                     </a>
                 </div>
@@ -689,7 +642,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            9
+                            10
                         </p>
                     </a>
                 </div>
@@ -701,7 +654,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            10
+                            12
                         </p>
                     </a>
                 </div>
@@ -724,6 +677,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Boost/">
+            <span class="level-start">
+                <span class="level-item">Boost</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/C/">
             <span class="level-start">
                 <span class="level-item">C++</span>
@@ -806,7 +767,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -815,6 +776,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-05T11:12:37.000Z">2021-06-05</time></div>
+                    <a href="/2021/06/boost-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Boost学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Boost/">Boost</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -868,19 +842,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点2</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -891,6 +852,17 @@
             文章
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/10/">
@@ -1012,6 +984,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/C/">
+                        <span class="tag">C++</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/C-11/">
                         <span class="tag">C++11</span>
                         <span class="tag is-grey">3</span>
@@ -1035,6 +1014,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Navicat/">
                         <span class="tag">Navicat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

@@ -130,6 +130,64 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-22T17:18:30.000Z">2020-04-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/C/">C++</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 381 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/cpp-rvalue-references/">C++右值引用</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Rvalue-references"><a href="#Rvalue-references" class="headerlink" title="Rvalue references"></a>Rvalue references</h2><p>在C++0x中介绍了一种新的引用类型：右值引用，它帮助解决了不必要的拷贝问题和允许了完美转发的存在。当赋值的右手边（right-hand side）是一个右值时，左手边（left-hand side）的对象就可以<strong>偷走</strong>右手边对象的资源，而不是进行一次独立的分配，也就诞生了”移动语义“。</p>
+<p>左值：可以出现在 <em>operator=</em> 左侧者。</p>
+<p>右值：只能出现在 <em>operator=</em> 右侧者。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">9</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">4</span>;</span><br><span class="line">    <span class="comment">// a + b = 42; // error: lvalue required as left operand of assignment</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">"Hello "</span>)</span></span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(<span class="string">"World"</span>)</span></span>;</span><br><span class="line">    s1 + s2 = s2; <span class="comment">// s1 + s2 可以当做左值！</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s2 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">string</span>() = <span class="string">"World"</span>; <span class="comment">// 可以对临时对象赋值！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>C++在用户自定义类型中会产生一些细微的问题，这些问题有关于修改或赋值动作。这种问题就导致上面的定义不正确。</p>
+<p>（但是仍然应把临时对象认为是右值。）</p>
+<p>当右值出现在 <em>operator=</em> （拷贝赋值，copy assignment）的右侧，我们认为对资源进行偷取/搬移（move）而非拷贝（copy）是合理的。则</p>
+<ol>
+<li>必须有语法让我们在调用端告诉编译器“这是个右值”</li>
+<li>必须有语法让我们在被调用端写出一个专门处理右值的所谓移动赋值（move assignment）函数</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-21T16:43:00.000Z">2020-04-22</time>
                 
                 <div class="level-item">
@@ -532,72 +590,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-22T18:10:09.000Z">2020-03-23</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Linux/">Linux</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 378 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/valgrind-installation-and-memcheck-usage/">Valgrind安装与memcheck简单使用</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="安装-valgrind"><a href="#安装-valgrind" class="headerlink" title="安装 valgrind"></a>安装 valgrind</h2><p><code>sudo apt install valgrind</code></p>
-<p>安装后，查看一下版本以确认安装成功</p>
-<p><code>valgrind --version</code></p>
-<p>输出形如以下版本号信息就表示安装成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valgrind-3.11.0</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用-memcheck-检查内存泄漏"><a href="#使用-memcheck-检查内存泄漏" class="headerlink" title="使用 memcheck 检查内存泄漏"></a>使用 memcheck 检查内存泄漏</h2><p>memleak.cpp</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A() &#123;</span><br><span class="line">        a_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] a_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* a_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B() &#123;</span><br><span class="line">        b_arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~B() &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] b_arr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* b_arr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A* pa = <span class="keyword">new</span> B();</span><br><span class="line">    <span class="keyword">delete</span> pa;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -g memleak.cpp -o memleak</span><br><span class="line">valgrind --tool=memcheck ./memleak</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>--tool=memcheck</code> 可以省略，因为 <code>valgrind</code> 的默认工具就是 <code>memcheck</code> 。<br>可以检查出类B对象中的12个字节（3个int）内存泄漏（见下方 <code>definitely lost</code> ）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Memcheck, a memory error detector</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Copyright (C) 2002-2015, and GNU GPL&#39;d, by Julian Seward et al.</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Command: .&#x2F;memleak</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; HEAP SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;     in use at exit: 72,716 bytes in 2 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;   total heap usage: 4 allocs, 2 frees, 72,752 bytes allocated</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; LEAK SUMMARY:</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    definitely lost: 12 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    indirectly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;      possibly lost: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;    still reachable: 72,704 bytes in 1 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;         suppressed: 0 bytes in 0 blocks</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; Rerun with --leak-check&#x3D;full to see details of leaked memory</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D;</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; For counts of detected and suppressed errors, rerun with: -v</span><br><span class="line">&#x3D;&#x3D;7661&#x3D;&#x3D; ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/valgrind-installation-and-memcheck-usage/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -662,7 +654,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            29
+                            30
                         </p>
                     </a>
                 </div>
@@ -674,7 +666,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            9
+                            10
                         </p>
                     </a>
                 </div>
@@ -686,7 +678,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            10
+                            12
                         </p>
                     </a>
                 </div>
@@ -709,6 +701,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Boost/">
+            <span class="level-start">
+                <span class="level-item">Boost</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/C/">
             <span class="level-start">
                 <span class="level-item">C++</span>
@@ -791,7 +791,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -800,6 +800,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-05T11:12:37.000Z">2021-06-05</time></div>
+                    <a href="/2021/06/boost-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Boost学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Boost/">Boost</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -853,19 +866,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/python-topic2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点2</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -876,6 +876,17 @@
             文章
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/10/">
@@ -997,6 +1008,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/C/">
+                        <span class="tag">C++</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/C-11/">
                         <span class="tag">C++11</span>
                         <span class="tag is-grey">3</span>
@@ -1020,6 +1038,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Navicat/">
                         <span class="tag">Navicat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
