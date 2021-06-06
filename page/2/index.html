@@ -130,6 +130,199 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 读完 (大约 1920 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/06/python-topic3/">Python知识点3</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h3><p><code>open(file, mode=&#39;r&#39;, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</code></p>
+<p><em>file</em>：打开的文件名称。</p>
+<p><em>mode</em>：打开文件后的处理方式。模式见下表。</p>
+<p><em>buffering</em>：读写文件的缓存模式。0表示不缓存，1表示缓存，如大于1则表示缓冲区大小。默认值是缓存模式。</p>
+<p><em>encoding</em>：对文本进行编码和解码的方式，只适用于文本模式，可以使用Python支持的任何格式，如GBK、utf8、CP936等。</p>
+<table>
+<thead>
+<tr>
+<th><strong>模式</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>读模式（<strong>默认模式</strong>，可省略），如果文件不存在则抛出异常</td>
+</tr>
+<tr>
+<td>w</td>
+<td>写模式，如果文件已存在，先清空原有内容</td>
+</tr>
+<tr>
+<td>x</td>
+<td>写模式，创建新文件，如果文件已存在则抛出异常</td>
+</tr>
+<tr>
+<td>a</td>
+<td>追加模式，不覆盖文件中原有内容</td>
+</tr>
+<tr>
+<td>b</td>
+<td>二进制模式（可与其他模式组合使用）</td>
+</tr>
+<tr>
+<td>t</td>
+<td>文本模式（<strong>默认模式</strong>，可省略）</td>
+</tr>
+<tr>
+<td>+</td>
+<td>读、写模式（可与其他模式组合使用）</td>
+</tr>
+</tbody></table>
+<h3 id="上下文管理with语句"><a href="#上下文管理with语句" class="headerlink" title="上下文管理with语句"></a>上下文管理with语句</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(filename, mode, encoding) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="comment"># 这里写通过文件对象fp读写文件内容的语句</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> src, open(<span class="string">'test_new.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> dst:</span><br><span class="line">    dst.write(src.read())</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件对象常用属性"><a href="#文件对象常用属性" class="headerlink" title="文件对象常用属性"></a>文件对象常用属性</h3><table>
+<thead>
+<tr>
+<th align="left"><strong>属性</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">buffer</td>
+<td>返回当前文件的缓冲区对象</td>
+</tr>
+<tr>
+<td align="left">closed</td>
+<td>判断文件是否关闭，若文件已关闭则返回True</td>
+</tr>
+<tr>
+<td align="left">fileno</td>
+<td>文件号，一般不需要太关心这个数字</td>
+</tr>
+<tr>
+<td align="left">mode</td>
+<td>返回文件的打开模式</td>
+</tr>
+<tr>
+<td align="left">name</td>
+<td>返回文件的名称</td>
+</tr>
+</tbody></table>
+<h3 id="文件对象常用方法"><a href="#文件对象常用方法" class="headerlink" title="文件对象常用方法"></a>文件对象常用方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>close()</td>
+<td>把缓冲区的内容写入文件，同时关闭文件，并释放文件对象</td>
+</tr>
+<tr>
+<td>detach()</td>
+<td>分离并返回底层的缓冲，底层缓冲被分离后，文件对象不再可用，不允许做任何操作</td>
+</tr>
+<tr>
+<td>flush()</td>
+<td>把缓冲区的内容写入文件，但不关闭文件</td>
+</tr>
+<tr>
+<td>read([size])</td>
+<td>从文本文件中读取size个字符（Python  3.x）的内容作为结果返回，或从二进制文件中读取指定数量的字节并返回，如果省略size则表示读取所有内容</td>
+</tr>
+<tr>
+<td>readable()</td>
+<td>测试当前文件是否可读</td>
+</tr>
+<tr>
+<td>readline()</td>
+<td>从文本文件中读取一行内容作为结果返回</td>
+</tr>
+<tr>
+<td>readlines()</td>
+<td>把文本文件中的每行文本作为一个字符串存入列表中，返回该列表，对于大文件会占用较多内存，不建议使用</td>
+</tr>
+<tr>
+<td>seek(offset[,  whence])</td>
+<td>把文件指针移动到新的字节位置，offset表示相对于whence的位置。whence为0表示从文件头开始计算，1表示从当前位置开始计算，2表示从文件尾开始计算，默认为0</td>
+</tr>
+<tr>
+<td>seekable()</td>
+<td>测试当前文件是否支持随机访问，如果文件不支持随机访问，则调用方法seek()、tell()和truncate()时会抛出异常</td>
+</tr>
+<tr>
+<td>tell()</td>
+<td>返回文件指针的当前位置</td>
+</tr>
+<tr>
+<td>truncate([size])</td>
+<td>删除从当前指针位置到文件末尾的内容。如果指定了size，则不论指针在什么位置都只留下前size个字节，其余的一律删除</td>
+</tr>
+<tr>
+<td>write(s)</td>
+<td>把s的内容写入文件</td>
+</tr>
+<tr>
+<td>writable()</td>
+<td>测试当前文件是否可写</td>
+</tr>
+<tr>
+<td>writelines(s)</td>
+<td>把字符串列表写入文本文件，不添加换行符</td>
+</tr>
+</tbody></table>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>所谓序列化，简单地说就是把内存中的数据在不丢失其类型信息的情况下转成对象的二进制形式的过程，对象序列化后的形式经过正确的反序列化过程应该能够准确无误地恢复为原来的对象。</p>
+<p>Python中常用的序列化模块有struct、pickle、marshal和shelve。</p>
+<h4 id="pickle模块"><a href="#pickle模块" class="headerlink" title="pickle模块"></a>pickle模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">i = <span class="number">13000000</span></span><br><span class="line">a = <span class="number">99.056</span></span><br><span class="line">s = <span class="string">'中国人民123abc'</span></span><br><span class="line">lst = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br><span class="line">tu = (<span class="number">-5</span>, <span class="number">10</span>, <span class="number">8</span>)</span><br><span class="line">coll = &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">dic = &#123;<span class="string">'a'</span>:<span class="string">'apple'</span>, <span class="string">'b'</span>:<span class="string">'banana'</span>, <span class="string">'g'</span>:<span class="string">'grape'</span>, <span class="string">'o'</span>:<span class="string">'orange'</span>&#125;</span><br><span class="line">data = [i, a, s, lst, tu, coll, dic]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_pickle.dat'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">         pickle.dump(len(data), f) <span class="comment">#表示后面将要写入的数据个数</span></span><br><span class="line">         <span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">              pickle.dump(item, f)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        print(<span class="string">'写文件异常!'</span>)        <span class="comment">#如果写文件异常则跳到此处执行</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_pickle.dat'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    n = pickle.load(f)            <span class="comment">#读出文件的数据个数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        x = pickle.load(f)</span><br><span class="line">        print(x)</span><br></pre></td></tr></table></figure>
+
+<h4 id="struct模块"><a href="#struct模块" class="headerlink" title="struct模块"></a>struct模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">n = <span class="number">1300000000</span></span><br><span class="line">x = <span class="number">96.45</span></span><br><span class="line">b = <span class="literal">True</span></span><br><span class="line">s = <span class="string">'a1@中国'</span></span><br><span class="line">sn = struct.pack(<span class="string">'if?'</span>, n, x, b)       <span class="comment"># 序列化</span></span><br><span class="line">length = len(sn)                       <span class="comment"># 序列化后的长度，第14行会用到</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_struct.dat'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp.write(sn)                       <span class="comment"># 写入字节串 </span></span><br><span class="line">    fp.write(s.encode())               <span class="comment"># 字符串直接编码为字节串写入</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_struct.dat'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    sn = fp.read(length)               <span class="comment"># 读length个字节</span></span><br><span class="line">    tu = struct.unpack(<span class="string">'if?'</span>, sn) </span><br><span class="line">    print(tu)</span><br><span class="line">    n, x, bl = tu</span><br><span class="line">    print(<span class="string">'n='</span>, n)</span><br><span class="line">    print(<span class="string">'x='</span>, x)</span><br><span class="line">    print(<span class="string">'bl='</span>, bl)</span><br><span class="line">    s = fp.read(<span class="number">9</span>).decode()</span><br><span class="line">    print(<span class="string">'s='</span>, s)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">(1300000000, 96.44999694824219, True)</span></span><br><span class="line"><span class="string">n= 1300000000</span></span><br><span class="line"><span class="string">x= 96.44999694824219</span></span><br><span class="line"><span class="string">bl= True</span></span><br><span class="line"><span class="string">s= a1@中国</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/06/python-topic3/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-06-17T11:57:20.000Z">2020-06-17</time>
                 
                 <div class="level-item">
@@ -520,75 +713,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-30T15:00:00.000Z">2020-04-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    34 分钟 读完 (大约 5132 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/04/LeetCode/2020-04-leetcode-daily-problem-record/">2020-04 LeetCode每日一题做题记录</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="Apr-30-快乐数"><a href="#Apr-30-快乐数" class="headerlink" title="Apr.30 快乐数"></a>Apr.30 快乐数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isHappy</span><span class="params">(self, n: int)</span> -&gt; bool:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(x: int)</span> -&gt; int:</span></span><br><span class="line">            ret = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> x:</span><br><span class="line">                x, digit = divmod(x, <span class="number">10</span>)</span><br><span class="line">                ret += digit * digit</span><br><span class="line">            <span class="keyword">return</span> ret</span><br><span class="line">        </span><br><span class="line">        st = set()</span><br><span class="line">        <span class="keyword">while</span> n <span class="keyword">not</span> <span class="keyword">in</span> st:</span><br><span class="line">            <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            st.add(n)</span><br><span class="line">            n = change(n)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Apr-29-山脉数组中查找目标值"><a href="#Apr-29-山脉数组中查找目标值" class="headerlink" title="Apr.29 山脉数组中查找目标值"></a>Apr.29 山脉数组中查找目标值</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4 ms, 7.2 MB</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * // This is the MountainArray's API interface.</span></span><br><span class="line"><span class="comment"> * // You should not implement it, or speculate about its implementation</span></span><br><span class="line"><span class="comment"> * class MountainArray &#123;</span></span><br><span class="line"><span class="comment"> *   public:</span></span><br><span class="line"><span class="comment"> *     int get(int index);</span></span><br><span class="line"><span class="comment"> *     int length();</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Func&gt;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">binary_search</span><span class="params">(MountainArray&amp; mountainArr, <span class="keyword">int</span> target, <span class="keyword">int</span> l, <span class="keyword">int</span> r, Func func)</span> </span>&#123;</span><br><span class="line">        target = func(target);</span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> cur = func(mountainArr.get(mid));</span><br><span class="line">            <span class="keyword">if</span> (cur == target) <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">if</span> (cur &lt; target) l = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findInMountainArray</span><span class="params">(<span class="keyword">int</span> target, MountainArray &amp;mountainArr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = mountainArr.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (mountainArr.get(mid) &lt; mountainArr.get(mid + <span class="number">1</span>)) &#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> peak = l;</span><br><span class="line">        <span class="keyword">int</span> index = binary_search(mountainArr, target, <span class="number">0</span>, peak, [](<span class="keyword">int</span> x) &#123;</span><br><span class="line">            <span class="keyword">return</span> x;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span> (index != <span class="number">-1</span>) <span class="keyword">return</span> index;</span><br><span class="line">        index = binary_search(mountainArr, target, peak + <span class="number">1</span>, mountainArr.length() - <span class="number">1</span>, [](<span class="keyword">int</span> x) &#123;</span><br><span class="line">            <span class="keyword">return</span> -x;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Apr-28-数组中数字出现的次数"><a href="#Apr-28-数组中数字出现的次数" class="headerlink" title="Apr.28 数组中数字出现的次数"></a>Apr.28 数组中数字出现的次数</h2><p>分组异或。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 40 ms, 16.1 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">singleNumbers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> xor_all = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) xor_all ^= val;</span><br><span class="line">        <span class="comment">// xor_all 中 1 的位表示两个只出现过一次的数中这一位不同</span></span><br><span class="line">        <span class="keyword">int</span> bit = xor_all &amp; -xor_all; <span class="comment">// 以 lowbit(xor_all) 区分两个组别</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>; <span class="comment">// 对这两个组别分别做异或</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (val &amp; bit) a ^= val;</span><br><span class="line">            <span class="keyword">else</span> b ^= val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;a, b&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Apr-27-搜索旋转排序数组"><a href="#Apr-27-搜索旋转排序数组" class="headerlink" title="Apr.27 搜索旋转排序数组"></a>Apr.27 搜索旋转排序数组</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0 ms, 6.4 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.empty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>, q = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (q) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p + q &gt;= nums.size() || nums[p + q] &lt; nums[p]) &#123;</span><br><span class="line">                q &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p += q;</span><br><span class="line">                q &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// nums[p] is the biggest value in nums.</span></span><br><span class="line">        <span class="keyword">int</span> l, r;</span><br><span class="line">        <span class="keyword">if</span> (target &gt;= nums[<span class="number">0</span>]) &#123; <span class="comment">// the target's index is in [0, p].</span></span><br><span class="line">            l = <span class="number">-1</span>;</span><br><span class="line">            r = p + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// the target's index is in [p+1, nums.size()-1].</span></span><br><span class="line">            l = p;</span><br><span class="line">            r = nums.size();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l + <span class="number">1</span> &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt;= target) &#123;</span><br><span class="line">                l = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l &gt;= <span class="number">0</span> &amp;&amp; nums[l] == target ? l : <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Apr-26-合并K个排序链表"><a href="#Apr-26-合并K个排序链表" class="headerlink" title="Apr.26 合并K个排序链表"></a>Apr.26 合并K个排序链表</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 60 ms, 10.4 MB</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Cmp</span> &#123;</span></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> ListNode* a, <span class="keyword">const</span> ListNode* b)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> a-&gt;val &gt; b-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeKLists</span><span class="params">(<span class="built_in">vector</span>&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        priority_queue&lt;ListNode*, <span class="built_in">vector</span>&lt;ListNode*&gt;, Cmp&gt; heap;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (ListNode* listHead : lists) &#123;</span><br><span class="line">            <span class="keyword">if</span> (listHead) heap.push(listHead);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        ListNode dummy;</span><br><span class="line">        ListNode* last = &amp;dummy;</span><br><span class="line">        <span class="keyword">while</span> (!heap.empty()) &#123;</span><br><span class="line">            ListNode* now = heap.top();</span><br><span class="line">            heap.pop();</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (now-&gt;next) heap.push(now-&gt;next);</span><br><span class="line">            </span><br><span class="line">            last-&gt;next = now;</span><br><span class="line">            last = now;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Apr-25-全排列"><a href="#Apr-25-全排列" class="headerlink" title="Apr.25 全排列"></a>Apr.25 全排列</h2><p>解法一</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4 ms, 7.4 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; now, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> visit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (visit == (<span class="number">1</span> &lt;&lt; nums.size()) - <span class="number">1</span>) &#123;</span><br><span class="line">            ans.emplace_back(now);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!((visit &gt;&gt; i) &amp; <span class="number">1</span>)) &#123;</span><br><span class="line">                now.push_back(nums[i]);</span><br><span class="line">                dfs(ans, now, nums, visit ^ (<span class="number">1</span> &lt;&lt; i));</span><br><span class="line">                now.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permute</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        dfs(ans, tmp, nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>解法二</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4 ms, 7.2 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pos == nums.size()) &#123;</span><br><span class="line">            res.emplace_back(nums);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pos; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            swap(nums[pos], nums[i]);</span><br><span class="line">            solve(res, nums, pos + <span class="number">1</span>);</span><br><span class="line">            swap(nums[pos], nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permute</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        solve(ans, nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/04/LeetCode/2020-04-leetcode-daily-problem-record/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -609,7 +733,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -651,7 +775,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            30
+                            31
                         </p>
                     </a>
                 </div>
@@ -675,7 +799,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            12
+                            13
                         </p>
                     </a>
                 </div>
@@ -788,7 +912,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -797,6 +921,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-06T16:13:36.000Z">2021-06-07</time></div>
+                    <a href="/2021/06/git-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -850,19 +987,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -880,7 +1004,7 @@
                     <span class="level-item">六月 2021</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1015,6 +1139,13 @@
                     <a class="tags has-addons" href="/tags/C-11/">
                         <span class="tag">C++11</span>
                         <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

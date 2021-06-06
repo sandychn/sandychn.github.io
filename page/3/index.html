@@ -130,6 +130,75 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-30T15:00:00.000Z">2020-04-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    34 分钟 读完 (大约 5132 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/04/LeetCode/2020-04-leetcode-daily-problem-record/">2020-04 LeetCode每日一题做题记录</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Apr-30-快乐数"><a href="#Apr-30-快乐数" class="headerlink" title="Apr.30 快乐数"></a>Apr.30 快乐数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isHappy</span><span class="params">(self, n: int)</span> -&gt; bool:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(x: int)</span> -&gt; int:</span></span><br><span class="line">            ret = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> x:</span><br><span class="line">                x, digit = divmod(x, <span class="number">10</span>)</span><br><span class="line">                ret += digit * digit</span><br><span class="line">            <span class="keyword">return</span> ret</span><br><span class="line">        </span><br><span class="line">        st = set()</span><br><span class="line">        <span class="keyword">while</span> n <span class="keyword">not</span> <span class="keyword">in</span> st:</span><br><span class="line">            <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            st.add(n)</span><br><span class="line">            n = change(n)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Apr-29-山脉数组中查找目标值"><a href="#Apr-29-山脉数组中查找目标值" class="headerlink" title="Apr.29 山脉数组中查找目标值"></a>Apr.29 山脉数组中查找目标值</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4 ms, 7.2 MB</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * // This is the MountainArray's API interface.</span></span><br><span class="line"><span class="comment"> * // You should not implement it, or speculate about its implementation</span></span><br><span class="line"><span class="comment"> * class MountainArray &#123;</span></span><br><span class="line"><span class="comment"> *   public:</span></span><br><span class="line"><span class="comment"> *     int get(int index);</span></span><br><span class="line"><span class="comment"> *     int length();</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Func&gt;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">binary_search</span><span class="params">(MountainArray&amp; mountainArr, <span class="keyword">int</span> target, <span class="keyword">int</span> l, <span class="keyword">int</span> r, Func func)</span> </span>&#123;</span><br><span class="line">        target = func(target);</span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">int</span> cur = func(mountainArr.get(mid));</span><br><span class="line">            <span class="keyword">if</span> (cur == target) <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">if</span> (cur &lt; target) l = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findInMountainArray</span><span class="params">(<span class="keyword">int</span> target, MountainArray &amp;mountainArr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = mountainArr.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (mountainArr.get(mid) &lt; mountainArr.get(mid + <span class="number">1</span>)) &#123;</span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> peak = l;</span><br><span class="line">        <span class="keyword">int</span> index = binary_search(mountainArr, target, <span class="number">0</span>, peak, [](<span class="keyword">int</span> x) &#123;</span><br><span class="line">            <span class="keyword">return</span> x;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span> (index != <span class="number">-1</span>) <span class="keyword">return</span> index;</span><br><span class="line">        index = binary_search(mountainArr, target, peak + <span class="number">1</span>, mountainArr.length() - <span class="number">1</span>, [](<span class="keyword">int</span> x) &#123;</span><br><span class="line">            <span class="keyword">return</span> -x;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Apr-28-数组中数字出现的次数"><a href="#Apr-28-数组中数字出现的次数" class="headerlink" title="Apr.28 数组中数字出现的次数"></a>Apr.28 数组中数字出现的次数</h2><p>分组异或。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 40 ms, 16.1 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">singleNumbers</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> xor_all = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) xor_all ^= val;</span><br><span class="line">        <span class="comment">// xor_all 中 1 的位表示两个只出现过一次的数中这一位不同</span></span><br><span class="line">        <span class="keyword">int</span> bit = xor_all &amp; -xor_all; <span class="comment">// 以 lowbit(xor_all) 区分两个组别</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>; <span class="comment">// 对这两个组别分别做异或</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> val : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (val &amp; bit) a ^= val;</span><br><span class="line">            <span class="keyword">else</span> b ^= val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;a, b&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Apr-27-搜索旋转排序数组"><a href="#Apr-27-搜索旋转排序数组" class="headerlink" title="Apr.27 搜索旋转排序数组"></a>Apr.27 搜索旋转排序数组</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0 ms, 6.4 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.empty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>, q = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (q) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p + q &gt;= nums.size() || nums[p + q] &lt; nums[p]) &#123;</span><br><span class="line">                q &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p += q;</span><br><span class="line">                q &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// nums[p] is the biggest value in nums.</span></span><br><span class="line">        <span class="keyword">int</span> l, r;</span><br><span class="line">        <span class="keyword">if</span> (target &gt;= nums[<span class="number">0</span>]) &#123; <span class="comment">// the target's index is in [0, p].</span></span><br><span class="line">            l = <span class="number">-1</span>;</span><br><span class="line">            r = p + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// the target's index is in [p+1, nums.size()-1].</span></span><br><span class="line">            l = p;</span><br><span class="line">            r = nums.size();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l + <span class="number">1</span> &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &lt;= target) &#123;</span><br><span class="line">                l = mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                r = mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l &gt;= <span class="number">0</span> &amp;&amp; nums[l] == target ? l : <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Apr-26-合并K个排序链表"><a href="#Apr-26-合并K个排序链表" class="headerlink" title="Apr.26 合并K个排序链表"></a>Apr.26 合并K个排序链表</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 60 ms, 10.4 MB</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Cmp</span> &#123;</span></span><br><span class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> ListNode* a, <span class="keyword">const</span> ListNode* b)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> a-&gt;val &gt; b-&gt;val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeKLists</span><span class="params">(<span class="built_in">vector</span>&lt;ListNode*&gt;&amp; lists)</span> </span>&#123;</span><br><span class="line">        priority_queue&lt;ListNode*, <span class="built_in">vector</span>&lt;ListNode*&gt;, Cmp&gt; heap;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (ListNode* listHead : lists) &#123;</span><br><span class="line">            <span class="keyword">if</span> (listHead) heap.push(listHead);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        ListNode dummy;</span><br><span class="line">        ListNode* last = &amp;dummy;</span><br><span class="line">        <span class="keyword">while</span> (!heap.empty()) &#123;</span><br><span class="line">            ListNode* now = heap.top();</span><br><span class="line">            heap.pop();</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (now-&gt;next) heap.push(now-&gt;next);</span><br><span class="line">            </span><br><span class="line">            last-&gt;next = now;</span><br><span class="line">            last = now;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Apr-25-全排列"><a href="#Apr-25-全排列" class="headerlink" title="Apr.25 全排列"></a>Apr.25 全排列</h2><p>解法一</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4 ms, 7.4 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; now, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> visit)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (visit == (<span class="number">1</span> &lt;&lt; nums.size()) - <span class="number">1</span>) &#123;</span><br><span class="line">            ans.emplace_back(now);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!((visit &gt;&gt; i) &amp; <span class="number">1</span>)) &#123;</span><br><span class="line">                now.push_back(nums[i]);</span><br><span class="line">                dfs(ans, now, nums, visit ^ (<span class="number">1</span> &lt;&lt; i));</span><br><span class="line">                now.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permute</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp;</span><br><span class="line">        dfs(ans, tmp, nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>解法二</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4 ms, 7.2 MB</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; res, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pos == nums.size()) &#123;</span><br><span class="line">            res.emplace_back(nums);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = pos; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            swap(nums[pos], nums[i]);</span><br><span class="line">            solve(res, nums, pos + <span class="number">1</span>);</span><br><span class="line">            swap(nums[pos], nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permute</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;</span><br><span class="line">        solve(ans, nums, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/04/LeetCode/2020-04-leetcode-daily-problem-record/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-04-22T17:18:30.000Z">2020-04-23</time>
                 
                 <div class="level-item">
@@ -445,151 +514,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-28T11:20:00.000Z">2020-03-28</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/TCP-IP/">TCP/IP</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 分钟 读完 (大约 1134 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/03/tcp-ip-http/">TCP/IP学习笔记：HTTP</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h2><h3 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;somedir&#x2F;page.html HTTP&#x2F;1.1</span><br><span class="line">Host: www.someschool.edu</span><br><span class="line">Connection: close</span><br><span class="line">User-agent: Mozilla&#x2F;5.0</span><br><span class="line">Accept-language: fr</span><br></pre></td></tr></table></figure>
-
-<p>第一行叫做<strong>请求行</strong>，其后继的行叫做<strong>首部行</strong>。首部行中，冒号左边的称为首部字段名，右边称为值。</p>
-<ul>
-<li><p>请求行</p>
-<ul>
-<li>方法字段<ul>
-<li>GET：浏览器请求一个对象。</li>
-<li>POST：当用户提交表单时，HTTP客户常使用POST方法，表单中的值存放在<strong>实体体</strong>中。</li>
-<li>HEAD：类似于GET方法，当服务器收到一个HEAD请求时，将对用一个HTTP报文进行响应，但是<strong>不返回请求对象</strong>。</li>
-<li>PUT：用户上传对象到指定的Web服务器上的指定路径（目录）。</li>
-<li>DELETE：用户或应用程序删除Web服务器上的对象。</li>
-</ul>
-</li>
-<li>URL字段：例子中的<code>/somedir/page.html</code>。</li>
-<li>版本字段：例子中的<code>HTTP/1.1</code>。</li>
-</ul>
-</li>
-<li><p>首部行</p>
-<ul>
-<li>Host：指明对象所在的主机。</li>
-<li>Connection: close告诉服务器<strong>不要</strong>使用持续连接，它要求服务器在发送完被请求的对象后就关闭这条连接。</li>
-<li>User-agent：指明用户代理，即向服务器发送请求的浏览器类型。这里的<code>Mozilla/5.0</code>就是Firefox浏览器。</li>
-<li>Accept-language：用户想得到的对象的语言，如这里的<code>Fr</code>即指法语版本。若服务器中没有这样的对象，那么服务器应当发送它的默认版本。</li>
-<li>If-modified-since：（条件GET方法）若服务器上的对象在此日期之后被修改，服务器才会传回新对象，否则服务器返回<code>304 Not Modified</code>。这个日期通常来源于之前请求时得到的响应报文中的<code>Last-modified</code>首部行。</li>
-<li>cookie：本机对应本站点的cookie。</li>
-</ul>
-</li>
-<li><p>实体体（可以不存在）</p>
-<p>​    如上所述，实体体通常含通过POST方法发送的表单信息。</p>
-</li>
-</ul>
-<p>一个HTTP<strong>请求</strong>报文的通用格式为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;方法&gt; &lt;URL&gt; &lt;版本&gt;\r\n</span><br><span class="line">&lt;首部字段名:&gt; &lt;值&gt;\r\n</span><br><span class="line">&lt;首部字段名:&gt; &lt;值&gt;\r\n</span><br><span class="line">...</span><br><span class="line">&lt;首部字段名:&gt; &lt;值&gt;\r\n</span><br><span class="line">\r\n</span><br><span class="line">&lt;实体体&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h3><p>下面这个报文可以是对上述请求报文例子的回应。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Connection: close</span><br><span class="line">Date: Tue, 18 Aug 2015 15:44:04 GMT</span><br><span class="line">Server: Apache&#x2F;2.2.3 (CentOS)</span><br><span class="line">Last-Modified: Tue, 18 Aug 2015, 15:11:03 GMT</span><br><span class="line">Content-Length: 6821</span><br><span class="line">Content-Type: text&#x2F;html</span><br><span class="line">(data data data data data ...)</span><br></pre></td></tr></table></figure>
-
-<p>这个例子中，第1行称为<strong>状态行</strong>，第2-7行称为<strong>首部行</strong>，接下来是<strong>实体体</strong>。实体体部分是报文的主要部分，它包含了所请求的对象本身（表示为<code>data data data data data ...</code>）。</p>
-<ul>
-<li><p>状态行</p>
-<ul>
-<li><p>协议版本字段（<code>HTTP/1.1</code>）</p>
-</li>
-<li><p>状态码（<code>200</code>）</p>
-<p>常见的状态码：</p>
-<table>
-<thead>
-<tr>
-<th>状态码&amp;短语</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>200 OK</td>
-<td>请求成功，信息在返回的响应报文中。</td>
-</tr>
-<tr>
-<td>301 Moved Permanently</td>
-<td>请求的对象已经被永久转移，新的URL定义在响应报文的Location首部行中。客户软件将自动获取新的URL。</td>
-</tr>
-<tr>
-<td>304 Not Modified</td>
-<td>告诉缓存器可以使用原有对象。</td>
-</tr>
-<tr>
-<td>400 Bad Request</td>
-<td>一个通用差错代码，指示该请求不能被服务器理解。</td>
-</tr>
-<tr>
-<td>404 Not Found</td>
-<td>被请求的文档不在服务器上。</td>
-</tr>
-<tr>
-<td>505 HTTP Version Not Supported</td>
-<td>服务器不支持请求报文使用的HTTP协议版本。</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>相应状态信息（<code>OK</code>）</p>
-</li>
-</ul>
-</li>
-<li><p>首部行</p>
-<ul>
-<li>Connection: close告诉客户发送完报文后将关闭该TCP连接。</li>
-<li>Date：服务器产生并发送该响应报文的日期和时间。（<strong>不是</strong>对象创建或最后修改的时间，而是服务器从它的文件系统中检索到该对象，将该对象插入响应报文，并发送该响应报文的时间）</li>
-<li>Server：生成该报文的服务器信息。（与请求报文中的User-agent对应）</li>
-<li>Last-Modified：对象创建或最后修改的日期和时间。（对对象缓存很重要）</li>
-<li>Content-Length：被发送对象的字节数。</li>
-<li>Content-Type：对象类型。这里对象类型是HTML文本。（对象类型应该正式地由Content-Type首部行而不是用文件扩展名来指示）</li>
-<li>Set-cookie：设置cookie。</li>
-</ul>
-</li>
-<li><p>实体体（可以不存在）</p>
-<p>​    含有对象内容。</p>
-</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>《计算机网络：自顶向下方法（原书第7版）》P64-75</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -610,9 +534,9 @@
             
             <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -654,7 +578,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            30
+                            31
                         </p>
                     </a>
                 </div>
@@ -678,7 +602,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            12
+                            13
                         </p>
                     </a>
                 </div>
@@ -791,7 +715,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -800,6 +724,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-06T16:13:36.000Z">2021-06-07</time></div>
+                    <a href="/2021/06/git-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -853,19 +790,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -883,7 +807,7 @@
                     <span class="level-item">六月 2021</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1018,6 +942,13 @@
                     <a class="tags has-addons" href="/tags/C-11/">
                         <span class="tag">C++11</span>
                         <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

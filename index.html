@@ -130,6 +130,50 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-06-06T16:13:36.000Z">2021-06-07</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 65 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2021/06/git-notes/">Git笔记</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="windows使含有中文的文件名正常显示"><a href="#windows使含有中文的文件名正常显示" class="headerlink" title="windows使含有中文的文件名正常显示"></a>windows使含有中文的文件名正常显示</h3><p>对于某些含有中文的文件名（比如文档），在 <code>git status</code> 时会出现 <code>\347</code> 这样的转义显示。将其修改为中文显示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.quotepath <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2021-06-05T11:12:37.000Z">2021-06-05</time>
                 
                 <div class="level-item">
@@ -377,199 +421,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 1920 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/python-topic3/">Python知识点3</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h3><p><code>open(file, mode=&#39;r&#39;, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</code></p>
-<p><em>file</em>：打开的文件名称。</p>
-<p><em>mode</em>：打开文件后的处理方式。模式见下表。</p>
-<p><em>buffering</em>：读写文件的缓存模式。0表示不缓存，1表示缓存，如大于1则表示缓冲区大小。默认值是缓存模式。</p>
-<p><em>encoding</em>：对文本进行编码和解码的方式，只适用于文本模式，可以使用Python支持的任何格式，如GBK、utf8、CP936等。</p>
-<table>
-<thead>
-<tr>
-<th><strong>模式</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>r</td>
-<td>读模式（<strong>默认模式</strong>，可省略），如果文件不存在则抛出异常</td>
-</tr>
-<tr>
-<td>w</td>
-<td>写模式，如果文件已存在，先清空原有内容</td>
-</tr>
-<tr>
-<td>x</td>
-<td>写模式，创建新文件，如果文件已存在则抛出异常</td>
-</tr>
-<tr>
-<td>a</td>
-<td>追加模式，不覆盖文件中原有内容</td>
-</tr>
-<tr>
-<td>b</td>
-<td>二进制模式（可与其他模式组合使用）</td>
-</tr>
-<tr>
-<td>t</td>
-<td>文本模式（<strong>默认模式</strong>，可省略）</td>
-</tr>
-<tr>
-<td>+</td>
-<td>读、写模式（可与其他模式组合使用）</td>
-</tr>
-</tbody></table>
-<h3 id="上下文管理with语句"><a href="#上下文管理with语句" class="headerlink" title="上下文管理with语句"></a>上下文管理with语句</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(filename, mode, encoding) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="comment"># 这里写通过文件对象fp读写文件内容的语句</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'test.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> src, open(<span class="string">'test_new.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> dst:</span><br><span class="line">    dst.write(src.read())</span><br></pre></td></tr></table></figure>
-
-<h3 id="文件对象常用属性"><a href="#文件对象常用属性" class="headerlink" title="文件对象常用属性"></a>文件对象常用属性</h3><table>
-<thead>
-<tr>
-<th align="left"><strong>属性</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">buffer</td>
-<td>返回当前文件的缓冲区对象</td>
-</tr>
-<tr>
-<td align="left">closed</td>
-<td>判断文件是否关闭，若文件已关闭则返回True</td>
-</tr>
-<tr>
-<td align="left">fileno</td>
-<td>文件号，一般不需要太关心这个数字</td>
-</tr>
-<tr>
-<td align="left">mode</td>
-<td>返回文件的打开模式</td>
-</tr>
-<tr>
-<td align="left">name</td>
-<td>返回文件的名称</td>
-</tr>
-</tbody></table>
-<h3 id="文件对象常用方法"><a href="#文件对象常用方法" class="headerlink" title="文件对象常用方法"></a>文件对象常用方法</h3><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>功能说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>close()</td>
-<td>把缓冲区的内容写入文件，同时关闭文件，并释放文件对象</td>
-</tr>
-<tr>
-<td>detach()</td>
-<td>分离并返回底层的缓冲，底层缓冲被分离后，文件对象不再可用，不允许做任何操作</td>
-</tr>
-<tr>
-<td>flush()</td>
-<td>把缓冲区的内容写入文件，但不关闭文件</td>
-</tr>
-<tr>
-<td>read([size])</td>
-<td>从文本文件中读取size个字符（Python  3.x）的内容作为结果返回，或从二进制文件中读取指定数量的字节并返回，如果省略size则表示读取所有内容</td>
-</tr>
-<tr>
-<td>readable()</td>
-<td>测试当前文件是否可读</td>
-</tr>
-<tr>
-<td>readline()</td>
-<td>从文本文件中读取一行内容作为结果返回</td>
-</tr>
-<tr>
-<td>readlines()</td>
-<td>把文本文件中的每行文本作为一个字符串存入列表中，返回该列表，对于大文件会占用较多内存，不建议使用</td>
-</tr>
-<tr>
-<td>seek(offset[,  whence])</td>
-<td>把文件指针移动到新的字节位置，offset表示相对于whence的位置。whence为0表示从文件头开始计算，1表示从当前位置开始计算，2表示从文件尾开始计算，默认为0</td>
-</tr>
-<tr>
-<td>seekable()</td>
-<td>测试当前文件是否支持随机访问，如果文件不支持随机访问，则调用方法seek()、tell()和truncate()时会抛出异常</td>
-</tr>
-<tr>
-<td>tell()</td>
-<td>返回文件指针的当前位置</td>
-</tr>
-<tr>
-<td>truncate([size])</td>
-<td>删除从当前指针位置到文件末尾的内容。如果指定了size，则不论指针在什么位置都只留下前size个字节，其余的一律删除</td>
-</tr>
-<tr>
-<td>write(s)</td>
-<td>把s的内容写入文件</td>
-</tr>
-<tr>
-<td>writable()</td>
-<td>测试当前文件是否可写</td>
-</tr>
-<tr>
-<td>writelines(s)</td>
-<td>把字符串列表写入文本文件，不添加换行符</td>
-</tr>
-</tbody></table>
-<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>所谓序列化，简单地说就是把内存中的数据在不丢失其类型信息的情况下转成对象的二进制形式的过程，对象序列化后的形式经过正确的反序列化过程应该能够准确无误地恢复为原来的对象。</p>
-<p>Python中常用的序列化模块有struct、pickle、marshal和shelve。</p>
-<h4 id="pickle模块"><a href="#pickle模块" class="headerlink" title="pickle模块"></a>pickle模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">i = <span class="number">13000000</span></span><br><span class="line">a = <span class="number">99.056</span></span><br><span class="line">s = <span class="string">'中国人民123abc'</span></span><br><span class="line">lst = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]</span><br><span class="line">tu = (<span class="number">-5</span>, <span class="number">10</span>, <span class="number">8</span>)</span><br><span class="line">coll = &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">dic = &#123;<span class="string">'a'</span>:<span class="string">'apple'</span>, <span class="string">'b'</span>:<span class="string">'banana'</span>, <span class="string">'g'</span>:<span class="string">'grape'</span>, <span class="string">'o'</span>:<span class="string">'orange'</span>&#125;</span><br><span class="line">data = [i, a, s, lst, tu, coll, dic]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_pickle.dat'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">         pickle.dump(len(data), f) <span class="comment">#表示后面将要写入的数据个数</span></span><br><span class="line">         <span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">              pickle.dump(item, f)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        print(<span class="string">'写文件异常!'</span>)        <span class="comment">#如果写文件异常则跳到此处执行</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_pickle.dat'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    n = pickle.load(f)            <span class="comment">#读出文件的数据个数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        x = pickle.load(f)</span><br><span class="line">        print(x)</span><br></pre></td></tr></table></figure>
-
-<h4 id="struct模块"><a href="#struct模块" class="headerlink" title="struct模块"></a>struct模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">n = <span class="number">1300000000</span></span><br><span class="line">x = <span class="number">96.45</span></span><br><span class="line">b = <span class="literal">True</span></span><br><span class="line">s = <span class="string">'a1@中国'</span></span><br><span class="line">sn = struct.pack(<span class="string">'if?'</span>, n, x, b)       <span class="comment"># 序列化</span></span><br><span class="line">length = len(sn)                       <span class="comment"># 序列化后的长度，第14行会用到</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_struct.dat'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    fp.write(sn)                       <span class="comment"># 写入字节串 </span></span><br><span class="line">    fp.write(s.encode())               <span class="comment"># 字符串直接编码为字节串写入</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'sample_struct.dat'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    sn = fp.read(length)               <span class="comment"># 读length个字节</span></span><br><span class="line">    tu = struct.unpack(<span class="string">'if?'</span>, sn) </span><br><span class="line">    print(tu)</span><br><span class="line">    n, x, bl = tu</span><br><span class="line">    print(<span class="string">'n='</span>, n)</span><br><span class="line">    print(<span class="string">'x='</span>, x)</span><br><span class="line">    print(<span class="string">'bl='</span>, bl)</span><br><span class="line">    s = fp.read(<span class="number">9</span>).decode()</span><br><span class="line">    print(<span class="string">'s='</span>, s)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">(1300000000, 96.44999694824219, True)</span></span><br><span class="line"><span class="string">n= 1300000000</span></span><br><span class="line"><span class="string">x= 96.44999694824219</span></span><br><span class="line"><span class="string">bl= True</span></span><br><span class="line"><span class="string">s= a1@中国</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/python-topic3/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -588,7 +439,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -630,7 +481,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            30
+                            31
                         </p>
                     </a>
                 </div>
@@ -654,7 +505,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            12
+                            13
                         </p>
                     </a>
                 </div>
@@ -767,7 +618,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
+        <a href="/tags/ACM/" style="font-size: 13.33px;">ACM</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C-11/" style="font-size: 16.67px;">C++11</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Navicat/" style="font-size: 10px;">Navicat</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/STL/" style="font-size: 20px;">STL</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Valgrind/" style="font-size: 10px;">Valgrind</a> <a href="/tags/memcheck/" style="font-size: 10px;">memcheck</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 20px;">数据结构</a>
     </div>
 </div>
     
@@ -776,6 +627,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-06-06T16:13:36.000Z">2021-06-07</time></div>
+                    <a href="/2021/06/git-notes/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -829,19 +693,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-17T11:59:20.000Z">2020-06-17</time></div>
-                    <a href="/2020/06/python-topic3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python知识点3</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -859,7 +710,7 @@
                     <span class="level-item">六月 2021</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -994,6 +845,13 @@
                     <a class="tags has-addons" href="/tags/C-11/">
                         <span class="tag">C++11</span>
                         <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
